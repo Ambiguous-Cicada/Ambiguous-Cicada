@@ -14,6 +14,7 @@ Refer to our [API Documentation](APIDOCS.md) for internal details of our app.
 
 ## Table of Contents
 
+<<<<<<< HEAD
 1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
@@ -55,6 +56,12 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+=======
+```
+$ heroku create
+$ git push heroku master
+$ heroku open
+>>>>>>> Update README.md
 ```
 
 ### Known bugs and issues
@@ -62,4 +69,12 @@ This project contains known bugs and issues, which can all be accessed [here](ht
 
 ## Contributing
 
+<<<<<<< HEAD
 See the [Contribution Guidelines](CONTRIBUTING.md) in `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.
+=======
+- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
+- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
+- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
+- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+>>>>>>> Update README.md
