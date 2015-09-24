@@ -10,6 +10,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use("static", express.static(__dirname + '/../client'));
+
 
 // internal dependencies
 var auth = require('./auth');
