@@ -1,20 +1,41 @@
+// basic server set up
 var express = require('express');
 var bodyParser = require('bodyParser');
-var db = require('./db');
 var app = express();
-
 app.use(bodyParser.json());
 
-// auth
-app.route('/login').post(function(req, res) {
+// internal dependencies
+var auth = require('./auth');
+var match = require('./match');
+var chats = require('./chats');
 
+// Authentication
+app.post('/signup', function(req, res) {
+  auth.signup(req.body.username, req.body.password)
+    .then(function(result) {
+      res.status(201)
+        .send(result);
+    })
+    .catch(function(err) {
+      res.status(300)
+        .send(err);
+    });
 });
 
-app.route('/signup').post(function(req, res) {
-
+app.post('/login', function(req, res) {
+  auth.login(req.body.username, req.body.password)
+    .then(function(result) {
+      res.status(200)
+        .send(result);
+    })
+    .catch(function(err) {
+      res.status(300)
+        .send(err);
+    });
 });
 
-// matching
+// Matching
+// do we need both post and login??
 app.route('/match')
   .post(function(req, res) {
 
@@ -23,7 +44,7 @@ app.route('/match')
 
   });
 
-// chats
+// Chats
 app.route('/chats')
   .post(function(req, res) {
 
