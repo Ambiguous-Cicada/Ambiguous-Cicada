@@ -7,5 +7,12 @@ var app = angular.module('kwiki', [
     .when('/loading', {
       templateUrl: 'client/loading.html',
       controller: 'LoadingController'
+    .when('/login', {
+      templateUrl: 'login.html',
+      controller: 'userControl'
+    })
+    .when('/signup', {
+      templateUrl: 'signup.html',
+      controller: 'userControl'
     })
 })
