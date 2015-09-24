@@ -1,13 +1,21 @@
 // basic server set up
 var express = require('express');
 var bodyParser = require('bodyParser');
+var session = require('express-session');
 var app = express();
+
 app.use(bodyParser.json());
+app.use(session({
+  secret: 'vsafklj4kl2j34kl2',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // internal dependencies
 var auth = require('./auth');
 var match = require('./match');
 var chats = require('./chats');
+var utils = require('./lib/utils');
 
 // Authentication
 app.post('/signup', function(req, res) {
@@ -24,9 +32,9 @@ app.post('/signup', function(req, res) {
 
 app.post('/login', function(req, res) {
   auth.login(req.body.username, req.body.password)
-    .then(function(result) {
-      res.status(200)
-        .send(result);
+    .then(function(user) {
+      res.status(200);
+      utils.createSession(req, res, user);
     })
     .catch(function(err) {
       res.status(300)

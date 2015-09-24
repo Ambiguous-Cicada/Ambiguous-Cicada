@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/kwiki');
-
-// add Mongoose schemas here? or in individual files?
+mongoose.connect(process.env.DBPATH || 'mongodb://localhost/kwiki');
 
 module.exports = mongoose;
