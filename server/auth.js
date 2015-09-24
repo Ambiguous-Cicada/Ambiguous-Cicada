@@ -60,7 +60,7 @@ var User = db.model('users', UserSchema);
 // signup function that validates, creates new user and returns a promise
 exports.signup = function(username, password) {
   return new Promise(function(resolve, reject) {
-    User.findOne({username: username}, function(user) {
+    User.findOne({username: username}, function(err, user) {
       if (user) {
         reject(new Error('User already exist!'));
       } else {
@@ -80,7 +80,7 @@ exports.signup = function(username, password) {
 // login function that validates, authenticates and returns a promise
 exports.login = function(username, password) {
   return new Promise(function(resolve, reject) {
-    findOne({username: username}, function(err, user) {
+    User.findOne({username: username}, function(err, user) {
       if(err){
         throw new Error(err);
       }
@@ -91,9 +91,9 @@ exports.login = function(username, password) {
         return user.comparePasswords(password)
           .then(function (foundUser) {
             if (foundUser) {
-              resolve(user.id);
+              resolve(user._id);
             } else {
-              reject('User not found');
+              reject(new Error('User not found!'));
             }
           });
       }
