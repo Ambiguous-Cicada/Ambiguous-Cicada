@@ -6,11 +6,11 @@
 ```
 git clone https://github.com/<yourusername>/ambiguous-cicada.git
 ```
-1. Set a remote to upstream
+2. Set a remote to upstream
 ```
 git remote add upstream https://github.com/ambiguous/ambiguous-cicada.git
 ```
-1. Make a branch for the issue you're trying to fix
+3. Make a branch for the issue you're trying to fix
 ```
 git checkout -b iss<num>
 ```
@@ -18,7 +18,7 @@ Example:
 ```
 git checkout -b iss12
 ```
-1. Make changes to fix the issue and commit with the issue number. Using an editor is prefered over '-m'
+4. Make changes to fix the issue and commit with the issue number. Using an editor is prefered over '-m'
 ```
 git commit -m '[close #<num>] <descripting commit message>'
 ```
@@ -26,23 +26,23 @@ Example:
 ```
 git commit -m '[close #12] <Add server routes for "/match">'
 ```
-1. Checkout master branch and pull any changes from upstream
+5. Checkout master branch and pull any changes from upstream
 ```
 git pull upstream master
 ```
-1. Merge issue branch into master
+6. Merge issue branch into master
 ```
 git merge iss<num>
 ```
-1. Fix and merge conflicts
+7. Fix and merge conflicts
 
-1. Push to your fork
+8. Push to your fork
 ```
 git push origin master
 ```
-1. Make a pull request from your forked repor into the organizations repo
+9. Make a pull request from your forked repor into the organizations repo
 
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+10. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ### Guidelines
 
@@ -50,10 +50,10 @@ git push origin master
     - Keep your code [DRY][].
     - Apply the [boy scout rule][].
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
-1. Run the [tests][] before submitting a pull request.
-1. Tests are very, very important. Submit tests if your pull request contains
+2. Run the [tests][] before submitting a pull request.
+3. Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
-1. Your pull request is comprised of a single ([squashed][]) commit.
+4. Your pull request is comprised of a single ([squashed][]) commit.
 
 ### Commit Message Guidelines
 
