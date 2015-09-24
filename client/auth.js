@@ -11,7 +11,7 @@ angular.module('kwiki.auth', ['ChatFactory'])
 
   var checkuser = function (userObject) {
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/login',
       data: userObject
     })
@@ -36,6 +36,7 @@ angular.module('kwiki.auth', ['ChatFactory'])
       password: password
     }
     Users.checkUser(userObject).then(res) {
+      console.log(res);
       // if (res === valid){
       //   ChatFactory.
       // }
