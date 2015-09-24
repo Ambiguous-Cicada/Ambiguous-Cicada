@@ -1,0 +1,8 @@
+{
+  "name": "my-project",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-route": "~1.4.6"
+  }
+}
