@@ -30,7 +30,6 @@ UserSchema.methods.comparePasswords = function (candidatePassword) {
 
 UserSchema.pre('save', function (next) {
   var user = this;
-
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) {
     return next();
@@ -43,7 +42,7 @@ UserSchema.pre('save', function (next) {
     }
 
     // hash the password along with our new salt
-    bcrypt.hash(user.password, salt, null, function (err, hash) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       if (err) {
         return next(err);
       }
@@ -61,27 +60,27 @@ var User = db.model('users', UserSchema);
 // signup function that validates, creates new user and returns a promise
 exports.signup = function(username, password) {
   return new Promise(function(resolve, reject) {
-    findOne({username: username}, function(user) {
-        if (user) {
-          reject(new Error('User already exist!'));
-        } else {
-          // make a new user if not one
-          newUser = {
-            username: username,
-            password: password
-          };
-          User.create(newUser, function(user) {
-            resolve(user.id);
-          });
-        }
-      });
+    User.findOne({username: username}, function(err, user) {
+      if (user) {
+        reject(new Error('User already exist!'));
+      } else {
+        newUser = {
+          username: username,
+          password: password
+        };
+        User.create(newUser, function(err, user) {
+          if (err) reject(err);
+          else resolve(user.id);
+        });
+      }
+    });
   });
 };
 
 // login function that validates, authenticates and returns a promise
 exports.login = function(username, password) {
   return new Promise(function(resolve, reject) {
-    findOne({username: username}, function(err, user) {
+    User.findOne({username: username}, function(err, user) {
       if(err){
         throw new Error(err);
       }
@@ -92,9 +91,9 @@ exports.login = function(username, password) {
         return user.comparePasswords(password)
           .then(function (foundUser) {
             if (foundUser) {
-              resolve(user.id);
+              resolve(user._id);
             } else {
-              reject('User not found');
+              reject(new Error('User not found!'));
             }
           });
       }
