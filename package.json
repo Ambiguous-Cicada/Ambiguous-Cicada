@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/nirajvora/Ambiguous-Cicada",
   "dependencies": {
-    "bower": "^1.5.2",
     "body-parser": "^1.14.0",
+    "bower": "^1.5.2",
     "express": "^4.13.3",
     "mongoose": "^4.1.8"
   }
