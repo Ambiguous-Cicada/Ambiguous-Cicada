@@ -23,6 +23,7 @@
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "mongo": "^0.1.0",
-    "mongoose": "^4.1.8"
+    "mongoose": "^4.1.8",
+    "morgan": "^1.6.1"
   }
 }
