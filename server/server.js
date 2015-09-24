@@ -1,9 +1,11 @@
 // basic server set up
 var express = require('express');
 var bodyParser = require('body-parser');
+var logger = require('morgan');
 var session = require('express-session');
 var app = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(session({
   secret: 'vsafklj4kl2j34kl2',
