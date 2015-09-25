@@ -1,16 +1,50 @@
-// var app = angular.module('kwiki', [
-//   // 'kwiki.loading',
-//   // 'ng-route'
-//   ])
+angular.module('kwiki.load',[])
+// var app = angular.module('kwiki', []);
 
-angular.module('kwiki.loading',[])
+.factory('LoadFactory', ['$http', function ($http) {
 
-.controller('LoadingController', ['$scope', '$http', function ($scope, $http) {
+  var getMatch = function () {
+    return $http({
+      method: 'GET',
+      url: '/match'
+    });
+  };
 
-  $scope.loading = 'Looking for a kwiki';
+  var checkMatch = function () {
+    getmatch().then(function (res, err) {
+      if(res.chatid) {
+        $location.path('/chat')
+      } else {
+        setTimeout(function() { 
+          checkMatch(); 
+        }, 700)
+      }
+    });
+  };
+
+  var postMatch = function () {
+    return $http({
+      method: 'POST', 
+      url: '/match'
+      // data: location data in the future
+    });
+  };
+
+  return {
+    postMatch: postMatch,
+    getMatch: getMatch,
+    checkMatch: checkMatch
+  };
 
 }])
 
-.factory('LoadingFactory', ['$http', function ($http) {
-  
+.controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
+
+  $scope.bored = function () {
+    LoadFactory.postMatch();
+  }
+
+  // LoadFactory.getMatch(); 
+
+
 }]);
