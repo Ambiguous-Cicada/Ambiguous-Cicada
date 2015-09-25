@@ -1,12 +1,14 @@
-var app = angular.module('kwiki', [
+angular.module('kwiki', [
   'kwiki.loading',
-  'ng-route'
+  'kwiki.auth',
+  'ngRoute'
   ])
-.config(['$routeProvider'], function ($routeProvider) {
+.config(function ($routeProvider) {
   $routeProvider
     .when('/loading', {
       templateUrl: 'loading.html',
       controller: 'LoadingController'
+    })
     .when('/login', {
       templateUrl: 'login.html',
       controller: 'userControl'
@@ -15,5 +17,5 @@ var app = angular.module('kwiki', [
       templateUrl: 'signup.html',
       controller: 'userControl'
     })
-    .otherwise({redierectTo: '/login'});
-})
+    .otherwise({redirectTo: '/login'})
+});
