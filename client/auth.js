@@ -26,7 +26,7 @@ angular.module('kwiki.auth', [])
   }
 })
 
-.controller('userControl', function ($scope, Users) {
+.controller('userControl', function ($scope, $location, Users) {
   $scope.addUser = function (username, password) {
     var userObject = {
       username: username,
@@ -40,10 +40,36 @@ angular.module('kwiki.auth', [])
       username: username,
       password: password
     }
-    Users.checkUser(userObject).then(function (res) {
-      // if (res === valid){
-      //   ChatFactory.
-      // }
+
+    Users.checkUser(userObject).then(function () {
+      $location.path('/loading');
     });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

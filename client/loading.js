@@ -41,6 +41,7 @@ angular.module('kwiki.load',[])
 .controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
 
   $scope.bored = function () {
+
     LoadFactory.postMatch();
   }
 
