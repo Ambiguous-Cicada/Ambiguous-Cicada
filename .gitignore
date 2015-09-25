@@ -1,5 +1,8 @@
 ### node etc ###
 
+# OS files
+.DS_Store
+
 # Logs
 logs
 *.log
