@@ -67,7 +67,7 @@ app.route('/match')
     //send back either
       //200 with chatroomid
       //200 with null
-    res.status(200).send(chatId);
+    res.status(200).send({chatId: chatId});
   });
 
 // Chats

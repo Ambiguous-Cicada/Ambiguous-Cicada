@@ -3,7 +3,7 @@
 //   'ng-route'
 //   ])
 
-angular.module('kwiki.chat',[])
+angular.module('kwiki.chat',['kwiki.load'])
 .factory('ChatFactory', ['$http', function ($http) {
 
   var getChat = function (id, callback) {
@@ -37,12 +37,12 @@ angular.module('kwiki.chat',[])
 
 }])
 
-.controller('ChatController', ['$scope', 'ChatFactory', '$interval', function ($scope, ChatFactory, $interval) {
+.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', function ($scope, ChatFactory, $interval) {
 
   $scope.messages = [];
   // var count = 0;
   $scope.display = function () {
-    ChatFactory.getChat(1, function(messages) {
+    ChatFactory.getChat(LoadFactory.chatId, function(messages) {
       $scope.messages = messages;
     });
     // $scope.messages.unshift(count);

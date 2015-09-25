@@ -91,7 +91,10 @@ exports.login = function(username, password) {
         return user.comparePasswords(password)
           .then(function (foundUser) {
             if (foundUser) {
-              resolve(user._id);
+              resolve({
+                id: user._id,
+                name: user.username
+              });
             } else {
               reject(new Error('User not found!'));
             }
