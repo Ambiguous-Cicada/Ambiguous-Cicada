@@ -39,8 +39,10 @@ app.post('/signup', function(req, res) {
 app.post('/login', function(req, res) {
   auth.login(req.body.username, req.body.password)
     .then(function(user) {
-      res.status(200);
-      utils.createSession(req, res, user);
+      console.log(user);
+      utils.createSession(req, res, user, function(req, res) {
+        res.status(200).send();
+      });
     })
     .catch(function(err) {
       res.status(300)
@@ -60,6 +62,7 @@ app.route('/match')
     res.status(201).send("Added to Lobby");
   })
   .get(function(req, res) {
+    console.log(req.session);
     //get user from req
     var user = req.session.user;
     //check with match.js if userid has been paired
