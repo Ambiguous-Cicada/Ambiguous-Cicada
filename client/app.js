@@ -1,5 +1,5 @@
 angular.module('kwiki', [
-  'kwiki.loading',
+  'kwiki.load',
   'kwiki.auth',
   'ngRoute'
   ])
@@ -7,7 +7,7 @@ angular.module('kwiki', [
   $routeProvider
     .when('/loading', {
       templateUrl: 'loading.html',
-      controller: 'LoadingController'
+      controller: 'LoadController'
     })
     .when('/login', {
       templateUrl: 'login.html',
