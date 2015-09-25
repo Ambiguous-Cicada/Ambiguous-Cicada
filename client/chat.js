@@ -1,10 +1,10 @@
-var app = angular.module('kwiki', [
-  // 'kwiki.loading',
-  // 'ng-route'
-  ])
+// var app = angular.module('kwiki', [
+//   'kwiki.loading',
+//   'ng-route'
+//   ])
 
-// angular.module('kwiki.chat',[])
-app.factory('ChatFactory', ['$http', function ($http) {
+angular.module('kwiki.chat',[])
+.factory('ChatFactory', ['$http', function ($http) {
 
   var getChat = function (callback) {
     $http.get('/chats/:id')
