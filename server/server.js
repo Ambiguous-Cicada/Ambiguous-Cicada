@@ -52,19 +52,54 @@ app.post('/login', function(req, res) {
 // do we need both post and login??
 app.route('/match')
   .post(function(req, res) {
-
+    //get userObj from req
+    var user = req.session.user;
+    //send userObj to match.js (to add to waiting room)
+    match.joinLobby(user);
+    //send back a 201
+    res.status(201).send("Added to Lobby");
   })
   .get(function(req, res) {
-
+    //get user from req
+    var user = req.session.user;
+    //check with match.js if userid has been paired
+    var chatId = match.findChatRoom(user);
+    //send back either
+      //200 with chatroomid
+      //200 with null
+    res.status(200).send(chatId);
   });
 
 // Chats
-app.route('/chats')
+app.route('/chats/:id')
   .post(function(req, res) {
+    //get info needed to construct message
+    var chatRoomId = req.params.id;
+    var message = req.body.message;
+    var name = req.session.user.name;
+    var timeStamp = new Date();
+
+    //add message to chatroom messages
+    chats.addMessage(chatroomid, {
+      userName: name,
+      text: message,
+      timeStamp: timeStamp
+    });
 
   })
   .get(function(req, res) {
+    //req should have a chatroomid on it
+    var chatRoomId = req.params.id;
 
+    //return messages of that chatroom
+    getMessages(chatroomid)
+      .then( function (chatroom) {
+        res.status(200).send(chatroom.messages);
+      })
+      .reject( function (err) {
+        console.log(err);
+        res.status(404).send(err);
+      });
   });
 
 app.listen(process.env.PORT || 3000);
