@@ -42,10 +42,10 @@ angular.module('kwiki.load',[])
 
   $scope.bored = function () {
 
-    LoadFactory.postMatch();
+    // LoadFactory.postMatch();
+    LoadFactory.getMatch(); 
   }
 
-  // LoadFactory.getMatch(); 
 
 
 }]);

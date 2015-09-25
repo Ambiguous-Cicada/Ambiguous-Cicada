@@ -1,7 +1,8 @@
 angular.module('kwiki', [
   'kwiki.load',
   'kwiki.auth',
-  'ngRoute'
+  'ngRoute',
+  'kwiki.chat'
   ])
 .config(function ($routeProvider) {
   $routeProvider
@@ -16,6 +17,10 @@ angular.module('kwiki', [
     .when('/signup', {
       templateUrl: 'signup.html',
       controller: 'userControl'
+    })
+    .when('/chat', {
+      templateUrl: 'chat.html',
+      controller: 'ChatController'
     })
     .otherwise({redirectTo: '/login'})
 });
