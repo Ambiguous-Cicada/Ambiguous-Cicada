@@ -6,8 +6,8 @@
 angular.module('kwiki.chat',[])
 .factory('ChatFactory', ['$http', function ($http) {
 
-  var getChat = function (callback) {
-    $http.get('/chats/:id')
+  var getChat = function (id, callback) {
+    $http.get('/chats/' + id)
     .then(
       function (res) {
         callback(res.data);
@@ -42,7 +42,7 @@ angular.module('kwiki.chat',[])
   $scope.messages = [];
   // var count = 0;
   $scope.display = function () {
-    ChatFactory.getChat(function(messages) {
+    ChatFactory.getChat(1, function(messages) {
       $scope.messages = messages;
     });
     // $scope.messages.unshift(count);
