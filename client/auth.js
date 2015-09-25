@@ -1,4 +1,4 @@
-angular.module('kwiki.auth', ['ChatFactory'])
+angular.module('kwiki.auth', [])
 
 .factory('Users', function ($http) {
   var addUser = function (userObject) {
@@ -9,7 +9,7 @@ angular.module('kwiki.auth', ['ChatFactory'])
     })
   }
 
-  var checkuser = function (userObject) {
+  var checkUser = function (userObject) {
     return $http({
       method: 'POST',
       url: '/login',
@@ -19,15 +19,20 @@ angular.module('kwiki.auth', ['ChatFactory'])
       return res.data;
     })
   }
+
+  return {
+    addUser: addUser,
+    checkUser: checkUser
+  }
 })
 
-.controller('userControl', function ($scope, Users, ChatFactory) {
+.controller('userControl', function ($scope, Users) {
   $scope.addUser = function (username, password) {
     var userObject = {
       username: username,
-      username: username
+      password: password
     }
-
+    console.log(userObject);
     Users.addUser(userObject);
   }
   $scope.checkUser = function (username, password) {
@@ -35,11 +40,10 @@ angular.module('kwiki.auth', ['ChatFactory'])
       username: username,
       password: password
     }
-    Users.checkUser(userObject).then(res) {
-      console.log(res);
+    Users.checkUser(userObject).then(function (res) {
       // if (res === valid){
       //   ChatFactory.
       // }
-    }
+    });
   }
 });
