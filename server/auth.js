@@ -101,3 +101,5 @@ exports.login = function(username, password) {
 
     });
 };
+
+exports.User = User;
