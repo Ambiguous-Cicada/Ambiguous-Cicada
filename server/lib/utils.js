@@ -10,6 +10,7 @@ exports.checkUser = function(req, res, next) {
   }
 };
 
+
 exports.createSession = function(req, res, newUser, callback) {
   req.session.regenerate(function() {
     req.session.user = newUser;

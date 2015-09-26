@@ -32,17 +32,17 @@ exports.joinLobby = function (user) {
       openChatRooms[user.id] = chatroom._id;
       openChatRooms[otherUser.id] = chatroom._id;
     });
-    
+
   } else {
     waitingRoom.push(user);
   }
 };
 
 //need method to check the open chatrooms data structure
-exports.findChatRoom = function (user) {
+exports.findChatRoom = function (userid) {
   //should take a user id as arguments
   //should return a chatroomid or null
-  return openChatRooms[user.id] || null;
+  return openChatRooms[userid] || null;
 };
 
 
