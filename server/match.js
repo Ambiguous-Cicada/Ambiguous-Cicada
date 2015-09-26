@@ -39,10 +39,10 @@ exports.joinLobby = function (user) {
 };
 
 //need method to check the open chatrooms data structure
-exports.findChatRoom = function (userid) {
+exports.findChatRoom = function (user) {
   //should take a user id as arguments
   //should return a chatroomid or null
-  return openChatRooms[userid] || null;
+  return openChatRooms[user.id] || null;
 };
 
 

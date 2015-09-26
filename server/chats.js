@@ -1,6 +1,6 @@
-var db = require('./db');
-
-var Schema = db.Schema,
+// var db = require('./db');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
 var ChatRoomSchema = new Schema({
@@ -20,8 +20,8 @@ var MessageSchema = new Schema({
   timestamp: Date
 });
 
-exports.ChatRoom = ChatRoom = db.model('chatrooms', ChatRoomSchema);
-exports.Message = Message = db.model('messages', MessageSchema);
+exports.ChatRoom = ChatRoom = mongoose.model('chatrooms', ChatRoomSchema);
+exports.Message = Message = mongoose.model('messages', MessageSchema);
 
 exports.addMessage = function (chatRoomId, message) {
   Message.create(message).then(function(msg) {

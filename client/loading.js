@@ -17,9 +17,9 @@ angular.module('kwiki.load',[])
       if(res.data.chatid) {
         $location.path('/chat');
       } else {
-        setTimeout(function() {
+        $timeout(function() {
           checkMatch();
-        }, 700);
+        }, 2000);
       }
     });
   };
