@@ -1,6 +1,6 @@
 var db = require('./db');
 
-var Schema = sb.Schema,
+var Schema = db.Schema,
     ObjectId = Schema.ObjectId;
 
 var ChatRoomSchema = new Schema({
@@ -35,6 +35,6 @@ exports.getMessages = function (chatRoomId) {
   return ChatRoom
     .findOne({_id: chatRoomId})
     .populate("messages")
-    .exec(); 
+    .exec();
 };
 
