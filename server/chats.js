@@ -35,6 +35,6 @@ exports.getMessages = function (chatRoomId) {
   return ChatRoom
     .findOne({_id: chatRoomId})
     .populate("messages")
-    .exec(); 
+    .exec();
 };
 
