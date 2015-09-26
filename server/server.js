@@ -9,9 +9,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(session({
   secret: 'vsafklj4kl2j34kl2',
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
+
+app.use(function(req, res, next) {
+  console.log(req.session);
+  next();
+});
 
 app.use("/", express.static(__dirname + '/../client'));
 
@@ -39,9 +44,11 @@ app.post('/signup', function(req, res) {
 app.post('/login', function(req, res) {
   auth.login(req.body.username, req.body.password)
     .then(function(user) {
-      res.status(200);
       utils.createSession(req, res, user);
     })
+    // .then(function() {
+    //   res.status(200).redirect('/');
+    // })
     .catch(function(err) {
       res.status(300)
         .send(err);

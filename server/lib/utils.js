@@ -10,9 +10,10 @@ exports.checkUser = function(req, res, next) {
   }
 };
 
-exports.createSession = function(req, res, newUser) {
+exports.createSession = function(req, res, user) {
   req.session.regenerate(function() {
-    req.session.user = newUser;
-    res.redirect('/');
+    req.session.user = user;
+    req.session.save();
+    res.status(200).end();
   });
 };
