@@ -6,10 +6,10 @@
 <body> -->
 <div ng-controller="ChatController">
   <div>
-    <div ng-repeat="message in messages track by $index">{{ message }}</div>
+    <div ng-repeat="message in messages track by $index">{{ message.text }}</div>
   </div>
   <form ng-submit="submit()">
-    <input ng-model="message" type="message" placeholder="Type a message">
+    <input ng-model="message.text" type="message" placeholder="Type a message">
     <input type="submit" value="Submit" id="Submit">
   </form>
 </div>

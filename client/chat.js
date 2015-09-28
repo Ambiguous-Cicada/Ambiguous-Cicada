@@ -22,7 +22,7 @@ angular.module('kwiki.chat',['kwiki.load'])
     $http.post('/chats/' + id, data)
     .then(
       function (res) {
-        callback();
+        console.log(data);
       },
       function (err) {
         console.error(err);
@@ -44,22 +44,22 @@ angular.module('kwiki.chat',['kwiki.load'])
     ChatFactory.getChat(LoadFactory.chatId, function(messages) {
       $scope.messages = messages;
     });
-    console.log($scope.messages);
   };
 
   var timer = $interval(function () {
     $scope.display();
   }, 1000);
   
-  $scope.message = '';
+  $scope.message = {
+    text: ''
+  };
 
   $scope.submit = function () {
     if( $scope.message ){
-      ChatFactory.postMessage(LoadFactory.chatId, this.message, function() {
-        console.log('ChatFactory.postMessage was called');
-      });
+      ChatFactory.postMessage(LoadFactory.chatId, 
+        { message: this.message.text });
       $scope.messages.unshift(this.message);
-      $scope.message = '';
+      $scope.message.text = '';
     }
   };
 
