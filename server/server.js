@@ -42,7 +42,6 @@ app.post('/login', function(req, res) {
   auth.login(req.body.username, req.body.password)
     .then(function(user) {
       utils.createSession(req, res, user, function() {
-        console.log("Sending back userObj:", user);
         res.status(200).send(user);
       });
     })
