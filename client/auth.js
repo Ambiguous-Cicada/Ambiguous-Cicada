@@ -15,9 +15,9 @@ angular.module('kwiki.auth', [])
       url: '/login',
       data: userObject
     })
-    .then(function (res) {
-      return res.data;
-    })
+    // .then(function (res) {
+    //   return res.data;
+    // })
   }
 
   return {
@@ -41,7 +41,9 @@ angular.module('kwiki.auth', [])
       password: password
     }
 
-    Users.checkUser(userObject).then(function () {
+    Users.checkUser(userObject).then(function (res) {
+      // console.log('DATA:', res.data);
+      window.localStorage['com.kwiki'] = JSON.stringify(res.data.data);
       $location.path('/loading');
     });
   }

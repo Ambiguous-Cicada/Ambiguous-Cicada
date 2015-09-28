@@ -5,9 +5,25 @@ angular.module('kwiki', [
   'kwiki.chat'
   ])
 .config(function ($routeProvider) {
+
+  var checkAuth = function (success, failure) {
+    failure = failure || '/login';
+    return {
+      'check' : function ($location) {
+        console.log(window.localStorage);
+        if(window.localStorage['com.kwiki']){
+          $location.path(success);
+        } else {
+          $location.path(failure);
+        }
+      }
+    };
+  };
+
   $routeProvider
     .when('/loading', {
       templateUrl: 'loading.html',
+      resolve: checkAuth('/loading'),
       controller: 'LoadController'
     })
     .when('/login', {
@@ -20,6 +36,7 @@ angular.module('kwiki', [
     })
     .when('/chat', {
       templateUrl: 'chat.html',
+      resolve: checkAuth('/chat'),
       controller: 'ChatController'
     })
     .otherwise({redirectTo: '/login'})
