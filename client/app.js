@@ -10,7 +10,6 @@ angular.module('kwiki', [
     failure = failure || '/login';
     return {
       'check' : function ($location) {
-        console.log(window.localStorage);
         if(window.localStorage['com.kwiki']){
           $location.path(success);
         } else {
