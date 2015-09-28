@@ -37,7 +37,7 @@ angular.module('kwiki.chat',['kwiki.load'])
 
 }])
 
-.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', function (LoadFactory, $scope, ChatFactory, $interval) {
+.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', 'Users', function (LoadFactory, $scope, ChatFactory, $interval, Users) {
 
   $scope.messages = [];
   $scope.display = function () {
@@ -49,19 +49,23 @@ angular.module('kwiki.chat',['kwiki.load'])
   var timer = $interval(function () {
     $scope.display();
   }, 1000);
-  
+
   $scope.message = {
     text: ''
   };
 
   $scope.submit = function () {
     if( $scope.message ){
-      ChatFactory.postMessage(LoadFactory.chatId, 
+      ChatFactory.postMessage(LoadFactory.chatId,
         { message: this.message.text });
       $scope.messages.unshift(this.message);
       $scope.message.text = '';
     }
   };
 
-}])
+  $scope.logOut = function () {
+    Users.logOut();
+  };
+
+}]);
 

@@ -54,6 +54,10 @@ app.post('/login', function(req, res) {
     });
 });
 
+app.post('/logout', utils.destroySession, function(req, res) {
+  res.status(200).end();
+});
+
 // Matching
 // do we need both post and login??
 app.route('/match')

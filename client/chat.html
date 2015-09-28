@@ -1,9 +1,3 @@
-<!-- <!DOCTYPE html>
-<html ng-app="kwiki">
-<head>
-  <title></title>
-</head>
-<body> -->
 <div ng-controller="ChatController">
   <div>
     <div ng-repeat="message in messages track by $index">{{ message.text }}</div>
@@ -12,14 +6,8 @@
     <input ng-model="message.text" type="message" placeholder="Type a message">
     <input type="submit" value="Submit" id="Submit">
   </form>
+  <form>
+    <input ng-click='logOut()' type='submit' value="Log Out">
+  </form>
 </div>
-<!-- 
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script> -->
 
-<!-- add individual view modules here -->
-
-<!-- <script src="chat.js"></script>
-
-</body>
-</html> -->

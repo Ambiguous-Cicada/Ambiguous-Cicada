@@ -42,19 +42,10 @@ angular.module('kwiki.load', [])
 
 }])
 
-<<<<<<< HEAD
 .controller('LoadController', ['$scope', '$http', 'LoadFactory', 'Users', function ($scope, $http, LoadFactory, Users) {
-
-  // $scope.chatId = LoadFactory.chatId;
-
-  $scope.bored = function () {
-
-=======
-.controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
   $scope.buttonDisabled = false;
   $scope.submit = function () {
     $scope.buttonDisabled = true;
->>>>>>> iss40
     LoadFactory.postMatch();
   };
 

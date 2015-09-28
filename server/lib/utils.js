@@ -1,3 +1,5 @@
+//utils
+
 var isLoggedIn = function(req) {
   return req.session ? !! req.session.user : false;
 };
@@ -15,5 +17,15 @@ exports.createSession = function(req, res, user, next) {
     req.session.user = user;
     req.session.save();
     next();
+  });
+};
+
+exports.destroySession = function(req, res, next) {
+  req.session.destroy(function(err) {
+    if(err){
+      res.status(200).send(err);
+    } else {
+      next();
+    }
   });
 };
