@@ -1,6 +1,6 @@
 angular.module('kwiki.auth', [])
 
-.factory('Users', function ($http) {
+.factory('Users', function ($http, $location) {
   var addUser = function (userObject) {
     return $http({
       method: 'POST',
@@ -31,7 +31,7 @@ angular.module('kwiki.auth', [])
     .catch(function (err) {
       console.log(err);
     });
-  }
+  };
 
   return {
     addUser: addUser,
