@@ -14,7 +14,7 @@ angular.module('kwiki.load',[])
 
   var checkMatch = function () {
     getMatch().then(function (res, err) {
-      if(res.data.chatid) {
+      if(res.data.chatId) {
         $location.path('/chat');
       } else {
         $timeout(function() {
