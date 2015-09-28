@@ -4,13 +4,14 @@ angular.module('kwiki', [
   'ngRoute',
   'kwiki.chat'
   ])
-.config(function ($routeProvider, $window, $location) {
+.config(function ($routeProvider) {
 
   var checkAuth = function (success, failure) {
     failure = failure || '/login';
     return {
-      'check' : function ( ) {
-        if($window.localStorage.getItem('com.kwiki')){
+      'check' : function ($location) {
+        console.log(window.localStorage);
+        if(window.localStorage['com.kwiki']){
           $location.path(success);
         } else {
           $location.path(failure);
