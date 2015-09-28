@@ -12,10 +12,14 @@ var openChatRooms = {};
 //need method to add user to waiting room
 //user should be object with name and id props
 exports.joinLobby = function (user) {
+
+
   //on add check if another user is in waiting room
-  if (waitingRoom.length) {
+  if (waitingRoom.length > 0) {
     //remove both user ids from waiting room
     var otherUser = waitingRoom.pop();
+    console.log(otherUser);
+    console.log(user);
     //make a new entry on chatrooms DB
     ChatRoom.create({
       users: [
@@ -25,12 +29,16 @@ exports.joinLobby = function (user) {
         { id: otherUser.id,
           name: otherUser.name
         }
-      ]
-    })
-    //add those user ids and chatroom id to chatrooms data structure
-    .then(function (chatroom) {
-      openChatRooms[user.id] = chatroom._id;
-      openChatRooms[otherUser.id] = chatroom._id;
+      ],
+      messages: []
+    }, function (err, chatroom) {
+      if (err) {
+        console.log(err);
+        throw new Error(err);
+      } else {
+        openChatRooms[user.id] = chatroom._id;
+        openChatRooms[otherUser.id] = chatroom._id;
+      }
     });
 
   } else {
@@ -41,7 +49,8 @@ exports.joinLobby = function (user) {
 //need method to check the open chatrooms data structure
 exports.findChatRoom = function (user) {
   //should take a user id as arguments
-  //should return a chatroomid or null
+  //should return a chatroomid or null;
+  console.log(openChatRooms);
   return openChatRooms[user.id] || null;
 };
 

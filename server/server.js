@@ -14,13 +14,10 @@ app.use(session({
 }));
 
 app.use(function(req, res, next) {
-  console.log(req.session);
   next();
 });
 
 app.use("/", express.static(__dirname + '/../client'));
-
-
 
 // internal dependencies
 var auth = require('./auth');
@@ -44,7 +41,6 @@ app.post('/signup', function(req, res) {
 app.post('/login', function(req, res) {
   auth.login(req.body.username, req.body.password)
     .then(function(user) {
-      console.log(user);
       utils.createSession(req, res, user, function(req, res) {
         res.status(200).send();
       });
@@ -70,7 +66,6 @@ app.route('/match')
     res.status(201).send("Added to Lobby");
   })
   .get(function(req, res) {
-    console.log(req.session);
     //get user from req
     var user = req.session.user;
     //check with match.js if userid has been paired

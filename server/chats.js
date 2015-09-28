@@ -1,18 +1,7 @@
-// var db = require('./db');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema,
+var db = require('./db');
+// var mongoose = require('mongoose');
+var Schema = db.Schema,
     ObjectId = Schema.ObjectId;
-
-var ChatRoomSchema = new Schema({
-  users: [{
-    id: Number,
-    name: String,
-  }],
-  messages: {
-    type: ObjectId,
-    ref: 'MessageSchema'
-  }
-});
 
 var MessageSchema = new Schema({
   userName: String,
@@ -20,8 +9,25 @@ var MessageSchema = new Schema({
   timestamp: Date
 });
 
-exports.ChatRoom = ChatRoom = mongoose.model('chatrooms', ChatRoomSchema);
-exports.Message = Message = mongoose.model('messages', MessageSchema);
+var ChatRoomSchema = new Schema({
+  users: [{
+    id: String,
+    name: String,
+  }],
+  messages: [{
+    type: ObjectId,
+    ref: 'MessageSchema'
+  }]
+});
+
+var Message = db.model('messages', MessageSchema);
+var ChatRoom = db.model('chatrooms', ChatRoomSchema);
+
+// var newChat = new ChatRoom({
+//   users: [{id: 23234234234324, name: 'Pericles'}],
+//   messages: []
+// });
+// newChat.save();
 
 exports.addMessage = function (chatRoomId, message) {
   Message.create(message).then(function(msg) {
@@ -38,3 +44,5 @@ exports.getMessages = function (chatRoomId) {
     .exec();
 };
 
+exports.ChatRoom = ChatRoom;
+exports.Message = Message;
