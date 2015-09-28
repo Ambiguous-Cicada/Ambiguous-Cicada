@@ -43,13 +43,10 @@ angular.module('kwiki.load', [])
 }])
 
 .controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
-
-  // $scope.chatId = LoadFactory.chatId;
-
-  $scope.bored = function () {
-
+  $scope.buttonDisabled = false;
+  $scope.submit = function () {
+    $scope.buttonDisabled = true;
     LoadFactory.postMatch();
-
   };
 
 }]);
