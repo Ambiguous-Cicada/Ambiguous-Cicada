@@ -32,7 +32,7 @@ exports.joinLobby = function (user) {
       openChatRooms[user.id] = chatroom._id;
       openChatRooms[otherUser.id] = chatroom._id;
     });
-    
+
   } else {
     waitingRoom.push(user);
   }
