@@ -6,19 +6,19 @@ angular.module('kwiki.auth', [])
       method: 'POST',
       url: '/signup',
       data: userObject
-    })
-  }
+    });
+  };
 
   var checkUser = function (userObject) {
     return $http({
       method: 'POST',
       url: '/login',
       data: userObject
-    })
+    });
     // .then(function (res) {
     //   return res.data;
     // })
-  }
+  };
 
   var logOut = function () {
     $http({
@@ -45,15 +45,15 @@ angular.module('kwiki.auth', [])
     var userObject = {
       username: username,
       password: password
-    }
+    };
     console.log(userObject);
     Users.addUser(userObject);
-  }
+  };
   $scope.checkUser = function (username, password) {
     var userObject = {
       username: username,
       password: password
-    }
+    };
 
     Users.checkUser(userObject).then(function (res) {
       // console.log('DATA:', res.data);
