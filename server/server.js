@@ -99,10 +99,10 @@ app.route('/chats/:id')
 
     //return messages of that chatroom
     chats.getMessages(chatRoomId)
-      .then( function (chatroom) {
+      .then(function (chatroom) {
         res.status(200).send(chatroom.messages);
       })
-      .reject( function (err) {
+      .reject(function (err) {
         console.log(err);
         res.status(404).send(err);
       });
