@@ -18,8 +18,8 @@ angular.module('kwiki.chat',['kwiki.load'])
     );
   };
 
-  var postMessage = function (data, callback) {
-    $http.post('/chats/:id', data)
+  var postMessage = function (id, data, callback) {
+    $http.post('/chats/' + id, data)
     .then(
       function (res) {
         callback();
@@ -37,16 +37,13 @@ angular.module('kwiki.chat',['kwiki.load'])
 
 }])
 
-.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', function ($scope, ChatFactory, $interval) {
+.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', function (LoadFactory, $scope, ChatFactory, $interval) {
 
   $scope.messages = [];
-  // var count = 0;
   $scope.display = function () {
     ChatFactory.getChat(LoadFactory.chatId, function(messages) {
       $scope.messages = messages;
     });
-    // $scope.messages.unshift(count);
-    // count++;
     console.log($scope.messages);
   };
 
@@ -58,7 +55,7 @@ angular.module('kwiki.chat',['kwiki.load'])
 
   $scope.submit = function () {
     if( $scope.message ){
-      ChatFactory.postMessage(this.message, function() {
+      ChatFactory.postMessage(LoadFactory.chatId, this.message, function() {
         console.log('ChatFactory.postMessage was called');
       });
       $scope.messages.unshift(this.message);

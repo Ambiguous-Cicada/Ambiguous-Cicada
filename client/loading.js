@@ -1,30 +1,31 @@
-angular.module('kwiki.load',[])
-// var app = angular.module('kwiki', []);
+angular.module('kwiki.load', [])
 
-.factory('LoadFactory', ['$http', '$timeout', function ($http, $timeout) {
+.factory('LoadFactory', ['$http', '$timeout', '$location', function ($http, $timeout, $location) {
+  var loadFac = {};
 
-  var getMatch = function () {
+  loadFac.getMatch = function () {
     return $http({
       method: 'GET',
       url: '/match'
     });
   };
 
-  var chatId = null;
+  loadFac.chatId = null;
 
-  var checkMatch = function () {
-    getMatch().then(function (res, err) {
+  loadFac.checkMatch = function () {
+    loadFac.getMatch().then(function (res, err) {
       if(res.data.chatId) {
+        loadFac.chatId = res.data.chatId;
         $location.path('/chat');
       } else {
         $timeout(function() {
-          checkMatch();
+          loadFac.checkMatch();
         }, 2000);
       }
     });
   };
 
-  var postMatch = function () {
+  loadFac.postMatch = function () {
     return $http({
       method: 'POST',
       url: '/match'
@@ -32,23 +33,18 @@ angular.module('kwiki.load',[])
     })
     .then(function (res) {
         if (res.status === 201){
-          checkMatch();
+          loadFac.checkMatch();
         }
     });
   };
 
-  return {
-    postMatch: postMatch,
-    getMatch: getMatch,
-    checkMatch: checkMatch,
-    chatId: chatId
-  };
+  return loadFac;
 
 }])
 
 .controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
 
-  $scope.chatId = LoadFactory.chatId;
+  // $scope.chatId = LoadFactory.chatId;
 
   $scope.bored = function () {
 
