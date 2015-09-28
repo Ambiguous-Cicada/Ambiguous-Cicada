@@ -86,7 +86,7 @@ app.route('/chats/:id')
     var timeStamp = new Date();
 
     //add message to chatroom messages
-    chats.addMessage(chatroomid, {
+    chats.addMessage(chatRoomId, {
       userName: name,
       text: message,
       timeStamp: timeStamp
@@ -98,11 +98,11 @@ app.route('/chats/:id')
     var chatRoomId = req.params.id;
 
     //return messages of that chatroom
-    getMessages(chatroomid)
-      .then( function (chatroom) {
+    chats.getMessages(chatRoomId)
+      .then(function (chatroom) {
         res.status(200).send(chatroom.messages);
       })
-      .reject( function (err) {
+      .reject(function (err) {
         console.log(err);
         res.status(404).send(err);
       });
