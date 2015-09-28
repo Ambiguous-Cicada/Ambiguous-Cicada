@@ -56,6 +56,4 @@ angular.module('kwiki.load',[])
 
   };
 
-
-
 }]);
