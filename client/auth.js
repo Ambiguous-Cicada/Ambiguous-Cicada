@@ -20,10 +20,24 @@ angular.module('kwiki.auth', [])
     // })
   }
 
+  var logOut = function () {
+    $http({
+      method: 'POST',
+      url: '/logout'
+    }).then(function (res) {
+      delete window.localStorage['com.kwiki'];
+      $location.path('/login');
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
+
   return {
     addUser: addUser,
-    checkUser: checkUser
-  }
+    checkUser: checkUser,
+    logOut: logOut
+  };
 })
 
 .controller('userControl', function ($scope, $location, Users) {
@@ -46,7 +60,11 @@ angular.module('kwiki.auth', [])
       window.localStorage['com.kwiki'] = JSON.stringify(res.data.data);
       $location.path('/loading');
     });
-  }
+  };
+
+  $scope.logOut = function () {
+    Users.logOut();
+  };
 });
 
 

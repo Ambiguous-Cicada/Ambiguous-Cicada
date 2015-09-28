@@ -42,7 +42,7 @@ angular.module('kwiki.load', [])
 
 }])
 
-.controller('LoadController', ['$scope', '$http', 'LoadFactory', function ($scope, $http, LoadFactory) {
+.controller('LoadController', ['$scope', '$http', 'LoadFactory', 'Users', function ($scope, $http, LoadFactory, Users) {
 
   // $scope.chatId = LoadFactory.chatId;
 
@@ -50,6 +50,10 @@ angular.module('kwiki.load', [])
 
     LoadFactory.postMatch();
 
+  };
+
+  $scope.logOut = function () {
+    Users.logOut();
   };
 
 }]);
