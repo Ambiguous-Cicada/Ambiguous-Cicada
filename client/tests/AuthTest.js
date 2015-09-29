@@ -38,8 +38,8 @@ describe('Front-end Authentication', function(){
   
   after(function () {
     $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandindRequest();
-    $window.localstorage.removeItem('com.kwiki');
+    $httpBackend.verifyNoOutstandingRequest();
+    $window.localStorage.removeItem('com.kwiki');
     //restore fake server
     //restor xhr
     //restore fake DB
@@ -62,15 +62,19 @@ describe('Front-end Authentication', function(){
   });
 
   it('Should be able to send new user to server, and store their info in local storage', function () {
-    $httpBackend.expectPOST('/signup').respond();
-    $httpBackend.expectPOST('/login').respond({name: 'JT', id: 'as08df70as98f'});
-    $scope.addUser('JT', 'password');
-    $httpBackend.flush();
-    expect().to.be({name: 'JT', id: 'as08df70as98f'});
+
+
+    var user = {name: 'JT', id: 'as08df70as98f'};
+
     //call $scope signup function
     //simulate getting 201 back
-    //verify that path is at /#/loading
+    $httpBackend.expectPOST('/signup').respond(201);
+    $httpBackend.expectPOST('/login').respond(user);
+    $scope.addUser('JT', 'password');
+    $httpBackend.flush();
     //verify that local storage has user
+    expect($window.localStorage.getItem('com.kwiki')).to.equal(JSON.stringify(user));
+    
   });
 
   it('Should be able to signin user', function () {
