@@ -1,72 +1,34 @@
-module.exports = function(config) {
-  config.set({
-    // base path, that will be used to resolve files and exclude
-    basePath: './',
 
-    frameworks: ['mocha', 'chai', 'sinon'],
+module.exports = function (config) {
+    'use strict';
+    console.log("setting config");
+    config.set({
 
-    // list of files / patterns to load in the browser
-    files: require('./include.conf.js').concat([
-      'test/unit/**/*.js',
-      'test/integration/**/*.js'
-    ]),
+        basePath: '',
 
-    // list of files to exclude
-    exclude: [
-      'karma.conf.js'
-    ],
+        frameworks: ['mocha', 'chai', 'sinon',],
 
-    // progress reporter: lists each test run and whether they pass/fail
-    // coverage reporter: creates coverage reports for every tested browser
-    reporters: ['progress', 'coverage'],
+        files: [
+            'client/bower_components/angular/angular.js',
+            'client/bower_components/angular-route/angular-route.js',
+            'client/*.js',
+            'client/tests/*Test.js',
+            // 'server/**/*.js',
+            // 'server/tests/*Test.js'
+        ],
 
-    // web server port
-    port: 9876,
+        reporters: ['progress'],
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
+        port: 9876,
+        colors: true,
+        autoWatch: true,
+        singleRun: true,
 
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_INFO,
 
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+        browsers: ['PhantomJS']
 
-    // the browsers that should be tested
-    browsers: [
-      'Chrome'
-    ],
-
-    // preprocessors: {
-    //   // Source files you want to generate coverage reports for
-    //   // This should not include tests or libraries
-    //   // These files will be instrumented by Istanbul
-    //   'client/scripts/todo/**/*.js': ['coverage']
-    // },
-
-    // Configure the reporter
-    coverageReporter: {
-      type: 'html',
-      dir: 'results/coverage/'
-    },
-
-    // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 20000,
-
-    // Auto run tests on start (when browsers are captured) and exit
-    singleRun: false,
-
-    // report which specs run too slow
-    reportSlowerThan: 500,
-
-    // any additional plugins needed for testing
-    plugins: [
-      'karma-coverage',
-      'karma-mocha',
-      'karma-chai',
-      'karma-sinon',
-      'karma-chrome-launcher'
-    ]
-  });
+    });
 };
