@@ -47,7 +47,13 @@ angular.module('kwiki.auth', [])
       password: password
     };
     console.log(userObject);
-    Users.addUser(userObject);
+    Users.addUser(userObject)
+    .then(function (res) {
+      $scope.checkUser(username, password);
+    })
+    .catch(function (err) {
+      throw err;
+    });
   };
   $scope.checkUser = function (username, password) {
     var userObject = {
