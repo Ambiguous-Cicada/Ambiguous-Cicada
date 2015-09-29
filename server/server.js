@@ -20,6 +20,7 @@ app.use(function(req, res, next) {
 app.use("/", express.static(__dirname + '/../client'));
 
 // internal dependencies
+var config = require('./env/config');
 var auth = require('./auth');
 var match = require('./match');
 var chats = require('./chats');
