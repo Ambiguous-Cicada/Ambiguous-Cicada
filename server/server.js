@@ -74,6 +74,7 @@ app.route('/match')
     var user = req.session.user;
     //check with match.js if userid has been paired
     var chatId = match.findChatRoom(user);
+    console.log(chatId);
     //send back either
       //200 with chatroomid
       //200 with null
