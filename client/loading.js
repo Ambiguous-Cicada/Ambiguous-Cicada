@@ -1,6 +1,6 @@
 angular.module('kwiki.load', [])
 
-.factory('LoadFactory', ['$location', 'socket', '$window', function ($location, socket, $window) {
+.factory('LoadFactory', ['$location', 'socket', '$window', '$rootScope', function ($location, socket, $window, $rootScope) {
   var loadFac = {};
 
   loadFac.chatId = null;
@@ -8,13 +8,12 @@ angular.module('kwiki.load', [])
 
   loadFac.postMatch = function () {
     // use socket to emit 
-    console.log('postMatch wascalled');
-    console.log(this.socket);
-    // $window.localStorage.debug = '*';
-    this.socket.emit('matching', 'sup'); // sending obj with name/id prop
+    this.socket.emit('matching', $window.localStorage.getItem('com.kwiki')); // sending obj with name/id prop
     this.socket.on('matched', function (data) {
       loadFac.chatId = data;
-      $location.path('/chat');
+      $rootScope.$apply(function () {
+        $location.path('/chat');        
+      });
     });
   };
   return loadFac;
@@ -28,7 +27,7 @@ angular.module('kwiki.load', [])
     //     if (res.status === 201){
     //       loadFac.checkMatch();
     //     }
-    // });
+    // })
 
   // loadFac.getMatch = function () {
   //   return $http({
