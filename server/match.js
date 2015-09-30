@@ -11,9 +11,9 @@ var openChatRooms = {};
 
 //need method to add user to waiting room
 //user should be object with name and id props
-exports.joinLobby = function (user) {
+exports.joinLobby = function (user, callback) {
 
-
+  var user = [user, callback];
   //on add check if another user is in waiting room
   if (waitingRoom.length > 0) {
     //remove both user ids from waiting room
@@ -23,11 +23,11 @@ exports.joinLobby = function (user) {
     //make a new entry on chatrooms DB
     ChatRoom.create({
       users: [
-        { id: user.id,
-          name: user.name
+        { id: user[0].id,
+          name: user[0].name
         },
-        { id: otherUser.id,
-          name: otherUser.name
+        { id: otherUser[0].id,
+          name: otherUser[0].name
         }
       ],
       messages: []
@@ -36,8 +36,11 @@ exports.joinLobby = function (user) {
         console.log(err);
         throw new Error(err);
       } else {
-        openChatRooms[user.id] = chatroom._id;
-        openChatRooms[otherUser.id] = chatroom._id;
+        openChatRooms[user[0].id] = chatroom._id;
+        openChatRooms[otherUser[0].id] = chatroom._id;
+
+        user[1](chatroom._id);
+        otherUser[1](chatroom._id);
       }
     });
 
