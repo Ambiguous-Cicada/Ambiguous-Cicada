@@ -26,7 +26,12 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+  var match = io.of('localhost:8000/match');
+  match.on('matching', function (data) {
+    console.log('hello');
+  });
 });
+
 
 app.use("/", express.static(__dirname + '/../client'));
 
