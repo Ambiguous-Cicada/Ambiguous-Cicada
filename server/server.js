@@ -17,9 +17,16 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(function(req, res, next) {
-  next();
-});
+// app.use(function(req, res, next) {
+//   next();
+// });
+
+// internal dependencies
+var config = require('./env/config');
+var auth = require('./auth');
+var match = require('./match');
+var chats = require('./chats');
+var utils = require('./lib/utils');
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -28,15 +35,18 @@ io.on('connection', function(socket){
   });
 });
 
+io.of('/match').on('connection', function(socket) {
+  socket.on('matching', function (data) {
+    match.joinLobby(data, function (chatroomid) {
+      socket.emit('matched', chatroomid);
+    })
+  });
+});
+
+
 app.use("/", express.static(__dirname + '/../client'));
 
 
-// internal dependencies
-var config = require('./env/config');
-var auth = require('./auth');
-var match = require('./match');
-var chats = require('./chats');
-var utils = require('./lib/utils');
 
 // Authentication
 app.post('/signup', function(req, res) {
@@ -73,25 +83,25 @@ app.post('/logout', utils.destroySession, function(req, res) {
 
 // Matching
 // do we need both post and login??
-app.route('/match')
-  .post(function(req, res) {
-    //get userObj from req
-    var user = req.session.user;
-    //send userObj to match.js (to add to waiting room)
-    match.joinLobby(user);
-    //send back a 201
-    res.status(201).send("Added to Lobby");
-  })
-  .get(function(req, res) {
-    //get user from req
-    var user = req.session.user;
-    //check with match.js if userid has been paired
-    var chatId = match.findChatRoom(user);
-    //send back either
-      //200 with chatroomid
-      //200 with null
-    res.status(200).send({chatId: chatId});
-  });
+// app.route('/match')
+//   .post(function(req, res) {
+//     //get userObj from req
+//     var user = req.session.user;
+//     //send userObj to match.js (to add to waiting room)
+//     match.joinLobby(user);
+//     //send back a 201
+//     res.status(201).send("Added to Lobby");
+//   })
+//   .get(function(req, res) {
+//     //get user from req
+//     var user = req.session.user;
+//     //check with match.js if userid has been paired
+//     var chatId = match.findChatRoom(user);
+//     //send back either
+//       //200 with chatroomid
+//       //200 with null
+//     res.status(200).send({chatId: chatId});
+//   });
 
 // Chats
 app.route('/chats/:id')
