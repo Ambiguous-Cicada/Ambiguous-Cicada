@@ -1,7 +1,9 @@
 angular.module('kwiki.load', [])
 
-.factory('LoadFactory', ['$http', '$timeout', '$location', function ($http, $timeout, $location) {
+.factory('LoadFactory', ['$http', '$timeout', '$location', 'socket', function ($http, $timeout, $location, socket) {
   var loadFac = {};
+
+  loadFac.socket = socket.connect("/match");
 
   loadFac.getMatch = function () {
     return $http({
@@ -46,7 +48,9 @@ angular.module('kwiki.load', [])
   $scope.buttonDisabled = false;
   $scope.submit = function () {
     $scope.buttonDisabled = true;
+    LoadFactory.socket;
     LoadFactory.postMatch();
+
   };
 
   $scope.logOut = function () {
