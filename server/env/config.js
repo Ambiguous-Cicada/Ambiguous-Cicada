@@ -1,5 +1,13 @@
-var fs = require('fs');
-var path = require('path');
+var config = {
 
-// Set config variable file here
-module.exports = JSON.parse(fs.readFileSync(__dirname+'/dev.json'));
+  development: {
+    dbpath: "/kwikidev"
+  },
+
+  production: {
+    dbpath: "/kwiki"
+  }
+
+};
+
+module.exports = config[process.env.NODE_ENV || 'development'];
