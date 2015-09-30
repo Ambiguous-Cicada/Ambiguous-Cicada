@@ -51,11 +51,11 @@ describe('Front-end Authentication', function(){
 
   xit('Should not be able to view non login/signup pages without being signed in', function () {
     //without being signed in
-      $location.path('/signup');
-      expect($location.path()).to.equal('/signup');
-      $location.path('/loading');
-      // $rootScope.$apply();
-      expect($location.path()).to.equal('/login');
+      
+      $window.location = 'localhost:9876/#/signup';
+      expect($window.location).to.equal('localhost:9876/#/signup');
+      $window.location = 'localhost:9876/#/loading';      // $rootScope.$apply();
+      expect($window.location).to.equal('localhost:9876/#/login');
       //set path to /#/loading, expect go to login page
       //set path to /#/chats, expect go to login page
     //
@@ -78,16 +78,33 @@ describe('Front-end Authentication', function(){
   });
 
   it('Should be able to signin user', function () {
+
+    var user = {name: 'JT', id: 'as08df70as98f'};
+
+    $httpBackend.expectPOST('/login').respond(user);
     //call $scope signin function
-    //simulate getting 200 back
-    //verify that path is at /#/loading
+    $scope.checkUser('JT', 'password');
+    $httpBackend.flush();
     //verify that local storage has user
+    expect($window.localStorage.getItem('com.kwiki')).to.equal(JSON.stringify(user));
   });
 
   it('Should be able to logout', function () {
+
+    var user = {name: 'JT', id: 'as08df70as98f'};
+
+    $httpBackend.expectPOST('/login').respond(user);
     //call $scope signin function
+    $scope.checkUser('JT', 'password');
+    $httpBackend.flush();
+
     //simulate getting 200 back
-    //verify that path is at /#/loading
+    $httpBackend.expectPOST('/logout').respond(200);
+    $scope.logOut();
+    $httpBackend.flush();
+    
     //verify that local storgage user is destroyed
+    expect($window.localStorage.getItem('com.kwiki')).to.equal(null);
+
   });
 });
