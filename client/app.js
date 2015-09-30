@@ -1,16 +1,17 @@
 angular.module('kwiki', [
   'kwiki.load',
   'kwiki.auth',
-  'ngRoute',
-  'kwiki.chat'
+  'kwiki.chat',
+  'ngRoute'
   ])
+
 .config(function ($routeProvider) {
 
   var checkAuth = function (success, failure) {
     failure = failure || '/login';
     return {
-      'check' : function ($location) {
-        if(window.localStorage['com.kwiki']){
+      'check' : function ($location, Users) {
+        if(!!Users.isAuth()){
           $location.path(success);
         } else {
           $location.path(failure);
