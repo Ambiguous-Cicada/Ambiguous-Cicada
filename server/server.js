@@ -4,6 +4,10 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(8000);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -17,7 +21,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
 app.use("/", express.static(__dirname + '/../client'));
+
 
 // internal dependencies
 var config = require('./env/config');

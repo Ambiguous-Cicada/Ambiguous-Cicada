@@ -1,11 +1,21 @@
-angular.module('kwiki', [
+var kwiki = angular.module('kwiki', [
   'kwiki.load',
   'kwiki.auth',
   'kwiki.chat',
   'ngRoute'
-  ])
+]);
 
-.config(function ($routeProvider) {
+kwiki.factory('socket', ['$location', function ($location) {
+  var socketFac = {};
+  socketFac.host = $location.host() + ":8000";
+  socketFac.connect = function (nameSpace) {
+  console.log("attempting connection to:", this.host + "/" + nameSpace);
+    return io(this.host + "/" + nameSpace);
+  };
+  return socketFac;
+}]);
+
+kwiki.config(function ($routeProvider) {
 
   var checkAuth = function (success, failure) {
     failure = failure || '/login';
@@ -39,5 +49,5 @@ angular.module('kwiki', [
       resolve: checkAuth('/chat'),
       controller: 'ChatController'
     })
-    .otherwise({redirectTo: '/login'})
+    .otherwise({redirectTo: '/login'});
 });
