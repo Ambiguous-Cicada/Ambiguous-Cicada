@@ -42,7 +42,7 @@ angular.module('kwiki.auth', [])
   };
 })
 
-.controller('userControl', function ($scope, $location, $window, Users) {
+.controller('userControl', function ($scope, $rootScope, $location, $window, Users) {
   $scope.addUser = function (username, password) {
     var userObject = {
       username: username,
@@ -64,6 +64,8 @@ angular.module('kwiki.auth', [])
 
     Users.checkUser(userObject).then(function (res) {
       $window.localStorage.setItem('com.kwiki', JSON.stringify(res.data));
+      $rootScope.user = res.data;
+
       $location.path('/loading');
     });
   };

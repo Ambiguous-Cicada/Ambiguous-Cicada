@@ -4,68 +4,50 @@
 //   ])
 
 angular.module('kwiki.chat',['kwiki.load'])
-.factory('ChatFactory', ['$http', 'socket', 'LoadFactory', '$window', function ($http, socket, LoadFactory, $window) {
+.factory('ChatFactory', ['$http', '$rootScope', 'SocketFactory', '$window', function ($http, $rootScope, SocketFactory, $window) {
 
-  var chatFac = {}
-  chatFac.socket = socket.connect('chat', $window.localStorage.getItem('com.kwiki'));
- 
+  var chatFact = {};
 
-  chatFac.getChat = function (id, callback) {
-  //   $http.get('/chats/' + idt)
-  //   .then(
-  //     function (res) {
-  //       callback(res.data);
-  //     },
-  //     function (err) {
-  //       console.error(err);
-  //     }
-  //   );
-  };
+  chatFact.socket = SocketFactory.connect('chat', $rootScope.user);
 
-  chatFac.postMessage = function (data, callback) {
-    this.socket.emit()
-
-
-
-
-
-
-  //   $http.post('/chats/' + id, data)
-  //   .then(
-  //     function (res) {
-  //       console.log(data);
-  //     },
-  //     function (err) {
-  //       console.error(err);
-  //     }
-  //   );
-  };
-
-  return chatFac;
-
-}])
-
-.controller('ChatController', ['LoadFactory', '$scope', 'ChatFactory', '$interval', 'Users', function (LoadFactory, $scope, ChatFactory, $interval, Users) {
-
-  $scope.messages = [];
-  $scope.display = function () {
-    ChatFactory.getChat(LoadFactory.chatId, function(messages) {
-      $scope.messages = messages;
+  chatFact.loadChat = function(callback) {
+    this.socket.emit('loadChat', $rootScope.chatRoomId);
+    this.socket.on('message', function(message) {
+      callback(message);
     });
   };
 
-  var timer = $interval(function () {
-    $scope.display();
-  }, 1000);
+  chatFact.postMessage = function (message, callback) {
+    console.log(message);
+    this.socket.emit('message', message);
+  };
+
+  return chatFact;
+}])
+
+.controller('ChatController', ['$scope', '$rootScope', 'ChatFactory', '$interval', 'Users', function ($scope, $rootScope, ChatFactory, $interval, Users) {
+
+  $scope.messages = [];
 
   $scope.message = {
+    userName: $rootScope.user.name,
     text: ''
   };
 
-  $scope.submit = function () {
+  $scope.loadChat = function() {
+    ChatFactory.loadChat(function(message) {
+      $scope.messages.unshift(message);
+      $scope.$apply();
+    });
+  };
+
+  $scope.sendMessage = function () {
     if( $scope.message ){
-      ChatFactory.postMessage({ message: this.message.text });
-      $scope.messages.unshift(this.message);
+      ChatFactory.postMessage(this.message);
+      $scope.messages.unshift({
+        userName: this.message.userName,
+        text: this.message.text
+      });
       $scope.message.text = '';
     }
   };

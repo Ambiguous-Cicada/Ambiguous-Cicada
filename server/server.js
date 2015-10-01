@@ -1,13 +1,13 @@
-// basic server set up
+// Basic Server Requirements
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var socketIOServer = require('http').Server(app);
+var io = require('socket.io')(socketIOServer);
 
-server.listen(8000);
+socketIOServer.listen(8000);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -16,42 +16,45 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use("/", express.static(__dirname + '/../client'));
 
-// app.use(function(req, res, next) {
-//   next();
-// });
-
-// internal dependencies
+// Internal Dependencies
 var config = require('./env/config');
 var auth = require('./auth');
 var match = require('./match');
 var chats = require('./chats');
 var utils = require('./lib/utils');
 
+// Sockets Connection
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('Socket '+ socket.id +' connected.');
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    console.log('Socket '+ socket.id +' disconnected.');
   });
 });
 
-io.of('/match').on('connection', function(socket) {
+// Sockets Matching Namespace
+io.of('/match').on('connection', function (socket) {
   socket.on('matching', function (data) {
-    match.joinLobby(data, function (chatroomid) {
-      socket.emit('matched', chatroomid);
+    match.joinLobby(data, function (chatRoomId) {
+      socket.emit('matched', chatRoomId);
     })
   });
 });
 
+// Sockets Chatting Namespace
+  // Join socket to room
 io.of('/chat').on('connection', function (socket) {
-  console.log(socket);
-  // socket.join(chatroomid);
-
+  socket.on('loadChat', function(chatRoomId) {
+    socket.join(chatRoomId);
+    socket.on('message', function(message) {
+      socket.to(chatRoomId).broadcast.emit('message', message);
+      chats.addMessage(chatRoomId, message);
+    })
+  });
 });
 
-app.use("/", express.static(__dirname + '/../client'));
-
-// Authentication
+// Authentication Routes
 app.post('/signup', function(req, res) {
   auth.signup(req.body.username, req.body.password)
     .then(function(result) {
@@ -83,60 +86,6 @@ app.post('/login', function(req, res) {
 app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
-
-// Matching
-// do we need both post and login??
-// app.route('/match')
-//   .post(function(req, res) {
-//     //get userObj from req
-//     var user = req.session.user;
-//     //send userObj to match.js (to add to waiting room)
-//     match.joinLobby(user);
-//     //send back a 201
-//     res.status(201).send("Added to Lobby");
-//   })
-//   .get(function(req, res) {
-//     //get user from req
-//     var user = req.session.user;
-//     //check with match.js if userid has been paired
-//     var chatId = match.findChatRoom(user);
-//     //send back either
-//       //200 with chatroomid
-//       //200 with null
-//     res.status(200).send({chatId: chatId});
-//   });
-
-// Chats
-// app.route('/chats/:id')
-//   .post(function(req, res) {
-//     //get info needed to construct message
-//     var chatRoomId = req.params.id;
-//     var message = req.body.message;
-//     var name = req.session.user.name;
-//     var timeStamp = new Date();
-
-//     //add message to chatroom messages
-//     chats.addMessage(chatRoomId, {
-//       userName: name,
-//       text: message,
-//       timeStamp: timeStamp
-//     });
-
-//   })
-//   .get(function(req, res) {
-//     //req should have a chatroomid on it
-//     var chatRoomId = req.params.id;
-
-//     //return messages of that chatroom
-//     chats.getMessages(chatRoomId)
-//       .then(function (chatroom) {
-//         res.status(200).send(chatroom.messages);
-//       })
-//       .reject(function (err) {
-//         console.log(err);
-//         res.status(404).send(err);
-//       });
-//   });
 
 app.listen(process.env.PORT || 3000);
 
