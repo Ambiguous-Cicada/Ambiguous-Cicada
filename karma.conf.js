@@ -18,7 +18,6 @@ module.exports = function (config) {
       // 'server/tests/*Test.js'
     ],
 
-
     reporters: ['progress', 'coverage'],
 
     port: 9876,

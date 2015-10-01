@@ -43,10 +43,13 @@ io.of('/match').on('connection', function(socket) {
   });
 });
 
+io.of('/chat').on('connection', function (socket) {
+  console.log(socket);
+  // socket.join(chatroomid);
+
+});
 
 app.use("/", express.static(__dirname + '/../client'));
-
-
 
 // Authentication
 app.post('/signup', function(req, res) {
@@ -104,36 +107,36 @@ app.post('/logout', utils.destroySession, function(req, res) {
 //   });
 
 // Chats
-app.route('/chats/:id')
-  .post(function(req, res) {
-    //get info needed to construct message
-    var chatRoomId = req.params.id;
-    var message = req.body.message;
-    var name = req.session.user.name;
-    var timeStamp = new Date();
+// app.route('/chats/:id')
+//   .post(function(req, res) {
+//     //get info needed to construct message
+//     var chatRoomId = req.params.id;
+//     var message = req.body.message;
+//     var name = req.session.user.name;
+//     var timeStamp = new Date();
 
-    //add message to chatroom messages
-    chats.addMessage(chatRoomId, {
-      userName: name,
-      text: message,
-      timeStamp: timeStamp
-    });
+//     //add message to chatroom messages
+//     chats.addMessage(chatRoomId, {
+//       userName: name,
+//       text: message,
+//       timeStamp: timeStamp
+//     });
 
-  })
-  .get(function(req, res) {
-    //req should have a chatroomid on it
-    var chatRoomId = req.params.id;
+//   })
+//   .get(function(req, res) {
+//     //req should have a chatroomid on it
+//     var chatRoomId = req.params.id;
 
-    //return messages of that chatroom
-    chats.getMessages(chatRoomId)
-      .then(function (chatroom) {
-        res.status(200).send(chatroom.messages);
-      })
-      .reject(function (err) {
-        console.log(err);
-        res.status(404).send(err);
-      });
-  });
+//     //return messages of that chatroom
+//     chats.getMessages(chatRoomId)
+//       .then(function (chatroom) {
+//         res.status(200).send(chatroom.messages);
+//       })
+//       .reject(function (err) {
+//         console.log(err);
+//         res.status(404).send(err);
+//       });
+//   });
 
 app.listen(process.env.PORT || 3000);
 
