@@ -1,0 +1,1 @@
+var key = require("./apiConfig.js").geocoding;
