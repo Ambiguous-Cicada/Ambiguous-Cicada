@@ -6,8 +6,7 @@ angular.module('kwiki.load', [])
   loadFact.socket = SocketFactory.connect("match");
 
   loadFact.postMatch = function () {
-    // use socket to emit
-    this.socket.emit('matching', $rootScope.user); // sending obj with name/id prop
+    this.socket.emit('matching', $rootScope.user);
     this.socket.on('matched', function (data) {
       $rootScope.chatRoomId = data;
       $rootScope.$apply(function () {
@@ -15,18 +14,19 @@ angular.module('kwiki.load', [])
       });
     });
   };
+  
   return loadFact;
 }])
 
 .controller('LoadController', ['$scope', 'LoadFactory', 'Users', function ($scope, LoadFactory, Users) {
-  $scope.buttonDisabled = false;
+  $scope.disableButton = false;
+
   $scope.submit = function () {
-    $scope.buttonDisabled = true;
+    $scope.disableButton = true;
     LoadFactory.postMatch();
   };
 
   $scope.logOut = function () {
     Users.logOut();
   };
-
 }]);
