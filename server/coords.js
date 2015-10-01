@@ -18,12 +18,12 @@ var encode = function (addressString) {
   }).join("");
 };
 
-//take an address string and make a call to he google api, then run the callback on a lat/long object
+//take an address string and make a call to he google api, then run the callback on a lat/lng object
 exports.getCoords = function (addressString, callback) {
   
   var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encode(addressString) +  "&key=" + key;
   
-  console.log("Sending GEt to:", url); //remove after testing
+  console.log("Sending GET to:", url); //remove after testing
 
   https.get(url, function (res) {
 
@@ -34,7 +34,7 @@ exports.getCoords = function (addressString, callback) {
         // lng
 
     res.on('data', function (data) {
-      
+
       console.log("Return from maps API:", data); //remove after testing
       
       callback(JSON.parse(data).geometry.location);
@@ -42,12 +42,23 @@ exports.getCoords = function (addressString, callback) {
     });
 
   }).on('error', function (e) {
-    console.error("Error with map API:", e);
+    console.error("Error with geocoding API:", e);
   });
 
 };
 
-//take two lat/long objects and return the distance between them (in miles)
+//take two lat/lng objects and return the distance between them (in miles)
 exports.getDistance = function (coords1, coords2) {
+
+//fairly accurate lat/lng to distance converter
+//see http://andrew.hedges.name/experiments/haversine for limitations
+
+  // var R = 3961; //radius of earth in miles
+  // var dlng = coords1.lng - coords2.lng;
+  // var dlat = coords1.lat - coords2.lat; 
+
+  // var a = Math.pow(Math.sin(dlat/2), 2) + Math.cos(coords1.lat) * Math.cos(coords2.lat) * Math.pow(Math.sin(dlng/2), 2);
+  // var d = R * ( 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) );
+  // return d; //distance between coords in miles
 
 };

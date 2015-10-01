@@ -13,7 +13,7 @@ var openChatRooms = {};
 //user should be object with name and id props
 exports.joinLobby = function (user, callback) {
 
-  var user = [user, callback];
+  user = [user, callback];
   //on add check if another user is in waiting room
   if (waitingRoom.length > 0) {
     //remove both user ids from waiting room
