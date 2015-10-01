@@ -4,11 +4,13 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var app = express();
+var cors = require('cors');
 var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
 socketIOServer.listen(8000);
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(session({
@@ -38,7 +40,7 @@ io.of('/match').on('connection', function (socket) {
   socket.on('matching', function (data) {
     match.joinLobby(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
-    })
+    });
   });
 });
 
@@ -50,7 +52,7 @@ io.of('/chat').on('connection', function (socket) {
     socket.on('message', function(message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
       chats.addMessage(chatRoomId, message);
-    })
+    });
   });
 });
 
