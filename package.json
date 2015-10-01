@@ -24,6 +24,7 @@
     "express-session": "^1.11.3",
     "grunt-cli": "^0.1.13",
     "http": "0.0.0",
+    "https": "^1.0.0",
     "istanbul": "^0.3.21",
     "mongo": "^0.1.0",
     "mongoose": "^4.1.8",
