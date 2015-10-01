@@ -42,6 +42,5 @@ module.exports = function (config) {
       type: 'html',
       dir: 'results/coverage/'
     }
-
   });
 };

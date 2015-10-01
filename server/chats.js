@@ -24,16 +24,13 @@ var Message = db.model('messages', MessageSchema);
 var ChatRoom = db.model('chatrooms', ChatRoomSchema);
 
 exports.addMessage = function (chatRoomId, message) {
-  console.log(message);
   Message.create(message).then(function(msg) {
-    // console.log(msg);
     ChatRoom.findOne({_id: chatRoomId}, function (err, chatroom) {
       if (err) {
         console.error(err);
       }
       var oldMessages = chatroom.messages;
       oldMessages.push(msg._id);
-      console.log(oldMessages);
       ChatRoom.findOneAndUpdate({_id: chatRoomId}, {messages: oldMessages}).exec();
     });
   });
