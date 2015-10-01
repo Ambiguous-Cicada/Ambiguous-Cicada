@@ -8,9 +8,9 @@ var kwiki = angular.module('kwiki', [
 kwiki.factory('socket', ['$location', function ($location) {
   var socketFac = {};
   socketFac.host = $location.host() + ":8000";
-  socketFac.connect = function (nameSpace) {
+  socketFac.connect = function (nameSpace, data) {
   console.log("attempting connection to:", this.host + "/" + nameSpace);
-    return io(this.host + "/" + nameSpace);
+    return io.connect(this.host + "/" + nameSpace, data);
   };
   return socketFac;
 }]);

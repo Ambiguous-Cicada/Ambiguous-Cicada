@@ -4,36 +4,44 @@
 //   ])
 
 angular.module('kwiki.chat',['kwiki.load'])
-.factory('ChatFactory', ['$http', function ($http) {
+.factory('ChatFactory', ['$http', 'socket', 'LoadFactory', '$window', function ($http, socket, LoadFactory, $window) {
 
-  var getChat = function (id, callback) {
-    $http.get('/chats/' + id)
-    .then(
-      function (res) {
-        callback(res.data);
-      },
-      function (err) {
-        console.error(err);
-      }
-    );
+  var chatFac = {}
+  chatFac.socket = socket.connect('chat', $window.localStorage.getItem('com.kwiki'));
+ 
+
+  chatFac.getChat = function (id, callback) {
+  //   $http.get('/chats/' + idt)
+  //   .then(
+  //     function (res) {
+  //       callback(res.data);
+  //     },
+  //     function (err) {
+  //       console.error(err);
+  //     }
+  //   );
   };
 
-  var postMessage = function (id, data, callback) {
-    $http.post('/chats/' + id, data)
-    .then(
-      function (res) {
-        console.log(data);
-      },
-      function (err) {
-        console.error(err);
-      }
-    );
+  chatFac.postMessage = function (data, callback) {
+    this.socket.emit()
+
+
+
+
+
+
+  //   $http.post('/chats/' + id, data)
+  //   .then(
+  //     function (res) {
+  //       console.log(data);
+  //     },
+  //     function (err) {
+  //       console.error(err);
+  //     }
+  //   );
   };
 
-  return {
-    getChat: getChat,
-    postMessage: postMessage
-  };
+  return chatFac;
 
 }])
 
@@ -56,8 +64,7 @@ angular.module('kwiki.chat',['kwiki.load'])
 
   $scope.submit = function () {
     if( $scope.message ){
-      ChatFactory.postMessage(LoadFactory.chatId,
-        { message: this.message.text });
+      ChatFactory.postMessage({ message: this.message.text });
       $scope.messages.unshift(this.message);
       $scope.message.text = '';
     }

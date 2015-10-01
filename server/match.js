@@ -18,8 +18,8 @@ exports.joinLobby = function (user, callback) {
   if (waitingRoom.length > 0) {
     //remove both user ids from waiting room
     var otherUser = waitingRoom.pop();
-    console.log(otherUser);
-    console.log(user);
+    // console.log(otherUser);
+    // console.log(user);
     //make a new entry on chatrooms DB
     ChatRoom.create({
       users: [
