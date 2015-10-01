@@ -6,11 +6,13 @@ module.exports = function (config) {
 
     basePath: '',
 
+<<<<<<< HEAD
     frameworks: ['mocha', 'chai', 'sinon',],
 
     files: [
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-route/angular-route.js',
+      'client/bower_components/angular-mocks/angular-mocks.js',
       'client/*.js',
       'client/tests/*Test.js',
       // 'server/**/*.js',

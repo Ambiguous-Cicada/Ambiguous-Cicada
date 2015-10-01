@@ -1,6 +1,6 @@
 angular.module('kwiki.auth', [])
 
-.factory('Users', function ($http, $location) {
+.factory('Users', function ($http, $location, $window) {
   var addUser = function (userObject) {
     return $http({
       method: 'POST',
@@ -15,9 +15,6 @@ angular.module('kwiki.auth', [])
       url: '/login',
       data: userObject
     });
-    // .then(function (res) {
-    //   return res.data;
-    // })
   };
 
   var logOut = function () {
@@ -25,7 +22,7 @@ angular.module('kwiki.auth', [])
       method: 'POST',
       url: '/logout'
     }).then(function (res) {
-      delete window.localStorage['com.kwiki'];
+      $window.localStorage.removeItem('com.kwiki');
       $location.path('/login');
     })
     .catch(function (err) {
@@ -33,20 +30,24 @@ angular.module('kwiki.auth', [])
     });
   };
 
+  var isAuth = function () {
+    return $window.localStorage.getItem('com.kwiki');
+  }
+
   return {
     addUser: addUser,
     checkUser: checkUser,
-    logOut: logOut
+    logOut: logOut,
+    isAuth: isAuth
   };
 })
 
-.controller('userControl', function ($scope, $location, Users) {
+.controller('userControl', function ($scope, $location, $window, Users) {
   $scope.addUser = function (username, password) {
     var userObject = {
       username: username,
       password: password
     };
-    console.log(userObject);
     Users.addUser(userObject)
     .then(function (res) {
       $scope.checkUser(username, password);
@@ -62,11 +63,11 @@ angular.module('kwiki.auth', [])
     };
 
     Users.checkUser(userObject).then(function (res) {
-      // console.log('DATA:', res.data);
-      window.localStorage['com.kwiki'] = JSON.stringify(res.data.data);
+      $window.localStorage.setItem('com.kwiki', JSON.stringify(res.data));
       $location.path('/loading');
     });
   };
+
 
   $scope.logOut = function () {
     Users.logOut();
