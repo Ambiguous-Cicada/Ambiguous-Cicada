@@ -1,3 +1,3 @@
 module.exports = {
-	geocoding: "google-api-key-for-geocoding"
+  geocoding: "google-api-key-for-geocoding"
 };

@@ -2,6 +2,7 @@
 var ChatRoom = require("./chats.js").ChatRoom;
 var Message = require("./chats.js").Message;
 var User = require("./auth.js").User;
+var coords = require("./coords.js");
 
 //create waiting room that will hold userids
 var waitingRoom = [];

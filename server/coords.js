@@ -1,6 +1,6 @@
 //Get google geocoding API from apiConfig
 var key = require("./apiConfig.js").geocoding;
-var http = require("https");
+var https = require("https");
 
 //helper function to escape special characters in an address string to their URL encodings
 var encode = function (addressString) {
@@ -21,23 +21,33 @@ var encode = function (addressString) {
 //take an address string and make a call to he google api, then run the callback on a lat/lng object
 exports.getCoords = function (addressString, callback) {
   
-  var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encode(addressString) +  "&key=" + key;
+  var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encode(addressString) +  "&key=" + key;
   
   console.log("Sending GET to:", url); //remove after testing
 
   https.get(url, function (res) {
 
-    //maps send response in JSON including the following properties (among many others):
+    //maps send response in JSON with an array of results,
+    //each result the following properties (among many others):
     // geometry:
       // location:
         // lat
         // lng
 
+    var buffer = "";
     res.on('data', function (data) {
-
-      console.log("Return from maps API:", data); //remove after testing
-      
-      callback(JSON.parse(data).geometry.location);
+      buffer += data;
+    });
+    res.on('end', function () {
+      var results = JSON.parse(buffer).results;
+      //its possible (thought hasn't happend in testing yet) that maps will give back multiple results
+      if (results === 0) {
+        console.log("COULD NOT LOOKUP ADDRESS");
+      } else if (results > 1) {
+        console.log("ADDRESS IS TOO VAGUE");
+      } else {
+        callback(JSON.parse(buffer).results[0].geometry.location);
+      }
 
     });
 
