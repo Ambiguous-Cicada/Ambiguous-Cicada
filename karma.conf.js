@@ -6,7 +6,6 @@ module.exports = function (config) {
 
     basePath: '',
 
-<<<<<<< HEAD
     frameworks: ['mocha', 'chai', 'sinon',],
 
     files: [
