@@ -60,15 +60,22 @@ exports.getCoords = function (addressString, callback) {
 //take two lat/lng objects and return the distance between them (in miles)
 exports.getDistance = function (coords1, coords2) {
 
-//fairly accurate lat/lng to distance converter
-//see http://andrew.hedges.name/experiments/haversine for limitations
+  var R = 3958.7558657440545; // Radius of earth in Miles 
 
-  // var R = 3961; //radius of earth in miles
-  // var dlng = coords1.lng - coords2.lng;
-  // var dlat = coords1.lat - coords2.lat; 
+  var dLat = toRad(coords2.lat - coords1.lat);
+  var dLon = toRad(coords2.lng - coords1.lng); 
+  
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(toRad(coords1.lat)) * Math.cos(toRad(coords2.lat)) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c;
+  
+  return d;
 
-  // var a = Math.pow(Math.sin(dlat/2), 2) + Math.cos(coords1.lat) * Math.cos(coords2.lat) * Math.pow(Math.sin(dlng/2), 2);
-  // var d = R * ( 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) );
-  // return d; //distance between coords in miles
+  function toRad(Value) {
+      /** Converts numeric degrees to radians */
+      return Value * Math.PI / 180;
+  }
 
 };
