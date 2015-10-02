@@ -43,8 +43,10 @@ exports.getCoords = function (addressString, callback) {
       //its possible (thought hasn't happend in testing yet) that maps will give back multiple results
       if (results === 0) {
         console.log("COULD NOT LOOKUP ADDRESS");
+        callback();
       } else if (results > 1) {
         console.log("ADDRESS IS TOO VAGUE");
+        callback();
       } else {
         callback(JSON.parse(buffer).results[0].geometry.location);
       }

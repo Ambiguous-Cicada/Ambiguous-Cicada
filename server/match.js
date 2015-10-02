@@ -14,40 +14,54 @@ var openChatRooms = {};
 //user should be object with name and id props
 exports.joinLobby = function (user, callback) {
 
+  //replace user.address with coords
+  coords.getCoords(user.address, function (coordObj) {
+    if (coordObj) {
+      user.address = coordObj;
+    } else {
+      console.log("Could not find location for user:", user);
+    }
+  });
+
+  //store callback in tuple with user object for convenient invocation after the creation of a chat room
   user = [user, callback];
-  //on add check if another user is in waiting room
-  if (waitingRoom.length > 0) {
-    //remove both user ids from waiting room
-    var otherUser = waitingRoom.pop();
-    // console.log(otherUser);
-    // console.log(user);
-    //make a new entry on chatrooms DB
-    ChatRoom.create({
-      users: [
-        { id: user[0].id,
-          name: user[0].name
-        },
-        { id: otherUser[0].id,
-          name: otherUser[0].name
+
+  //look for another user within 5 miles
+  for (var i = 0; i < waitingRoom.length; i++) {
+    if (coords.getDistance(user.address, waitingRoom[i][0].address) < 5) {
+      
+      otherUser = waitingRoom.splice(i, 1);
+
+      //make new chatroom in mongo
+      ChatRoom.create({
+        users: [
+          { id: user[0].id,
+            name: user[0].name
+          },
+          { id: otherUser[0].id,
+            name: otherUser[0].name
+          }
+        ],
+        messages: []
+      }, function (err, chatroom) {
+        if (err) {
+          console.log(err);
+          throw new Error(err);
+        } else {
+          //add users to open chatrooms hashtabl for easy lookup 
+          openChatRooms[user[0].id] = chatroom._id;
+          openChatRooms[otherUser[0].id] = chatroom._id;
+
+          //invoke each users callback so that socket io will send a response
+          user[1](chatroom._id);
+          otherUser[1](chatroom._id);
         }
-      ],
-      messages: []
-    }, function (err, chatroom) {
-      if (err) {
-        console.log(err);
-        throw new Error(err);
-      } else {
-        openChatRooms[user[0].id] = chatroom._id;
-        openChatRooms[otherUser[0].id] = chatroom._id;
-
-        user[1](chatroom._id);
-        otherUser[1](chatroom._id);
-      }
-    });
-
-  } else {
-    waitingRoom.push(user);
+      });
+      return; //keep from adding current user to waiting room after a match
+    }
   }
+  //if no user within that location was found, add this user to the waiting room
+  waitingRoom.push(user);
 };
 
 //need method to check the open chatrooms data structure
