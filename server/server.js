@@ -8,7 +8,7 @@ var cors = require('cors');
 var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
-socketIOServer.listen(8000);
+socketIOServer.listen(config.socketPort);
 
 app.use(cors());
 app.use(logger('dev'));
@@ -76,9 +76,6 @@ app.post('/login', function(req, res) {
         res.status(200).send(user);
       });
     })
-    // .then(function() {
-    //   res.status(200).redirect('/');
-    // })
     .catch(function(err) {
       res.status(300)
         .send(err);
@@ -89,6 +86,6 @@ app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(config.httpPort);
 
 module.exports = app;
