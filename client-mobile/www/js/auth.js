@@ -1,6 +1,6 @@
 angular.module('kwiki.auth', [])
 
-.factory('AuthFactory', function ($http, $location, $window, $rootScope) {
+.factory('AuthFactory', function ($http, $state, $window, $rootScope) {
   var AuthFact = {};
 
   AuthFact.addUser = function (userObject) {
@@ -25,7 +25,7 @@ angular.module('kwiki.auth', [])
       url: $rootScope.host + '/logout'
     }).then(function (res) {
       $window.localStorage.removeItem('com.kwiki');
-      $location.path('/login');
+      $state.go('login');
     })
     .catch(function (err) {
       console.log(err);

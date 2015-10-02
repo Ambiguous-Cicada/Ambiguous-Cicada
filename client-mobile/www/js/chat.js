@@ -13,21 +13,35 @@ angular.module('kwiki.chat',[])
     });
   };
 
+  chatFact.leaveChat = function () {
+    this.socket.emit('leaveChat', $rootScope.chatRoomId);
+  };
+
   chatFact.postMessage = function (message, callback) {
     console.log(message);
     this.socket.emit('message', message);
   };
 
   return chatFact;
+
 }])
 
-.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatFactory', '$interval', 'AuthFactory', function ($scope, $rootScope, ChatFactory, $interval, AuthFactory) {
+.controller('ChatCtrl', ['$state', '$scope', '$rootScope', 'ChatFactory', 'AuthFactory', function ($state, $scope, $rootScope, ChatFactory, AuthFactory) {
 
   $scope.messages = [];
 
   $scope.message = {
     userName: $rootScope.user.name,
     text: ''
+  };
+
+  $scope.leaveChat = function () {
+    ChatFactory.postMessage({
+      userName: $rootScope.user.name,
+      text: $rootScope.user.name + ' has left the chat.'
+    });
+    ChatFactory.leaveChat();
+    $state.go('match');
   };
 
   $scope.loadChat = function() {

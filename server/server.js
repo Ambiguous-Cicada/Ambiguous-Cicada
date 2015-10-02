@@ -47,12 +47,15 @@ io.of('/match').on('connection', function (socket) {
 // Sockets Chatting Namespace
   // Join socket to room
 io.of('/chat').on('connection', function (socket) {
-  socket.on('loadChat', function(chatRoomId) {
+  socket.on('loadChat', function (chatRoomId) {
     socket.join(chatRoomId);
-    socket.on('message', function(message) {
+    socket.on('message', function (message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
       chats.addMessage(chatRoomId, message);
     });
+    socket.on('leaveChat', function (chatRoomId) {
+      socket.leave(chatRoomId);
+    })
   });
 });
 
