@@ -7,6 +7,12 @@ var app = express();
 var cors = require('cors');
 var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
+// Internal Dependencies
+var config = require('./env/config');
+var auth = require('./auth');
+var match = require('./match');
+var chats = require('./chats');
+var utils = require('./lib/utils');
 
 socketIOServer.listen(config.socketPort);
 
@@ -20,12 +26,6 @@ app.use(session({
 }));
 app.use("/", express.static(__dirname + '/../client-web'));
 
-// Internal Dependencies
-var config = require('./env/config');
-var auth = require('./auth');
-var match = require('./match');
-var chats = require('./chats');
-var utils = require('./lib/utils');
 
 // Sockets Connection
 io.on('connection', function(socket){
