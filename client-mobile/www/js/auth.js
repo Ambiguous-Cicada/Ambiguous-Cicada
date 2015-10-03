@@ -18,7 +18,6 @@ angular.module('kwiki.auth', [])
       data: userObject
     }).then(function (res) {
       this.socket = SocketFactory.connect();
-      console.log(this.socket);
       return res;
     }.bind(this));
   };
@@ -32,7 +31,6 @@ angular.module('kwiki.auth', [])
       $state.go('login');
       // delete $rootScope.chatRoomId;
       // delete $rootScope.user;
-      console.log(this.socket);
       this.socket.disconnect();
     }.bind(this))
     .catch(function (err) {

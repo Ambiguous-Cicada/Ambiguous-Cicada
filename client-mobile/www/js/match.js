@@ -5,15 +5,12 @@ angular.module('kwiki.match', [])
 
   matchFact.connectSocket = function () {
     this.socket = SocketFactory.connect("match");
-    console.log(this.socket);
   };
 
   matchFact.postMatch = function () {
     this.socket.emit('matching', $rootScope.user);
     this.socket.on('matched', function (data) {
       $rootScope.chatRoomId = data;
-      console.log($rootScope.chatRoomId);
-      console.log($rootScope.user);
       $rootScope.$apply(function () {
         $state.go('chat');
       });
