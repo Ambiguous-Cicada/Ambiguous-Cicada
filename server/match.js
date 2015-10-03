@@ -25,9 +25,9 @@ exports.joinLobby = function (user, callback) {
 
   //store callback in tuple with user object for convenient invocation after the creation of a chat room
   user = [user, callback];
+
   //look for another user within 5 miles
   for (var i = 0; i < waitingRoom.length; i++) {
-    
     if (coords.getDistance(user.address, waitingRoom[i][0].address) < 5) {
       
       otherUser = waitingRoom.splice(i, 1);
