@@ -39,6 +39,7 @@ angular.module('kwiki.chat',[])
   };
 
   $scope.leaveChat = function (logout) {
+    $scope.messages = [];
     $rootScope.disableButton = false;
     ChatFactory.leaveChat();
     $state.go('match'); 
