@@ -7,6 +7,7 @@ angular.module('kwiki.chat',[])
   chatFact.socket = SocketFactory.connect('chat', $rootScope.user);
 
   chatFact.loadChat = function(callback) {
+    console.log($rootScope.chatRoomId);
     this.socket.emit('loadChat', $rootScope.chatRoomId);
     this.socket.on('message', function (message) {
       callback(message);
@@ -47,6 +48,7 @@ angular.module('kwiki.chat',[])
     ChatFactory.loadChat(function (message, leavechat) {
       if (leavechat) {
         $state.go('match');
+        $scope.messages = [];
       } else {
         $scope.messages.push(message);
         $scope.$apply();
@@ -66,6 +68,7 @@ angular.module('kwiki.chat',[])
   };
 
   $scope.logOut = function () {
+    $scope.messages = [];
     $rootScope.disableButton = false;
     ChatFactory.leaveChat();
     AuthFactory.logOut();
