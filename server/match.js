@@ -26,9 +26,9 @@ exports.joinLobby = function (user, callback) {
 
   //look for another user within 5 miles
   for (var i = 0; i < lobby.length; i++) {
-    if (coords.getDistance(user.address, lobby[i][0].address) < 5) {
+    if (coords.getDistance(user[0].address, lobby[i][0].address) < 5) {
 
-      otherUser = lobby.splice(i, 1);
+      otherUser = lobby.splice(i, 1)[0];
 
       //make new chatroom in mongo
       ChatRoom.create({
@@ -58,9 +58,9 @@ exports.joinLobby = function (user, callback) {
         return; //keep from adding current user to waiting room after a match
       }
     }
-  });
   //if no user within that location was found, add this user to the waiting room
   lobby.push(user);
+  });
 };
 
 // Exit the lobby
