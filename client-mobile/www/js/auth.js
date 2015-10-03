@@ -30,8 +30,8 @@ angular.module('kwiki.auth', [])
     }).then(function (res) {
       $window.localStorage.removeItem('com.kwiki');
       $state.go('login');
-      delete $rootScope.chatRoomId;
-      delete $rootScope.user;
+      // delete $rootScope.chatRoomId;
+      // delete $rootScope.user;
       console.log(this.socket);
       this.socket.disconnect();
     }.bind(this))
