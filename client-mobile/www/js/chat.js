@@ -8,20 +8,27 @@ angular.module('kwiki.chat',[])
 
   chatFact.loadChat = function(callback) {
     this.socket.emit('loadChat', $rootScope.chatRoomId);
-    this.socket.on('message', function(message) {
+    this.socket.on('message', function (message) {
       callback(message);
+    });
+    this.socket.on('leaveChat', function () {
+      callback(null, true);
     });
   };
 
+  chatFact.leaveChat = function () {
+    this.socket.emit('leaveChat', $rootScope.chatRoomId);
+  };
+
   chatFact.postMessage = function (message, callback) {
-    console.log(message);
     this.socket.emit('message', message);
   };
 
   return chatFact;
+
 }])
 
-.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatFactory', '$interval', 'AuthFactory', function ($scope, $rootScope, ChatFactory, $interval, AuthFactory) {
+.controller('ChatCtrl', ['$rootScope', '$state', '$scope', '$rootScope', 'ChatFactory', 'AuthFactory', function ($rootScope, $state, $scope, $rootScope, ChatFactory, AuthFactory) {
 
   $scope.messages = [];
 
@@ -30,17 +37,29 @@ angular.module('kwiki.chat',[])
     text: ''
   };
 
+  $scope.leaveChat = function (logout) {
+    $scope.messages = [];
+    $rootScope.disableButton = false;
+    ChatFactory.leaveChat();
+    $state.go('match'); 
+  };
+
   $scope.loadChat = function() {
-    ChatFactory.loadChat(function(message) {
-      $scope.messages.unshift(message);
-      $scope.$apply();
+    ChatFactory.loadChat(function (message, leavechat) {
+      if (leavechat) {
+        $state.go('match');
+        $scope.messages = [];
+      } else {
+        $scope.messages.push(message);
+        $scope.$apply();
+      }
     });
   };
 
   $scope.sendMessage = function () {
     if( $scope.message ){
       ChatFactory.postMessage(this.message);
-      $scope.messages.unshift({
+      $scope.messages.push({
         userName: this.message.userName,
         text: this.message.text
       });
@@ -49,6 +68,9 @@ angular.module('kwiki.chat',[])
   };
 
   $scope.logOut = function () {
+    $scope.messages = [];
+    $rootScope.disableButton = false;
+    ChatFactory.leaveChat();
     AuthFactory.logOut();
   };
 
