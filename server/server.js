@@ -32,6 +32,7 @@ io.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
   socket.on('disconnect', function(){
     console.log('Socket '+ socket.id +' disconnected.');
+    socket.disconnect();
   });
 });
 
@@ -42,20 +43,31 @@ io.of('/match').on('connection', function (socket) {
       socket.emit('matched', chatRoomId);
     });
   });
+  // socket.on('disconnect', function () {
+  //   socket.disconnect();
+  // });
 });
 
 // Sockets Chatting Namespace
   // Join socket to room
 io.of('/chat').on('connection', function (socket) {
+  // socket.on('disconnect', function () {
+  //   console.log('Socket '+ socket.id +' disconnected.');
+  //   socket.disconnect();
+  // });
   socket.on('loadChat', function (chatRoomId) {
     socket.join(chatRoomId);
     socket.on('message', function (message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
       chats.addMessage(chatRoomId, message);
     });
-    socket.on('leaveChat', function (chatRoomId) {
-      socket.leave(chatRoomId);
-    })
+  });
+  socket.on('leaveChat', function (chatRoomId) {
+    socket.to(chatRoomId).broadcast.emit('leaveChat');
+    var room = io.nsps['/chat'].adapter.rooms[chatRoomId];
+    for( var sock in room ) {
+      io.sockets.connected[sock].leave(chatRoomId);
+    }
   });
 });
 

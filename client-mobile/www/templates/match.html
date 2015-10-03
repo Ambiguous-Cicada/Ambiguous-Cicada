@@ -1,7 +1,7 @@
 <ion-view view-title="Match">
   <ion-content>
 
-    <div>
+    <div ng-init="connect()">
       <form>
         <input type="text" placeholder="Enter a zipcode..." ng-model="$root.user.address">
         <button ng-click="submit()" ng-disabled="disableButton">Find me a kwiki!</button>

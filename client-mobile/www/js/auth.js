@@ -1,6 +1,6 @@
 angular.module('kwiki.auth', [])
 
-.factory('AuthFactory', function ($http, $state, $window, $rootScope) {
+.factory('AuthFactory', function ($http, $state, $window, $rootScope, SocketFactory) {
   var AuthFact = {};
 
   AuthFact.addUser = function (userObject) {
@@ -16,7 +16,11 @@ angular.module('kwiki.auth', [])
       method: 'POST',
       url: $rootScope.host + '/login',
       data: userObject
-    });
+    }).then(function (res) {
+      this.socket = SocketFactory.connect();
+      console.log(this.socket);
+      return res;
+    }.bind(this));
   };
 
   AuthFact.logOut = function () {
@@ -26,7 +30,9 @@ angular.module('kwiki.auth', [])
     }).then(function (res) {
       $window.localStorage.removeItem('com.kwiki');
       $state.go('login');
-    })
+      console.log(this.socket);
+      this.socket.disconnect();
+    }.bind(this))
     .catch(function (err) {
       console.log(err);
     });
@@ -72,30 +78,4 @@ angular.module('kwiki.auth', [])
     AuthFactory.logOut();
   };
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

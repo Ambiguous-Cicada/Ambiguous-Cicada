@@ -6,7 +6,11 @@ angular.module('kwiki.socket', [])
   socketFact.host = $location.host() + ":8000";
 
   socketFact.connect = function (nameSpace) {
-    return io.connect(this.host + "/" + nameSpace);
+    if (!nameSpace) {
+      return io.connect(this.host, { forceNew: nameSpace });
+    } else {
+      return io.connect(this.host + "/" + nameSpace);
+    }
   };
 
   return socketFact;
