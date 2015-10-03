@@ -15,22 +15,22 @@ var openChatRooms = {};
 exports.joinLobby = function (user, callback) {
 
   //replace user.address with coords
-  // coords.getCoords(user.address, function (coordObj) {
-  //   if (coordObj) {
-  //     user.address = coordObj;
-  //   } else {
-  //     console.log("Could not find location for user:", user);
-  //   }
-  // });
+  coords.getCoords(user.address, function (coordObj) {
+    if (coordObj) {
+      user.address = coordObj;
+    } else {
+      console.log("Could not find location for user:", user);
+    }
+  });
 
   //store callback in tuple with user object for convenient invocation after the creation of a chat room
   user = [user, callback];
   //look for another user within 5 miles
   for (var i = 0; i < waitingRoom.length; i++) {
-    if (waitingRoom.length > 0) {
-    // if (coords.getDistance(user.address, waitingRoom[i][0].address) < 5) {
+    
+    if (coords.getDistance(user.address, waitingRoom[i][0].address) < 5) {
       
-      otherUser = waitingRoom.splice(i, 1)[0];
+      otherUser = waitingRoom.splice(i, 1);
 
       //make new chatroom in mongo
       ChatRoom.create({
