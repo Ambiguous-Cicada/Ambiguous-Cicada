@@ -79,5 +79,4 @@ exports.getDistance = function (coords1, coords2) {
       /** Converts numeric degrees to radians */
       return Value * Math.PI / 180;
   }
-
 };

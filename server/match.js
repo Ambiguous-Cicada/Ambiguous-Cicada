@@ -11,7 +11,7 @@ var openChatRooms = {};
 
 //need method to add user to waiting room
 //user should be object with name and id props
-exports.joinLobby = function (user, callback) {
+exports.joinLobby = function (user, next) {
 
   //replace user.address with coords
   coords.getCoords(user.address, function (coordObj) {
@@ -22,22 +22,24 @@ exports.joinLobby = function (user, callback) {
     }
 
     //store callback in tuple with user object for convenient invocation after the creation of a chat room
-    user = [user, callback];
+    user.next = next;
 
   //look for another user within 5 miles
   for (var i = 0; i < lobby.length; i++) {
-    if (coords.getDistance(user[0].address, lobby[i][0].address) < 5) {
+    if (coords.getDistance(user.address, lobby[i].address) < 5) {
 
       otherUser = lobby.splice(i, 1)[0];
 
       //make new chatroom in mongo
       ChatRoom.create({
         users: [
-          { id: user[0].id,
-            name: user[0].name
+          {
+            id: user.id,
+            name: user.name
           },
-          { id: otherUser[0].id,
-            name: otherUser[0].name
+          {
+            id: otherUser.id,
+            name: otherUser.name
           }
         ],
         messages: []
@@ -47,12 +49,12 @@ exports.joinLobby = function (user, callback) {
           throw new Error(err);
         } else {
           //add users to open chatrooms hashtabl for easy lookup
-          openChatRooms[user[0].id] = chatroom._id;
-          openChatRooms[otherUser[0].id] = chatroom._id;
+          openChatRooms[user.id] = chatroom._id;
+          openChatRooms[otherUser.id] = chatroom._id;
 
             //invoke each users callback so that socket io will send a response
-            user[1](chatroom._id);
-            otherUser[1](chatroom._id);
+            user.next(chatroom._id);
+            otherUser.next(chatroom._id);
           }
         });
         return; //keep from adding current user to waiting room after a match
