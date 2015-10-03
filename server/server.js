@@ -49,7 +49,6 @@ io.of('/match').on('connection', function (socket) {
 });
 
 // Sockets Chatting Namespace
-  // Join socket to room
 io.of('/chat').on('connection', function (socket) {
   // socket.on('disconnect', function () {
   //   console.log('Socket '+ socket.id +' disconnected from /chat.');
