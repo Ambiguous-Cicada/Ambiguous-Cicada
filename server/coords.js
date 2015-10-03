@@ -1,5 +1,5 @@
 //Get google geocoding API from apiConfig
-var key = require("./apiConfig.js").geocoding;
+var apiKey = require("./env/api-keys.js").geocoding;
 var https = require("https");
 
 //helper function to escape special characters in an address string to their URL encodings
@@ -9,7 +9,7 @@ var encode = function (addressString) {
   var specials = {
     " ": "%20", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "@": "%40", "`": "%60", "/": "%2F", ":": "%3A",
     ";": "%3B", "<": "%3C", "=": "%3D", ">": "%3E", "?": "%3F", "[": "%5B", "\\": "%5C", "]": "%5D", "^": "%5E",
-    "{": "%7B", "|": "%7C", "}": "%7D", "~": "%7E", "\“": "%22", "‘": "%27", "+": "%2B", ",": "%2C", 
+    "{": "%7B", "|": "%7C", "}": "%7D", "~": "%7E", "\“": "%22", "‘": "%27", "+": "%2B", ",": "%2C",
   };
 
   //replace all special characters in addressString with their url encodings and return the encoded string
@@ -20,9 +20,9 @@ var encode = function (addressString) {
 
 //take an address string and make a call to he google api, then run the callback on a lat/lng object
 exports.getCoords = function (addressString, callback) {
-  
-  var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encode(addressString) +  "&key=" + key;
-  
+
+  var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encode(addressString) +  "&key=" + apiKey;
+
   console.log("Sending GET to:", url); //remove after testing
 
   https.get(url, function (res) {
@@ -62,22 +62,21 @@ exports.getCoords = function (addressString, callback) {
 //take two lat/lng objects and return the distance between them (in miles)
 exports.getDistance = function (coords1, coords2) {
 
-  var R = 3958.7558657440545; // Radius of earth in Miles 
+  var R = 3958.7558657440545; // Radius of earth in Miles
 
   var dLat = toRad(coords2.lat - coords1.lat);
-  var dLon = toRad(coords2.lng - coords1.lng); 
-  
+  var dLon = toRad(coords2.lng - coords1.lng);
+
   var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(toRad(coords1.lat)) * Math.cos(toRad(coords2.lat)) * 
-          Math.sin(dLon/2) * Math.sin(dLon/2); 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+          Math.cos(toRad(coords1.lat)) * Math.cos(toRad(coords2.lat)) *
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c;
-  
+
   return d;
 
   function toRad(Value) {
       /** Converts numeric degrees to radians */
       return Value * Math.PI / 180;
   }
-
 };

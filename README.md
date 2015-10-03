@@ -1,5 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/Ambiguous-Cicada/Ambiguous-Cicada.png?label=ready&title=Ready)](https://waffle.io/Ambiguous-Cicada/Ambiguous-Cicada)
-z# Project Name
+
+Kwiki
 
 > Pithy project description
 
@@ -22,6 +23,11 @@ z# Project Name
 ## Usage
 
 > Some usage instructions
+
+### API Keys
+
+API keys are all stored in `server/env/api-keys.js` and is .gitignored.
+An example file can be seen in `server/env/api-keys.example.js`
 
 ## Requirements
 
@@ -46,7 +52,6 @@ bower install
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 

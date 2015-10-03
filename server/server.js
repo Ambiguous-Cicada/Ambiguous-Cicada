@@ -7,6 +7,7 @@ var app = express();
 var cors = require('cors');
 var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
+
 // Internal Dependencies
 var config = require('./env/config');
 var auth = require('./auth');
@@ -16,8 +17,11 @@ var utils = require('./lib/utils');
 
 socketIOServer.listen(config.socketPort);
 
+if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
+  app.use(logger('dev'));
+}
+
 app.use(cors());
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(session({
   secret: 'vsafklj4kl2j34kl2',
@@ -49,7 +53,6 @@ io.of('/match').on('connection', function (socket) {
 });
 
 // Sockets Chatting Namespace
-  // Join socket to room
 io.of('/chat').on('connection', function (socket) {
   // socket.on('disconnect', function () {
   //   console.log('Socket '+ socket.id +' disconnected from /chat.');
