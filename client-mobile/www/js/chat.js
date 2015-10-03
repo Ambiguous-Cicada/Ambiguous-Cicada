@@ -65,11 +65,11 @@ angular.module('kwiki.chat',[])
     }
   };
 
-  // $scope.logOut = function () {
-  //   $rootScope.disableButton = false;
-  //   ChatFactory.leaveChat();
-  //   AuthFactory.logOut();
-  // };
+  $scope.logOut = function () {
+    $rootScope.disableButton = false;
+    ChatFactory.leaveChat();
+    AuthFactory.logOut();
+  };
 
 }]);
 

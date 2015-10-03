@@ -7,7 +7,7 @@ angular.module('kwiki.socket', [])
 
   socketFact.connect = function (nameSpace) {
     if (!nameSpace) {
-      return io.connect(this.host, { forceNew: nameSpace });
+      return io.connect(this.host, { forceNew: true });
     } else {
       return io.connect(this.host + "/" + nameSpace);
     }

@@ -13,6 +13,7 @@ angular.module('kwiki.match', [])
     this.socket.on('matched', function (data) {
       $rootScope.chatRoomId = data;
       console.log($rootScope.chatRoomId);
+      console.log($rootScope.user);
       $rootScope.$apply(function () {
         $state.go('chat');
       });
