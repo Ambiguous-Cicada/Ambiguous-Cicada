@@ -1,12 +1,13 @@
-<ion-view view-title="Login">
+<ion-view view-title="Kwiki">
   <ion-content>
 
     <div>
       <h4>Log In</h4>
       <form>
-        <input ng-model='username' type='text' placeholder='username'>
-        <input ng-model='password' type='password' placeholder='password'>
-        <input ng-click='checkUser(username, password)' type='submit'>
+        <input ng-model='username' type='text' placeholder='username' class='username'>
+        <input ng-model='password' type='password' placeholder='password' class='password'>
+        <!-- <input ng-click='checkUser(username, password)' type='submit'> -->
+        <button class="button button-outline button-calm" action="submit" ng-click="checkUser(username, password)">I'm Ready for a Kwiki</button>
       </form>
     </div>
 

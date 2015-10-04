@@ -1,1 +1,56 @@
 /* Empty. Add your own CSS if you like */
+.spinner svg {
+  width: 10em;
+  height: 10em;
+}
+
+.chatbox {
+    position:absolute;
+    bottom: 0px;
+}
+.message-input {
+    margin-top: 10px;
+}
+
+.username,
+.password,
+.login
+ {
+  margin: 0 auto;
+}
+
+.matchbox-location,
+.matchbox-button {
+  margin: 0 auto;
+}
+
+/*.button-energized {
+  color: black;
+}*/
+
+.chatbox-container {
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.8);
+    position:relative;
+    height: 450px;
+    /*border: 1px solid rgba(0,0,255, 0.2);*/
+    padding: 10px;
+    line-height: 29px;
+    overflow: hidden;
+}
+
+
+
+/* 
+
+leave chat button
+
+Add keyboard
+
+center div / increase font
+
+Contacting master splinter on loading page
+
+Colors
+
+*/

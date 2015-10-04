@@ -1,12 +1,17 @@
-<ion-view view-title="Match">
+<ion-view view-title="Kwiki">
   <ion-content>
 
-    <div ng-init="connect()">
-      <form>
-        <input type="text" placeholder="Enter a zipcode..." ng-model="$root.user.address">
-        <button ng-click="submit()" ng-disabled="disableButton">Find me a kwiki!</button>
-        <input ng-click='logOut()' type='submit' value="Log Out">
-      </form>
+    <div class="matchbox matchbox-container" ng-init="connect()">
+
+      <div>
+        <input type="text" placeholder="Enter an address or zipcode ..." ng-model="$root.user.address" class="matchbox-location">
+      </div>
+
+      <div>
+        <input type="submit" class="button button-energized matchbox-button" ng-click="submit()" ng-disabled="disableButton" placeholder="Find me a kwiki">
+        <!-- <button class="button button-energized matchbox-button" ng-click='logOut()' type='submit' value="Log Out">Log Out</button> -->
+      </div>
+
     </div>
 
   </ion-content>
