@@ -1,9 +1,9 @@
 var apiKey = require("./env/api-keys.js").geocoding;
 var https = require("https");
 
-var coordMatcher = function() {
-  this.roomSize = 2;
-  this.maxDist = 5;
+var coordMatcher = function(roomSize, maxDist) {
+  this.roomSize = roomSize;
+  this.maxDist = maxDist;
 };
 
 coordMatcher.prototype.preMatch = function(user) {

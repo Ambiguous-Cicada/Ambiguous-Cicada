@@ -1,4 +1,6 @@
-var Lobby = function(matcher, chatHandler) {
+var chatHandler = require('./chatHandler');
+
+var Lobby = function(matcher) {
   this.matcher = matcher;
   this.chatHandler = chatHandler;
   this.size = 0;
@@ -39,7 +41,7 @@ Lobby.prototype._match = function() {
         for (var i = 0; i < users.length; i++) {
           this.leave(users[i]);
         }
-        this.chatHandler.createChat(users);
+        chatHandler.createChat(users);
       });
   }
 };
