@@ -1,4 +1,4 @@
-var apiKey = require("./env/api-keys.js").geocoding;
+var apiKey = require("../env/api-keys.js").geocoding;
 var https = require("https");
 
 var coordMatcher = function(roomSize, maxDist) {
@@ -7,12 +7,11 @@ var coordMatcher = function(roomSize, maxDist) {
 };
 
 coordMatcher.prototype.preMatch = function(user) {
-  var coords = this._getCoords(user.address);
-  if (coords instanceof Error){
-    coords = null;
-  }
-  user.coords = coords;
-  return user;
+  return this._getCoords(user.address)
+    .then(function(coords) {
+      user.coords = coords;
+      return user;
+    });
 };
 
 coordMatcher.prototype.match = function(users) {
@@ -45,36 +44,40 @@ coordMatcher.prototype._encodeAddress = function (addressString) {
   };
 
   //replace all special characters in addressString with their url encodings and return the encoded string
-  return addressString.split("").map(function (char) {
+  return addressString.split('').map(function (char) {
     return specials[char] || char;
-  }).join("");
+  }).join('');
 };
 
 coordMatcher.prototype._getCoords = function (addressString) {
 
   var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this._encodeAddress(addressString) +  "&key=" + apiKey;
 
-  https.get(url, function (res) {
-    var buffer = "";
-    var e = null;
-    res.on('data', function (data) {
-      buffer += data;
-    });
-    res.on('end', function () {
-      var results = JSON.parse(buffer).results;
-      //its possible (thought hasn't happend in testing yet) that maps will give back multiple results
-      if (results === 0) {
-        return new Error('Address not found.');
-      } else if (results > 1) {
-        return new Error('Address too vague.');
-      } else {
-        return JSON.parse(buffer).results[0].geometry.location;
-      }
-    });
-  }).on('error', function () {
-    return new Error("Error with geocoding API");
-  });
+  return new Promise(function(resolve, reject) {
 
+    https.get(url, function (res) {
+      var buffer = "";
+      var e = null;
+      res.on('data', function (data) {
+        buffer += data;
+      });
+      res.on('end', function () {
+
+        var results = JSON.parse(buffer).results;
+        //its possible (thought hasn't happend in testing yet) that maps will give back multiple results
+        if (results === 0) {
+          reject(new Error('Address not found.'));
+        } else if (results > 1) {
+          reject(new Error('Address too vague.'));
+        } else {
+          resolve( JSON.parse(buffer).results[0].geometry.location );
+        }
+      });
+    }).on('error', function () {
+      reject(new Error("Error with geocoding API"));
+    });
+
+  });
 };
 
 coordMatcher.prototype._getDistance = function(coordsA, coordsB) {

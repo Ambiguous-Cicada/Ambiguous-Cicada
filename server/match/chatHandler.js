@@ -1,9 +1,9 @@
-var ChatRoom = require('./chats.js');
+var ChatRoom = require('../chats.js').ChatRoom;
 
 var chatHandler = {};
 
 chatHandler.createChat = function(users) {
-  users = users.map(function(user) {
+  usersDbObj = users.map(function(user) {
     return {
       id: user.id,
       name: user.name
@@ -11,7 +11,7 @@ chatHandler.createChat = function(users) {
   });
 
   ChatRoom.create({
-    users: users,
+    users: usersDbObj,
     messages: []
   }, function(err, chatroom) {
     if(err){

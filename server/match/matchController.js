@@ -9,8 +9,8 @@ var lobby = new Lobby(matcher);
 
 var matchController = {};
 
-matchController.add = function (user, joinChatFunction) {
-  user.join = joinChatFunction;
+matchController.add = function (user, joinChatCallback) {
+  user.join = joinChatCallback;
   lobby.join(user);
 };
 

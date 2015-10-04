@@ -12,6 +12,7 @@ var io = require('socket.io')(socketIOServer);
 var config = require('./env/config');
 var auth = require('./auth');
 var match = require('./match');
+var matchCtrl = require('./match/matchController');
 var chats = require('./chats');
 var utils = require('./lib/utils');
 
@@ -43,21 +44,14 @@ io.on('connection', function(socket){
 // Sockets Matching Namespace
 io.of('/match').on('connection', function (socket) {
   socket.on('matching', function (data) {
-    match.joinLobby(data, function (chatRoomId) {
+    matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
     });
-  });
-  socket.on('disconnect', function () {
-    socket.disconnect();
   });
 });
 
 // Sockets Chatting Namespace
 io.of('/chat').on('connection', function (socket) {
-  // socket.on('disconnect', function () {
-  //   console.log('Socket '+ socket.id +' disconnected from /chat.');
-  //   socket.disconnect();
-  // });
   socket.on('loadChat', function (chatRoomId) {
     socket.join(chatRoomId);
     socket.on('message', function (message) {
