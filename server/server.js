@@ -5,7 +5,9 @@ var logger = require('morgan');
 var session = require('express-session');
 var app = express();
 var cors = require('cors');
-var socketIOServer = require('http').Server(app);
+var port = process.env.PORT || 3000;
+var http = require("http");
+// var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
 // Internal Dependencies
@@ -29,6 +31,9 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use("/", express.static(__dirname + '/../client-web'));
+
+var server = http.createServer(app);
+
 
 // Sockets Connection
 io.on('connection', function(socket){

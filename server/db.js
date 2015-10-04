@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var config = require('./env/config');
+var config = require('./config.js');
 
 var mongoURI = process.env.MONGOLAB_URI || config.dbpath;
 
