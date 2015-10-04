@@ -19,10 +19,9 @@ var ChatroomSchema = new Schema({
   }]
 });
 
-var Message = db.model('messages', MessageSchema);
-var Chatroom = db.model('chatrooms', ChatroomSchema);
+var ChatModel = {};
 
-ChatModel.Chatroom = Chatroom;
-ChatModel.Message = Message;
+ChatModel.Message = db.model('messages', MessageSchema);
+ChatModel.Chatroom = db.model('chatrooms', ChatroomSchema);
 
 module.exports = ChatModel;
