@@ -1,6 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
-.button-energized {
+.button-energized,
+.button-calm {
   font-weight: bold;
 }
 
@@ -10,7 +11,6 @@
 .login {
   margin: 0 auto;
 }
-
 #authbox-container {
   height: 100vh;
   text-align: center;

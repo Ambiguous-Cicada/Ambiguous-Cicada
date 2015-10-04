@@ -1,5 +1,5 @@
 <!-- <ion-nav-bar ng-click="leaveChat()"> -->
-  <ion-view view-title="Kwiki with {{ message.userName }}" ng-controller="ChatCtrl">
+  <ion-view view-title="Kwiki" ng-controller="ChatCtrl">
     <ion-nav-buttons side="primary">
       <button class="button button-energized" ng-click="leaveChat()">
         Leave
@@ -18,7 +18,7 @@
           </div>
           <form ng-submit="sendMessage()">
             <label class="item item-input message-input">
-              <input type="text" ng-model="message.text" placeholder="Send a message to {{ message.userName }} ..."/>
+              <input type="text" ng-model="message.text" placeholder="Send a message ..."/>
             </label>
             <button class="button button-block button-calm" action="submit">Send</button>
           </form>
