@@ -1,3 +1,10 @@
+// Internal Dependencies
+var config = require('./env/config.js');
+var auth = require('./auth/auth');
+var matchCtrl = require('./match/matchController');
+var chatCtrl = require('./chat/chatController');
+var utils = require('./lib/utils');
+
 // Basic Server Requirements
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -8,14 +15,12 @@ var cors = require('cors');
 var port = process.env.PORT || 3000;
 var http = require("http");
 var socketIOServer = require('http').Server(app);
-var io = require('socket.io')(socketIOServer);
-
-// Internal Dependencies
-var config = require('./env/config.js');
-var auth = require('./auth/auth');
-var matchCtrl = require('./match/matchController');
-var chatCtrl = require('./chat/chatController');
-var utils = require('./lib/utils');
+var io = require('socket.io').listen(app)
+io.configure(function () {  
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+io = io.sockets;
 
 socketIOServer.listen(config.socketPort);
 
