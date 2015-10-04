@@ -1,3 +1,7 @@
+.env
+Dockerfile
+docker-compose.yml
+
 ### node etc ###
 
 # OS files
@@ -28,10 +32,12 @@ coverage
 build/
 dist/
 
-# API Keys and DB_URI
-.env
+# API Keys
+server/env/api-keys.js
 
 # Dependency directorys
+# Deployed apps should consider commenting these lines out:
+# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 client-web/bower_components/
 client-mobile/www/lib/
