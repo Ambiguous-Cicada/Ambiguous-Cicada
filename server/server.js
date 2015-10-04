@@ -1,28 +1,20 @@
-// Internal Dependencies
-var config = require('./env/config.js');
-var auth = require('./auth/auth');
-var matchCtrl = require('./match/matchController');
-var chatCtrl = require('./chat/chatController');
-var utils = require('./lib/utils');
-
 // Basic Server Requirements
+var config = require('./config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var app = express();
 var cors = require('cors');
-var port = process.env.PORT || 3000;
-var http = require("http");
-var socketIOServer = require('http').Server(app);
-var io = require('socket.io').listen(app)
-io.configure(function () {  
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
-io = io.sockets;
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(require('./config.js').port);
 
-socketIOServer.listen(config.socketPort);
+// Internal Dependencies
+var auth = require('./auth/auth');
+var matchCtrl = require('./match/matchController');
+var chatCtrl = require('./chat/chatController');
+var utils = require('./lib/utils');
 
 if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
@@ -37,11 +29,8 @@ app.use(session({
 }));
 app.use("/", express.static(__dirname + '/../client-web'));
 
-var server = http.createServer(app);
-
-
 // Sockets Connection
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
   socket.on('disconnect', function(){
     console.log('Socket '+ socket.id +' disconnected.');
@@ -51,6 +40,7 @@ io.on('connection', function(socket){
 
 // Sockets Matching Namespace
 io.of('/match').on('connection', function (socket) {
+  console.log("connection to /match");
   socket.on('matching', function (data) {
     matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
@@ -62,6 +52,7 @@ io.of('/match').on('connection', function (socket) {
 // Sockets Chatting Namespace
 io.of('/chat').on('connection', function (socket) {
   socket.on('loadChat', function (chatRoomId) {
+    console.log("connection to /chat");
     socket.join(chatRoomId);
     socket.on('message', function (message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
@@ -106,7 +97,3 @@ app.post('/login', function(req, res) {
 app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
-
-app.listen(config.httpPort);
-
-module.exports = app;
