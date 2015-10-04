@@ -11,7 +11,7 @@ var openChatRooms = {};
 
 //need method to add user to waiting room
 //user should be object with name and id props
-exports.joinLobby = function (user, next) {
+exports.joinLobby = function (user, joinFunction) {
 
   //replace user.address with coords
   coords.getCoords(user.address, function (coordObj) {
@@ -22,7 +22,7 @@ exports.joinLobby = function (user, next) {
     }
 
     //store callback in tuple with user object for convenient invocation after the creation of a chat room
-    user.next = next;
+    user.join = joinFunction;
 
   //look for another user within 5 miles
   for (var i = 0; i < lobby.length; i++) {
@@ -53,8 +53,8 @@ exports.joinLobby = function (user, next) {
           openChatRooms[otherUser.id] = chatroom._id;
 
             //invoke each users callback so that socket io will send a response
-            user.next(chatroom._id);
-            otherUser.next(chatroom._id);
+            user.join(chatroom._id);
+            otherUser.join(chatroom._id);
           }
         });
         return; //keep from adding current user to waiting room after a match
