@@ -14,8 +14,7 @@ module.exports = function (config) {
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/*.js',
       'client/tests/*Test.js',
-      // 'server/**/*.js',
-      // 'server/tests/*Test.js'
+      'server/test/*-spec.js'
     ],
 
     reporters: ['progress', 'coverage'],

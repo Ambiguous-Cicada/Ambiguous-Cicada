@@ -23,6 +23,9 @@ var ChatRoomSchema = new Schema({
 var Message = db.model('messages', MessageSchema);
 var ChatRoom = db.model('chatrooms', ChatRoomSchema);
 
+exports.ChatRoom = ChatRoom;
+exports.Message = Message;
+
 exports.addMessage = function (chatRoomId, message) {
   Message.create(message).then(function(msg) {
     ChatRoom.findOne({_id: chatRoomId}, function (err, chatroom) {
@@ -43,5 +46,3 @@ exports.getMessages = function (chatRoomId) {
     .exec();
 };
 
-exports.ChatRoom = ChatRoom;
-exports.Message = Message;
