@@ -29,9 +29,6 @@ app.use(session({
 }));
 app.use("/", express.static(__dirname + '/../client-web'));
 
-var server = http.createServer(app);
-
-
 // Sockets Connection
 io.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
