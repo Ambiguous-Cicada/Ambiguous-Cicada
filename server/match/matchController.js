@@ -1,11 +1,11 @@
-var Lobby = require('./lobby');
+var MatchModel = require('./matchModel');
 var CoordMatcher = require('./coordMatcher');
 
 var roomSize = 2;
 var maxDist = 5;
 var matcher = new CoordMatcher(roomSize, maxDist);
 
-var lobby = new Lobby(matcher);
+var lobby = new MatchModel(matcher);
 
 var matchController = {};
 
