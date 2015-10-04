@@ -30,7 +30,6 @@ app.use(session({
 }));
 app.use("/", express.static(__dirname + '/../client-web'));
 
-
 // Sockets Connection
 io.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
@@ -46,6 +45,7 @@ io.of('/match').on('connection', function (socket) {
     matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
     });
+    // .catch(function (err) { SEND ERROR BACK TO CLIENT });
   });
 });
 

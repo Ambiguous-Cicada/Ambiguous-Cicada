@@ -55,10 +55,12 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-var User = db.model('users', UserSchema);
+var Auth = {};
+
+Auth.User = User = db.model('users', UserSchema);
 
 // signup function that validates, creates new user and returns a promise
-exports.signup = function(username, password) {
+Auth.signup = function(username, password) {
   return new Promise(function(resolve, reject) {
     User.findOne({username: username}, function(err, user) {
       if (user) {
@@ -78,7 +80,7 @@ exports.signup = function(username, password) {
 };
 
 // login function that validates, authenticates and returns a promise
-exports.login = function(username, password) {
+Auth.login = function(username, password) {
   return new Promise(function(resolve, reject) {
     User.findOne({username: username}, function(err, user) {
       if(err){
@@ -105,4 +107,4 @@ exports.login = function(username, password) {
     });
 };
 
-exports.User = User;
+module.exports = Auth;
