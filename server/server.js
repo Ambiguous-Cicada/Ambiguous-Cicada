@@ -8,8 +8,7 @@ var app = express();
 var cors = require('cors');
 var port = process.env.PORT || 3000;
 var socketIOServer = require('http').Server(app);
-var io = require('socket.io')(socketIOServer);
-
+var io = require('socket.io').listen(socketIOServer);
 // Internal Dependencies
 var config = require('./env/config.js');
 var auth = require('./auth/auth');
