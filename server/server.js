@@ -11,9 +11,8 @@ var io = require('socket.io')(socketIOServer);
 // Internal Dependencies
 var config = require('./env/config');
 var auth = require('./auth');
-var match = require('./match');
 var matchCtrl = require('./match/matchController');
-var chats = require('./chats');
+var chatCtrl = require('./chat/chatController');
 var utils = require('./lib/utils');
 
 socketIOServer.listen(config.socketPort);
@@ -56,7 +55,7 @@ io.of('/chat').on('connection', function (socket) {
     socket.join(chatRoomId);
     socket.on('message', function (message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
-      chats.addMessage(chatRoomId, message);
+      chatCtrl.addMessage(chatRoomId, message);
     });
   });
   socket.on('leaveChat', function (chatRoomId) {

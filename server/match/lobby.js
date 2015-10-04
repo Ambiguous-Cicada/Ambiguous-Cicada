@@ -1,8 +1,7 @@
-var chatHandler = require('./chatHandler');
+var chatController = require('../chat/chatController');
 
 var Lobby = function(matcher) {
-  this.matcher = matcher;
-  this.chatHandler = chatHandler;
+  this._matcher = matcher;
   this._size = 0;
   this.users = [];
 };
@@ -10,7 +9,7 @@ var Lobby = function(matcher) {
 Lobby.prototype.join = function(user) {
   Promise.all([
       this._add(user),
-      this.matcher.preMatch(user)
+      this._matcher.preMatch(user)
     ])
     .then(function() {
       this._match();
@@ -38,16 +37,15 @@ Lobby.prototype._add = function(user) {
 };
 
 Lobby.prototype._match = function() {
-  if(this._size >= this.matcher.roomSize){
-    this.matcher.match(this.users)
+  if(this._size >= this._matcher.roomSize){
+    this._matcher.match(this.users)
       .then(function (users) {
         for (var i = 0; i < users.length; i++) {
           this.leave(users[i]);
         }
-        chatHandler.createChat(users);
+        chatController.createChat(users);
       }.bind(this));
   }
 };
-
 
 module.exports = Lobby;
