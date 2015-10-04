@@ -11,7 +11,7 @@ var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
 // Internal Dependencies
-var config = require('./config.js');
+var config = require('./env/config.js');
 var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
