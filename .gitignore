@@ -33,6 +33,7 @@ build/
 dist/
 
 # API Keys
+server/config.js
 server/env/api-keys.js
 
 # Dependency directorys

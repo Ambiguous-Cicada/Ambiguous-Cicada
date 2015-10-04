@@ -9,7 +9,7 @@ var config = {
   production: {
     dbpath: process.env.DB_HOST + '/kwiki',
     httpPort: process.env.PORT || 3000,
-    socketPort: process.env.SOCK_PORT || 8000
+    socketPort: process.env.PORT || 8000
   }
 
 };
