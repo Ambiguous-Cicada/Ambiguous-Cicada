@@ -8,8 +8,9 @@
     "postinstall": "bower install",
     "test": "grunt test"
   },
+  "homepage": "https://github.com/nirajvora/Ambiguous-Cicada",
   "engines": {
-    "node": "0.12.7"
+    "node": "4.1.0"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,6 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues"
-  },
-  "homepage": "https://github.com/Ambiguous-Cicada/Ambiguous-Cicada",
-  "engines": {
-    "node": "4.1.0"
   },
   "homepage": "https://github.com/Ambiguous-Cicada/Ambiguous-Cicada",
   "engines": {
