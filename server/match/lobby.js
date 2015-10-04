@@ -41,7 +41,7 @@ Lobby.prototype._add = function(user) {
 
 Lobby.prototype._isDuplicate = function(user) {
   for (var i = 0; i < this.users.length; i++) {
-    if (this.users[i] === user) {
+    if (this.users[i].id === user.id) {
       return true;
     }
   }
