@@ -1,19 +1,19 @@
 // var db = require('../db');
 var bcrypt = require('bcrypt');
 
-var UserSchema = new db.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
+// var UserSchema = new db.Schema({
+//   username: {
+//     type: String,
+//     required: true,
+//     unique: true
+//   },
 
-  password: {
-    type: String,
-    required: true
-  },
-  salt: String
-});
+//   password: {
+//     type: String,
+//     required: true
+//   },
+//   salt: String
+// });
 
 UserSchema.methods.comparePasswords = function (candidatePassword) {
   var savedPassword = this.password;
