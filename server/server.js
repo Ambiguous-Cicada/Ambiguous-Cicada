@@ -7,11 +7,11 @@ var app = express();
 var cors = require('cors');
 var port = process.env.PORT || 3000;
 var http = require("http");
-// var socketIOServer = require('http').Server(app);
+var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
 // Internal Dependencies
-var config = require('./env/config');
+var config = require('./config.js');
 var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
