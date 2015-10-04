@@ -24,6 +24,10 @@
   "engines": {
     "node": "4.1.0"
   },
+  "homepage": "https://github.com/Ambiguous-Cicada/Ambiguous-Cicada",
+  "engines": {
+    "node": "4.1.0"
+  },
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.0",
