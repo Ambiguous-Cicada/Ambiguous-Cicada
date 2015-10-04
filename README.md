@@ -23,7 +23,7 @@ Kwiki is a mobile chat app that brings closeby users together.
 
 ## Usage
 
-### Config - `env/config.js`
+### Config
 The config file located at `env/config.js` contains environment variables that can be set to your requirements and `process.env.NODE_ENV` will be used to determine which set of variables will be used.
 Find more information in the [API Documentation](APIDOCS.md).
 
@@ -63,4 +63,4 @@ View the project roadmap [here]('https://github.com/Ambiguous-Cicada/Ambiguous-C
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See the [Contribution Guidelines](CONTRIBUTING.md) at `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.
