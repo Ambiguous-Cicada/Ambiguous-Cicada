@@ -1,13 +1,13 @@
 var config = {
 
   development: {
-    dbpath: "/kwikidev",
+    dbpath: 'mongodb://localhost/kwikidev',
     httpPort: 3000,
     socketPort: 8000
   },
 
   production: {
-    dbpath: "/kwiki",
+    dbpath: process.env.DB_HOST + '/kwiki',
     httpPort: process.env.PORT || 3000,
     socketPort: process.env.SOCK_PORT || 8000
   }
