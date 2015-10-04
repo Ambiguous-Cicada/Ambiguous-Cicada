@@ -4,7 +4,7 @@
   "description": "setting up kwikis",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm install && node server/server.js",
+    "start": "npm install --production && node server/server.js",
     "test": "grunt test"
   },
   "repository": {
@@ -52,7 +52,6 @@
     "mocha": "^1.20.1",
     "requirejs": "^2.1.20",
     "sinon": "^1.17.1",
-    "morgan": "^1.6.1",
     "supertest": "^1.1.0"
   }
 }
