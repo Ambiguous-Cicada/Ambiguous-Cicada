@@ -10,7 +10,7 @@ var io = require('socket.io')(socketIOServer);
 
 // Internal Dependencies
 var config = require('./env/config');
-var auth = require('./auth');
+var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
 var utils = require('./lib/utils');
