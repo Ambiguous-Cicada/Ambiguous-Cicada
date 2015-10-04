@@ -205,8 +205,8 @@ Finds out if the two users are a match given their distance apart
 
 **returns:** *boolean*, whether there is a match or not
 
-### Chat
-### Config
-### API Keys
+## Chat
+## Config
+## API Keys
 
 ## Client

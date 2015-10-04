@@ -57,10 +57,9 @@ npm install
 bower install
 ```
 
-### Roadmap
-
-View the project roadmap [here]('https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues')
+### Known bugs and issues
+This project contains known bugs and issues, which can all be accessed [here]('https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues'). Feel free to add to them.
 
 ## Contributing
 
-See the [Contribution Guidelines](CONTRIBUTING.md) at `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.
+See the [Contribution Guidelines](CONTRIBUTING.md) in `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.
