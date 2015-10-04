@@ -20,7 +20,7 @@ if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
 }
 
-socketIOServer.listen(config.httpPort);
+socketIOServer.listen(config.socketPort);
 
 app.use(cors());
 app.use(bodyParser.json());
