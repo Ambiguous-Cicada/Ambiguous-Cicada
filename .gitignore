@@ -29,7 +29,7 @@ build/
 dist/
 
 # API Keys
-server/apiConfig.js
+server/env/api-keys.js
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:

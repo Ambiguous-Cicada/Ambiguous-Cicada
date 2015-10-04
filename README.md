@@ -1,35 +1,49 @@
 [![Stories in Ready](https://badge.waffle.io/Ambiguous-Cicada/Ambiguous-Cicada.png?label=ready&title=Ready)](https://waffle.io/Ambiguous-Cicada/Ambiguous-Cicada)
-z# Project Name
 
-> Pithy project description
+# Kwiki
 
-## Team
+Kwiki is a mobile chat app that brings closeby users together.
 
-  - __Product Owner__: Daniel
-  - __Scrum Master__: JT
-  - __Development Team Members__: Niraj, Michael, Daniel, JT
+[API Documentation](APIDOCS.md)
+
+## Original Kwiki Team
+
+  - __Product Owner__: Daniel O'Leary
+  - __Scrum Master__: JT Knox
+  - __Development Team Members__: Niraj Vora, Michael Junio, Daniel O'Leary, JT Knox
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+### Config
+The config file located at `env/config.js` contains environment variables that can be set to your requirements and `process.env.NODE_ENV` will be used to determine which set of variables will be used.
+Find more information in the [API Documentation](APIDOCS.md).
+
+### Server
+The server is in NodeJS and is configured to start with `node server/server.js` or simply `npm start` from the root directory.
+
+### Client
+
+### API Keys
+
+API keys are all stored in `server/env/api-keys.js` and is .gitignored.
+An example file can be seen in `server/env/api-keys.example.js`.
+Find more information in the [API Documentation](APIDOCS.md).
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 0.12.7
+- npm
+- MongoDB
+- Ionic
 
 ## Development
 
@@ -45,9 +59,8 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
+View the project roadmap [here]('https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues')
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See the [Contribution Guidelines](CONTRIBUTING.md) at `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.
