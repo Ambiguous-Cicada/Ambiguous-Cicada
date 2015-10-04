@@ -11,7 +11,7 @@ var matchController = {};
 
 matchController.add = function (user, joinChatCallback) {
   user.join = joinChatCallback;
-  lobby.join(user);
+  return lobby.join(user);
 };
 
 matchController.remove = function (user) {
@@ -19,4 +19,3 @@ matchController.remove = function (user) {
 };
 
 module.exports = matchController;
-

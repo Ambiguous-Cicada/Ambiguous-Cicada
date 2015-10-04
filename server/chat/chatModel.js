@@ -1,5 +1,4 @@
 var db = require('../db');
-// var mongoose = require('mongoose');
 var Schema = db.Schema,
     ObjectId = Schema.ObjectId;
 

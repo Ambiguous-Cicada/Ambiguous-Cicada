@@ -7,7 +7,7 @@ var Lobby = function(matcher) {
 };
 
 Lobby.prototype.join = function(user) {
-  Promise.all([
+  return Promise.all([
       this._add(user),
       this._matcher.preMatch(user)
     ])
@@ -30,10 +30,22 @@ Lobby.prototype.leave = function(user) {
 
 Lobby.prototype._add = function(user) {
   return new Promise(function(resolve, reject) {
+    if(this._isDuplicate(user)){
+      reject(new Error('User is already in the lobby'));
+    }
     this.users.unshift(user);
     this._size++;
     resolve(user);
   }.bind(this));
+};
+
+Lobby.prototype._isDuplicate = function(user) {
+  for (var i = 0; i < this.users.length; i++) {
+    if (this.users[i].id === user.id) {
+      return true;
+    }
+  }
+  return false;
 };
 
 Lobby.prototype._match = function() {
