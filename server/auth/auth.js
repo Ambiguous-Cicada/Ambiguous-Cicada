@@ -1,4 +1,4 @@
-var db = require('../db');
+// var db = require('../db');
 var bcrypt = require('bcrypt');
 
 var UserSchema = new db.Schema({
