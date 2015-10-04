@@ -8,7 +8,7 @@ var MessageSchema = new Schema({
   timestamp: Date
 });
 
-var ChatRoomSchema = new Schema({
+var ChatroomSchema = new Schema({
   users: [{
     id: String,
     name: String,
@@ -20,7 +20,9 @@ var ChatRoomSchema = new Schema({
 });
 
 var Message = db.model('messages', MessageSchema);
-var ChatRoom = db.model('chatrooms', ChatRoomSchema);
+var Chatroom = db.model('chatrooms', ChatroomSchema);
 
-exports.ChatRoom = ChatRoom;
-exports.Message = Message;
+ChatModel.Chatroom = Chatroom;
+ChatModel.Message = Message;
+
+module.exports = ChatModel;
