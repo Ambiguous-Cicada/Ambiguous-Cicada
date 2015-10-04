@@ -4,7 +4,7 @@
   "description": "setting up kwikis",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "npm install && node server/server.js",
     "test": "grunt test"
   },
   "repository": {
