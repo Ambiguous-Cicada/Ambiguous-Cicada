@@ -28,7 +28,7 @@ angular.module('kwiki.chat',[])
 
 }])
 
-.controller('ChatCtrl', ['$ionicScrollDelegate', '$rootScope', '$state', '$scope', '$rootScope', 'ChatFactory', 'AuthFactory', function ($ionicScrollDelegate, $rootScope, $state, $scope, $rootScope, ChatFactory, AuthFactory) {
+.controller('ChatCtrl', ['$rootScope', '$state', '$scope', '$rootScope', 'ChatFactory', 'AuthFactory', function ($rootScope, $state, $scope, $rootScope, ChatFactory, AuthFactory) {
 
   $scope.messages = [];
 
