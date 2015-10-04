@@ -1,3 +1,4 @@
+
 // Basic Server Requirements
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -6,7 +7,6 @@ var session = require('express-session');
 var app = express();
 var cors = require('cors');
 var port = process.env.PORT || 3000;
-var http = require("http");
 var socketIOServer = require('http').Server(app);
 var io = require('socket.io')(socketIOServer);
 
@@ -16,8 +16,6 @@ var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
 var utils = require('./lib/utils');
-
-socketIOServer.listen(config.socketPort);
 
 if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
