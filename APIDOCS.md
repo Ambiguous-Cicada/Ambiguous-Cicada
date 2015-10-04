@@ -74,10 +74,10 @@ Kickstarts the matching mechanism for the user.
 
 **user** *object*, a [user object](#user-object)
 
-**callback** *function*(*chatRoomId*)
+**callback** *function*(*chatroomId*)
 
 - a callback function that is invoked with a chatroom identifier as the argument:
-  - *chatRoomId* *string*, identifies the chatroom that the user was matched into
+  - *chatroomId* *string*, identifies the chatroom that the user was matched into
 
 #### matchController.remove(*user*)
 Removes user from matching process before user is matched.
@@ -206,6 +206,16 @@ Finds out if the two users are a match given their distance apart
 **returns:** *boolean*, whether there is a match or not
 
 ## Chat
+```
+server/chat
+```
+### ChatModel
+```
+server/chat/chatModel.js
+```
+This module specifies the MongoDB schemas for the chatting system.
+The chat model is comprised of Chatroom and Message, where exists a one-to-many relationship as MongoDB ObjectId references. Each chatroom will have a `messages` array containing `{ObjectId: ObjectId}` references to their respective messages.
+
 ## Config
 ## API Keys
 
