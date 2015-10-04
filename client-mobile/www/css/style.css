@@ -1,9 +1,62 @@
 /* Empty. Add your own CSS if you like */
+
+.button-energized {
+  font-weight: bold;
+}
+
+/* Auth Views */
+.username,
+.password,
+.login {
+  margin: 0 auto;
+}
+
+#authbox-container {
+  height: 100vh;
+  text-align: center;
+}
+.authbox-button-container {
+  text-align: center;
+}
+.username, 
+.password,
+.authbox-button,
+.auth-link-to-signup {
+  margin: 0 auto;
+}
+
+
+/* Match View */
+#matchbox-container {
+  height: 100vh;
+}
+.matchbox-button-container {
+  text-align: center;
+}
+.matchbox-location,
+.matchbox-button {
+  margin: 0 auto;
+}
+
+
+/* Load View */
 .spinner svg {
   width: 10em;
   height: 10em;
 }
+.loading {
+  font-family: sans-serif;
+  font-size: 1.5em;
+  margin: 100px auto;
+}
+#load-container {
+  max-height: 100%;
+  max-width: 100%;
+  text-align: center;
+}
 
+
+/* Chat View */
 .chatbox {
     position:absolute;
     bottom: 0px;
@@ -11,23 +64,6 @@
 .message-input {
     margin-top: 10px;
 }
-
-.username,
-.password,
-.login
- {
-  margin: 0 auto;
-}
-
-.matchbox-location,
-.matchbox-button {
-  margin: 0 auto;
-}
-
-/*.button-energized {
-  color: black;
-}*/
-
 .chatbox-container {
     font-size: 1.2rem;
     color: rgba(0,0,0,0.8);
@@ -38,19 +74,3 @@
     line-height: 29px;
     overflow: hidden;
 }
-
-
-
-/* 
-
-leave chat button
-
-Add keyboard
-
-center div / increase font
-
-Contacting master splinter on loading page
-
-Colors
-
-*/
