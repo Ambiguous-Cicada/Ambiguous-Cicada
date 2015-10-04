@@ -4,6 +4,7 @@
   "description": "setting up kwikis",
   "main": "server/server.js",
   "scripts": {
+    "start": "node server/server.js",
     "test": "grunt test"
   },
   "repository": {
@@ -16,6 +17,9 @@
     "url": "https://github.com/nirajvora/Ambiguous-Cicada/issues"
   },
   "homepage": "https://github.com/nirajvora/Ambiguous-Cicada",
+  "engines": {
+    "node": "4.1.0"
+  },
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.0",
