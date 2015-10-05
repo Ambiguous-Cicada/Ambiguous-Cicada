@@ -288,7 +288,13 @@ www/js
 - Javascript files
  
 ### templates
+```
+www/templates
+```
 - HTML files
 
 ### css
+```
+www/css
+```
 - CSS Files
