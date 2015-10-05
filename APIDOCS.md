@@ -300,7 +300,10 @@ Gets the messages of a particular chatroom
 
 ## Config
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Pull merge
 ```
 server/config.js
 ```
@@ -342,7 +345,7 @@ Consists of chat functions.
 Consists of matching functions.
 ### socket.js
 Consists of socket functions.
- 
+
 ## templates
 ```
 www/templates
