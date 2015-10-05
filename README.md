@@ -4,7 +4,7 @@
 
 Kwiki is a mobile chat app that brings closeby users together.
 
-[API Documentation](APIDOCS.md)
+Refer to our [API Documentation](APIDOCS.md) for internal details of our app.
 
 ## Original Kwiki Team
 

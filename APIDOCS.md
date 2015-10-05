@@ -262,6 +262,18 @@ Gets the messages of a particular chatroom
 **returns** *promise*
 
 ## Config
+```
+server/env/config.js
+```
+All config variables can be stored in this module.
+
 ## API Keys
 
+- NEED TO WRITE
+
+```
+.env
+```
+
 ## Client
+- NEED TO WRITE
