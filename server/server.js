@@ -1,6 +1,5 @@
 
 // Basic Server Requirements
-var config = require('./env/config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -8,10 +7,9 @@ var session = require('express-session');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-server.listen(config.httpPort);
+server.listen(require('./config.js').port);
 
 var cors = require('cors');
-var port = process.env.PORT || 3000;
 // Internal Dependencies
 var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
@@ -99,7 +97,3 @@ app.post('/login', function(req, res) {
 app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
-
-// app.listen(config.httpPort);
-
-// module.exports = app;
