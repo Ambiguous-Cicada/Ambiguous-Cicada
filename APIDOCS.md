@@ -278,7 +278,7 @@ All config variables can be stored in this module.
 ```
 
 ## Client-Mobile
-Majority of the important Ionic files are located in [www](#www) under [js](#js) (Javascript), /templates (HTML), and [css](#css).
+Majority of the important Ionic files are located in [www](#www) under [js](#js), [html](#html), and [css](#css).
 
 ### www
 - Main filess
