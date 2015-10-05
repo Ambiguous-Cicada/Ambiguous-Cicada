@@ -294,6 +294,16 @@ Consists of the main Ionic client.
 www/js/auth.js
 ```
 Consists of authorisation functions.
+#### AuthFactory.addUser
+Submits a POST request to `signup` and passes an object with `username` and `password`.
+#### AuthFactory.checkUser
+Submits a POST request to `login` and passes an object with `username` and `password`. Creates a socket connection.
+#### AuthFactory.logOut
+Submits a POSt request to `logout` and passwo
+#### AuthFactory.isAuth
+#### AuthCtrl.addUser
+#### AuthCtrl.checkUser
+#### AuthCtrl.logOut
 
 ### Chat (Client)
 ```
