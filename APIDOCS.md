@@ -56,41 +56,7 @@ The path to the database can be configured in the [config file](#config).
 ```
 server/auth/
 ```
-### User Model
-```
-server/auth/userModel.js
-```
-The database's user model module
-
-**depends on:**
-- [Database](#database)
-- [bcrypt](https://www.npmjs.com/package/bcrypt)
-
-#### UserSchema.pre()
-Encrypts input password using [bcrypt](https://www.npmjs.com/package/bcrypt) before saving to the database.
-
-#### UserSchema.methods.comparePasswords(*candidatePassword*)
-Checks to see if the candidate password is the same as the stored password for the user
-
-**candidatePassword** *string*
-
-### Authentication Controller
-```
-server/auth/auth.js
-```
-#### Auth.signup(*username*, *password*)
-Sign up the user to the app by adding them to the database
-
-**username** *string*
-
-**password** *string*
-
-#### Auth.login(*username*, *password*)
-Login the user to the app
-
-**username** *string*
-
-**password** *string*
+--- REFACTOR INTO TWO FILES
 
 ## Utilities
 ```
@@ -304,16 +270,6 @@ Gets the messages of a particular chatroom
 **returns** *promise*
 
 ## Config
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Pull merge
-```
-server/config.js
-```
-All config variables can be stored in this module.
->>>>>>> Add auth to API docs
 
 All config variables can be stored in this module `server/config.js`.
 
@@ -327,9 +283,15 @@ Majority of the important Ionic files are located in a folder called www.
 ```
 www/js
 ```
-### app.js
+### App
+```
+www/js/app.js
+```
 Consists of the main Ionic client.
-### auth.js
+### Auth
+```
+www/js/auth.js
+```
 Consists of authorisation functions.
 
 ### Chat (Client)
@@ -365,10 +327,25 @@ Sends a message to the server and pushes it to user's `ChatCtrl.messages` for re
 Clears the user's `ChatCtrl.messages` and logs them out. User is able to enter new chats after logging back in.
 
 ### match.js
+```
+www/js/match.js
+```
 Consists of matching functions.
-### socket.js
-Consists of socket functions.
+#### MatchFactory.connectSocket
+Connects the user to the `match` namespace on the server.
 
+#### MatchFactory.postMatch
+Triggers a `matching` event and creates a `matched` event listener that receives a chatRoomId from the server and switches the user to the `chat` state.
+
+#### MatchCtrl.connect
+#### MatchCtrl.submit
+#### MatchCtrl.logOut
+### socket.js
+```
+www/js/socket.js
+```
+Consists of socket functions.
+ 
 ## templates
 ```
 www/templates
