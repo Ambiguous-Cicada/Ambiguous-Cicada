@@ -32,11 +32,10 @@ The server is in NodeJS and is configured to start with `node server/server.js` 
 
 ### Client
 
-### API Keys
+### API Keys and public DB_URI
 
-API keys are all stored in `server/env/api-keys.js` and is .gitignored.
-An example file can be seen in `server/env/api-keys.example.js`.
-Find more information in the [API Documentation](APIDOCS.md).
+The Google geocoding API-key and the public Mongo-lab URI are all stored in `.env`, which is `.gitignore`d.
+The variables in `.env` can be manually added to the production server with `$ heroku config`. To access the the `.env` file with `process.env` in development mode, you must start the development server with `$ heroku local`.
 
 ## Requirements
 
