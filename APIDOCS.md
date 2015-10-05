@@ -285,25 +285,18 @@ Consists of authorisation functions.
 
 ### chat.js
 Consists of chat functions.
-####
-ChatFactory.loadChat(*callback*)
+#### ChatFactory.loadChat(*callback*)
 
 This function does two things: 
 1. Triggers a `loadChat` event on the server and passes in `$rootScope.chatRoomId`.
-2. Create event listeners for `message` and `leaveChat`.
+1. Create event listeners for `message` and `leaveChat`.
 
-####
-ChatFactory.leaveChat
-####
-ChatFactory.postMessage(*message*, *callback*)
-####
-ChatCtrl.leaveChat(*logout*)
-####
-ChatCtrl.loadChat
-####
-ChatCtrl.sendMessage
-####
-ChatCtrl.logOut
+#### ChatFactory.leaveChat
+#### ChatFactory.postMessage(*message*, *callback*)
+#### ChatCtrl.leaveChat(*logout*)
+#### ChatCtrl.loadChat
+#### ChatCtrl.sendMessage
+#### ChatCtrl.logOut
 
 ### match.js
 Consists of matching functions.
