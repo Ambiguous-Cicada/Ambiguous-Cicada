@@ -20,8 +20,6 @@ if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
 }
 
-socketIOServer.listen(config.socketPort);
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
@@ -41,8 +39,7 @@ io.sockets.on('connection', function(socket){
 });
 
 // Sockets Matching Namespace
-io.of('/match').on('connection', function (socket) {
-  console.log("connection to /match");
+io.sockets.of('/match').on('connection', function (socket) {
   socket.on('matching', function (data) {
     matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
@@ -52,7 +49,7 @@ io.of('/match').on('connection', function (socket) {
 });
 
 // Sockets Chatting Namespace
-io.of('/chat').on('connection', function (socket) {
+io.sockets.of('/chat').on('connection', function (socket) {
   socket.on('loadChat', function (chatRoomId) {
     console.log("connection to /chat");
     socket.join(chatRoomId);
