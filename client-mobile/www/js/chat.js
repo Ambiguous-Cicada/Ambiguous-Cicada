@@ -28,7 +28,7 @@ angular.module('kwiki.chat',[])
 
 }])
 
-.controller('ChatCtrl', ['$rootScope', '$state', '$scope', '$rootScope', 'ChatFactory', 'AuthFactory', function ($rootScope, $state, $scope, ChatFactory, AuthFactory) {
+.controller('ChatCtrl', ['$rootScope', '$state', '$scope', 'ChatFactory', 'AuthFactory', function ($rootScope, $state, $scope, ChatFactory, AuthFactory) {
 
   $scope.messages = [];
 
@@ -41,7 +41,7 @@ angular.module('kwiki.chat',[])
     $scope.messages = [];
     $rootScope.disableButton = false;
     ChatFactory.leaveChat();
-    $state.go('match'); 
+    $state.go('match');
   };
 
   $scope.loadChat = function() {
