@@ -265,18 +265,11 @@ Gets the messages of a particular chatroom
 **returns** *promise*
 
 ## Config
-```
-server/env/config.js
-```
-All config variables can be stored in this module.
 
-## API Keys
+All config variables can be stored in this module `server/config.js`.
 
-- NEED TO WRITE
+Environmental variables, as well as API keys and database URIs, are referenced in `.env`.
 
-```
-.env
-```
 
 ## Client-Mobile
 Majority of the important Ionic files are located in a folder called www.
@@ -293,7 +286,19 @@ Consists of authorisation functions.
 #### chat.js
 Consists of chat functions.
 #####
-ChatFactory
+ChatFactory.loadChat(*callback*)
+#####
+ChatFactory.leaveChat
+#####
+ChatFactory.postMessage(*message*, *callback*)
+#####
+ChatCtrl.leaveChat(*logout*)
+#####
+ChatCtrl.loadChat
+#####
+ChatCtrl.sendMessage
+#####
+ChatCtrl.logOut
 ######
 socket
 ######
