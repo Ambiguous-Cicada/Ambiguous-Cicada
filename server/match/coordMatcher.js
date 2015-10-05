@@ -1,4 +1,4 @@
-var apiKey = require("../env/api-keys.js").geocoding;
+var apiKey = require("../config.js").api_keys.geocoding;
 var https = require("https");
 
 var coordMatcher = function(roomSize, maxDist) {
@@ -65,12 +65,12 @@ coordMatcher.prototype._getCoords = function (addressString) {
 
         var results = JSON.parse(buffer).results;
         //its possible (thought hasn't happend in testing yet) that maps will give back multiple results
-        if (results === 0) {
+        if (results.length === 0) {
           reject(new Error('Address not found.'));
-        } else if (results > 1) {
+        } else if (results.length > 1) {
           reject(new Error('Address too vague.'));
         } else {
-          resolve( JSON.parse(buffer).results[0].geometry.location );
+          resolve(results[0].geometry.location);
         }
       });
     }).on('error', function () {

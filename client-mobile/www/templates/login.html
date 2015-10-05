@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-view view-title="Kwiki">
   <ion-content>
     <div id="authbox-container" class="authbox">
@@ -15,5 +16,21 @@
       </div>
       <a class="auth-link-to-signup" href="#/signup">Not signed up? Click here!</a>
     </div>
+=======
+<ion-view view-title="Login">
+  <ion-content>
+
+    <div>
+      <h4>Log In</h4>
+      <form>
+        <input ng-model='username' type='text' placeholder='username'>
+        <input ng-model='password' type='password' placeholder='password'>
+        <input ng-click='checkUser(username, password)' type='submit'>
+      </form>
+    </div>
+
+    <a href="#/signup">Sign Up</a>
+
+>>>>>>> 36bec6a8a6c517934c8ce862b31f95b75363fce5
   </ion-content>
 </ion-view>

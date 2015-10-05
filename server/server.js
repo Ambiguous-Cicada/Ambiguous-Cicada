@@ -1,21 +1,20 @@
 // Basic Server Requirements
+var config = require('./config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var cors = require('cors');
 var session = require('express-session');
 var app = express();
-var cors = require('cors');
-var socketIOServer = require('http').Server(app);
-var io = require('socket.io')(socketIOServer);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(require('./config.js').port);
 
 // Internal Dependencies
-var config = require('./env/config');
 var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
 var utils = require('./lib/utils');
-
-socketIOServer.listen(config.socketPort);
 
 if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
@@ -31,7 +30,7 @@ app.use(session({
 app.use("/", express.static(__dirname + '/../client-web'));
 
 // Sockets Connection
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
   socket.on('disconnect', function(){
     console.log('Socket '+ socket.id +' disconnected.');
@@ -45,7 +44,6 @@ io.of('/match').on('connection', function (socket) {
     matchCtrl.add(data, function (chatroomId) {
       socket.emit('matched', chatroomId);
     });
-    // .catch(function (err) { SEND ERROR BACK TO CLIENT });
   });
 });
 
@@ -96,7 +94,3 @@ app.post('/login', function(req, res) {
 app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
-
-app.listen(config.httpPort);
-
-module.exports = app;
