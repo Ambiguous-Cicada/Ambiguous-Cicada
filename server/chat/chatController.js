@@ -30,9 +30,9 @@ chatController.addMessage = function (chatroomId, message) {
       if (err) {
         console.error(err);
       }
-      var oldMessages = chatroom.messages;
-      oldMessages.push(msg._id);
-      Chatroom.findOneAndUpdate({_id: chatroomId}, {messages: oldMessages}).exec();
+      var messages = chatroom.messages;
+      messages.push(msg._id);
+      Chatroom.findOneAndUpdate({_id: chatroomId}, {messages: messages}).exec();
     });
   });
 };
