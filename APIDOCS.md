@@ -287,6 +287,9 @@ Consists of authorisation functions.
 Consists of chat functions.
 ####
 ChatFactory.loadChat(*callback*)
+This function does two things: 
+1. Triggers a `loadChat` event on the server and passes in `$rootScope.chatRoomId`.
+2. Create event listeners for `message` and `leaveChat`.
 ####
 ChatFactory.leaveChat
 ####
