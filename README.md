@@ -55,7 +55,6 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
-```
 
 ### Known bugs and issues
 This project contains known bugs and issues, which can all be accessed [here](https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues). Feel free to add to them.

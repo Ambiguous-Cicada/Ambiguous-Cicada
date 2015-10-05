@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var config = require('./env/config');
+var mongoURI = require('./config.js').dbpath;
 
-mongoose.connect(config.dbpath);
+mongoose.connect(mongoURI);
 
 module.exports = mongoose;

@@ -1,3 +1,7 @@
+# heroku files we don't want to pull down
+Dockerfile
+docker-compose.yml
+
 ### node etc ###
 
 # OS files
@@ -28,8 +32,8 @@ coverage
 build/
 dist/
 
-# API Keys
-server/env/api-keys.js
+# DB URI and API Keys
+.env
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
@@ -37,3 +41,4 @@ server/env/api-keys.js
 node_modules/
 client-web/bower_components/
 client-mobile/www/lib/
+
