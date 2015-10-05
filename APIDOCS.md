@@ -17,7 +17,7 @@
     - [ChatController](#chatcontroller)
   - [Config](#config)
   - [API Keys](#api-keys)
-- [Client](#client)
+- [Client-Mobile](#client-mobile)
 
 ## Server.js
 ```
@@ -275,5 +275,5 @@ All config variables can be stored in this module.
 .env
 ```
 
-## Client (Mobile)
+## Client-Mobile
 - NEED TO WRITE
