@@ -70,7 +70,8 @@ coordMatcher.prototype._getCoords = function (addressString) {
         } else if (results.length > 1) {
           reject(new Error('Address too vague.'));
         } else {
-          resolve(results[0].geometry.location );
+          console.log("Geocoding results:",results[0]);
+          resolve(results[0].geometry.location);
         }
       });
     }).on('error', function () {
