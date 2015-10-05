@@ -330,12 +330,16 @@ Consists of authorisation functions.
 ### chat.js
 Consists of chat functions.
 #### ChatFactory.loadChat(*callback*)
-
-1. Triggers a `loadChat` event on the server.
+Does two things:
+1. Triggers a `loadChat` event and sends chatRoomId to server.
 2. Creates 'messsage' and 'leaveChat' event listeners.
 
 #### ChatFactory.leaveChat
-#### ChatFactory.postMessage(*message*, *callback*)
+Triggers `leaveChat` event and sends chatRoomId to server.
+
+#### ChatFactory.postMessage(*message*)
+Triggers `message` event and sends message to server.
+
 #### ChatCtrl.leaveChat(*logout*)
 #### ChatCtrl.loadChat
 #### ChatCtrl.sendMessage
