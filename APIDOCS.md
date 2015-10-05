@@ -275,5 +275,5 @@ All config variables can be stored in this module.
 .env
 ```
 
-## Client
+## Client (Mobile)
 - NEED TO WRITE
