@@ -98,6 +98,6 @@ app.post('/logout', utils.destroySession, function(req, res) {
   res.status(200).end();
 });
 
-app.listen(config.httpPort);
+// app.listen(config.httpPort);
 
-module.exports = app;
+// module.exports = app;
