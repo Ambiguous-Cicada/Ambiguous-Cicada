@@ -287,18 +287,30 @@ Consists of authorisation functions.
 Consists of chat functions.
 #### ChatFactory.loadChat(*callback*)
 Does two things:
-1. Triggers a `loadChat` event and sends chatRoomId to server.
+1. Triggers a `loadChat` event.
 2. Creates 'messsage' and 'leaveChat' event listeners.
 
 #### ChatFactory.leaveChat
-Triggers `leaveChat` event and sends chatRoomId to server.
+Triggers `leaveChat` event.
 
 #### ChatFactory.postMessage(*message*)
 Triggers `message` event and sends message to server.
 
+#### ChatCtrl.messages
+An array that stores user messages. Clears on `ChatCtrl.loadChat` and `ChatCtrl.logOut`.
+
+#### ChatCtrl.message
+An object that is stored in `ChatCtrl.messages`.
+
 #### ChatCtrl.leaveChat(*logout*)
+Clears `ChatCtrl.messages` and sends the user back to the matching view. Calls `ChatFactory.leaveChat` and switches the user back to the matching state.
+
 #### ChatCtrl.loadChat
+Loads the chat state for users. When one user leaves the chat instance, `ChatFactory.loadChat` is called with `null` and `true` to empty the other user's `ChatCtrl.messages` and switching the user's state to match.
+
 #### ChatCtrl.sendMessage
+Sends a message to the server and pushes it to user's `ChatCtrl.messages` to rendering. Sets the client's UI to an empty string.
+
 #### ChatCtrl.logOut
 
 ### match.js
