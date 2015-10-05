@@ -17,7 +17,10 @@
     - [ChatController](#chatcontroller)
   - [Config](#config)
   - [API Keys](#api-keys)
-- [Client](#client)
+- [Client Mobile](#client-mobile)
+  - [js](#js)
+  - [templates](#templates)
+  - [css](#css)
 
 ## Server.js
 ```
@@ -275,5 +278,14 @@ All config variables can be stored in this module.
 .env
 ```
 
-## Client
-- NEED TO WRITE
+## Client-Mobile
+Majority of the important Ionic files are located in a folder called www.
+
+### js
+- Javascript files
+ 
+### templates
+- HTML files
+
+### css
+- CSS Files

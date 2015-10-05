@@ -42,8 +42,8 @@ io.sockets.on('connection', function(socket){
 io.of('/match').on('connection', function (socket) {
   console.log(socket.id + "connected to /match");
   socket.on('matching', function (data) {
-    matchCtrl.add(data, function (chatroomId) {
-      socket.emit('matched', chatroomId);
+    matchCtrl.add(data, function (chatRoomId) {
+      socket.emit('matched', chatRoomId);
     });
   });
 });
@@ -54,15 +54,15 @@ io.of('/chat').on('connection', function (socket) {
   socket.on('loadChat', function (chatroomId) {
     socket.join(chatroomId);
     socket.on('message', function (message) {
-      socket.to(chatroomId).broadcast.emit('message', message);
-      chatCtrl.addMessage(chatroomId, message);
+      socket.to(chatRoomId).broadcast.emit('message', message);
+      chatCtrl.addMessage(chatRoomId, message);
     });
   });
-  socket.on('leaveChat', function (chatroomId) {
-    socket.to(chatroomId).broadcast.emit('leaveChat');
-    var room = io.nsps['/chat'].adapter.rooms[chatroomId];
+  socket.on('leaveChat', function (chatRoomId) {
+    socket.to(chatRoomId).broadcast.emit('leaveChat');
+    var room = io.nsps['/chat'].adapter.rooms[chatRoomId];
     for( var sock in room ) {
-      io.sockets.connected[sock].leave(chatroomId);
+      io.sockets.connected[sock].leave(chatRoomId);
     }
   });
 });
