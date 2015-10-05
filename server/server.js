@@ -51,9 +51,10 @@ io.of('/match').on('connection', function (socket) {
 // Sockets Chatting Namespace
 io.of('/chat').on('connection', function (socket) {
   console.log(socket.id + "connected to /chat");
-  socket.on('loadChat', function (chatroomId) {
-    socket.join(chatroomId);
+  socket.on('loadChat', function (chatRoomId) {
+    socket.join(chatRoomId);
     socket.on('message', function (message) {
+      console.log('Emitted from client to server');
       socket.to(chatRoomId).broadcast.emit('message', message);
       chatCtrl.addMessage(chatRoomId, message);
     });
