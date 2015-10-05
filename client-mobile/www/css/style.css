@@ -7,6 +7,9 @@
 .inputs {
   margin-top: 50%;
 }
+.inputs-login {
+  margin-top: 15%;
+}
 
 /* Auth Views */
 .username,
@@ -27,7 +30,13 @@
 .auth-link-to-signup {
   margin: 0 auto;
 }
-
+div.image {
+   content: url('../img/logo.png');
+   width: 20em;
+   height: 15em;
+   margin: 0 auto;
+   margin-top: 20%;
+}
 
 /* Match View */
 #matchbox-container {

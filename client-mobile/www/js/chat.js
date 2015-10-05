@@ -20,7 +20,7 @@ angular.module('kwiki.chat',[])
     this.socket.emit('leaveChat', $rootScope.chatRoomId);
   };
 
-  chatFact.postMessage = function (message, callback) {
+  chatFact.postMessage = function (message) {
     this.socket.emit('message', message);
   };
 
@@ -47,8 +47,8 @@ angular.module('kwiki.chat',[])
   $scope.loadChat = function() {
     ChatFactory.loadChat(function (message, leavechat) {
       if (leavechat) {
-        $state.go('match');
         $scope.messages = [];
+        $state.go('match');
       } else {
         $scope.messages.push(message);
         $scope.$apply();
