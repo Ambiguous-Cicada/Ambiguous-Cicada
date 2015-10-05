@@ -6,10 +6,10 @@ var config = {
   },
 
   production: {
-    dbpath: process.env.MONGOLAB_URI || 'DEPLOYED-MONGOLAB-DB-URI',
-    port: process.env.PORT || 5000,
+    dbpath: process.env.MONGOLAB_URI,
+    port: process.env.PORT || 3000,
     api_keys: {
-      geocoding: process.env.API_GEOCODING || "GOOGLE-GEOCODING-API-KEY",
+      geocoding: process.env.APIKEY_GEOCODING,
     }
   }
 
