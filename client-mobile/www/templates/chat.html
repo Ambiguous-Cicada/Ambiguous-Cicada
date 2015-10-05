@@ -9,7 +9,7 @@
         <div class="col">
           <div class="chatbox-container">
             <ul class="chatbox">
-              <li ng-repeat="message in messages track by $index">{{ message.text }}</li>
+              <li ng-repeat="message in messages track by $index"><span>{{message.userName}}</span>{{ message.text }}</li>
             </ul>
           </div>
           <form ng-submit="sendMessage()">
