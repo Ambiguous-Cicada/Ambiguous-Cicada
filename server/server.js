@@ -40,33 +40,33 @@ io.sockets.on('connection', function(socket){
   });
 });
 
-// // Sockets Matching Namespace
-// io.sockets.of('/match').on('connection', function (socket) {
-//   socket.on('matching', function (data) {
-//     matchCtrl.add(data, function (chatRoomId) {
-//       socket.emit('matched', chatRoomId);
-//     });
-//     // .catch(function (err) { SEND ERROR BACK TO CLIENT });
-//   });
-// });
+// Sockets Matching Namespace
+io.of('/match').on('connection', function (socket) {
+  socket.on('matching', function (data) {
+    matchCtrl.add(data, function (chatRoomId) {
+      socket.emit('matched', chatRoomId);
+    });
+    // .catch(function (err) { SEND ERROR BACK TO CLIENT });
+  });
+});
 
-// // Sockets Chatting Namespace
-// io.sockets.of('/chat').on('connection', function (socket) {
-//   socket.on('loadChat', function (chatRoomId) {
-//     socket.join(chatRoomId);
-//     socket.on('message', function (message) {
-//       socket.to(chatRoomId).broadcast.emit('message', message);
-//       chatCtrl.addMessage(chatRoomId, message);
-//     });
-//   });
-//   socket.on('leaveChat', function (chatRoomId) {
-//     socket.to(chatRoomId).broadcast.emit('leaveChat');
-//     var room = io.nsps['/chat'].adapter.rooms[chatRoomId];
-//     for( var sock in room ) {
-//       io.sockets.connected[sock].leave(chatRoomId);
-//     }
-//   });
-// });
+// Sockets Chatting Namespace
+io.of('/chat').on('connection', function (socket) {
+  socket.on('loadChat', function (chatRoomId) {
+    socket.join(chatRoomId);
+    socket.on('message', function (message) {
+      socket.to(chatRoomId).broadcast.emit('message', message);
+      chatCtrl.addMessage(chatRoomId, message);
+    });
+  });
+  socket.on('leaveChat', function (chatRoomId) {
+    socket.to(chatRoomId).broadcast.emit('leaveChat');
+    var room = io.nsps['/chat'].adapter.rooms[chatRoomId];
+    for( var sock in room ) {
+      io.sockets.connected[sock].leave(chatRoomId);
+    }
+  });
+});
 
 // Authentication Routes
 app.post('/signup', function(req, res) {
