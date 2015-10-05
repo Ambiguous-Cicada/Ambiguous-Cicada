@@ -326,7 +326,7 @@ Sends a message to the server and pushes it to user's `ChatCtrl.messages` for re
 #### ChatCtrl.logOut
 Clears the user's `ChatCtrl.messages` and logs them out. User is able to enter new chats after logging back in.
 
-### match.js
+### Match
 ```
 www/js/match.js
 ```
@@ -346,7 +346,7 @@ Triggers a `matching` event that prevents the user from entering multiple chats.
 #### MatchCtrl.logOut
 Logs the user out. User establishes a new chat on login.
 
-### socket.js
+### Socket
 ```
 www/js/socket.js
 ```
