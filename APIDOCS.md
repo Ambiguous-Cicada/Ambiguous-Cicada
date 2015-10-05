@@ -17,7 +17,9 @@
     - [ChatController](#chatcontroller)
   - [Config](#config)
   - [API Keys](#api-keys)
-- [Client-Mobile](#client-mobile)
+- [Client Mobile](#client-mobile)
+  - [js](#js)
+  - [templates](#templates)
 
 ## Server.js
 ```
@@ -277,3 +279,9 @@ All config variables can be stored in this module.
 
 ## Client-Mobile
 - NEED TO WRITE
+
+### js
+- Javascript files
+
+### templates
+- HTML files
