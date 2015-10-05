@@ -59,6 +59,13 @@ bower install
 ### Known bugs and issues
 This project contains known bugs and issues, which can all be accessed [here](https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues). Feel free to add to them.
 
+### Potential new features
+- Geolocation using device GPS
+- Location based restaurant/bar suggestions
+- Post images, location, yelp, foursquare.
+- Allow multiple chats per client
+- Allow more than two users per chat
+
 ## Contributing
 
 See the [Contribution Guidelines](CONTRIBUTING.md) in `CONTRIBUTING.md` for a detailed explanation of our contribution protocol.

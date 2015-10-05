@@ -56,7 +56,41 @@ The path to the database can be configured in the [config file](#config).
 ```
 server/auth/
 ```
---- REFACTOR INTO TWO FILES
+### User Model
+```
+server/auth/userModel.js
+```
+The database's user model module
+
+**depends on:**
+- [Database](#database)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+
+#### UserSchema.pre()
+Encrypts input password using [bcrypt](https://www.npmjs.com/package/bcrypt) before saving to the database.
+
+#### UserSchema.methods.comparePasswords(*candidatePassword*)
+Checks to see if the candidate password is the same as the stored password for the user
+
+**candidatePassword** *string*
+
+### Authentication Controller
+```
+server/auth/auth.js
+```
+#### Auth.signup(*username*, *password*)
+Sign up the user to the app by adding them to the database
+
+**username** *string*
+
+**password** *string*
+
+#### Auth.login(*username*, *password*)
+Login the user to the app
+
+**username** *string*
+
+**password** *string*
 
 ## Utilities
 ```
@@ -270,6 +304,16 @@ Gets the messages of a particular chatroom
 **returns** *promise*
 
 ## Config
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Pull merge
+```
+server/config.js
+```
+All config variables can be stored in this module.
+>>>>>>> Add auth to API docs
 
 All config variables can be stored in this module `server/config.js`.
 
@@ -324,7 +368,7 @@ Clears the user's `ChatCtrl.messages` and logs them out. User is able to enter n
 Consists of matching functions.
 ### socket.js
 Consists of socket functions.
- 
+
 ## templates
 ```
 www/templates
