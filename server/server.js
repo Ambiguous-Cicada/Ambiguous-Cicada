@@ -1,16 +1,18 @@
 
 // Basic Server Requirements
+var config = require('./env/config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(config.httpPort);
+
 var cors = require('cors');
 var port = process.env.PORT || 3000;
-var socketIOServer = require('http').Server(app);
-var io = require('socket.io').listen(socketIOServer);
 // Internal Dependencies
-var config = require('./env/config.js');
 var auth = require('./auth/auth');
 var matchCtrl = require('./match/matchController');
 var chatCtrl = require('./chat/chatController');
@@ -19,8 +21,6 @@ var utils = require('./lib/utils');
 if( (process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV) ){
   app.use(logger('dev'));
 }
-
-socketIOServer.listen(config.socketPort);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,7 +32,7 @@ app.use(session({
 app.use("/", express.static(__dirname + '/../client-web'));
 
 // Sockets Connection
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
   console.log('Socket '+ socket.id +' connected.');
   socket.on('disconnect', function(){
     console.log('Socket '+ socket.id +' disconnected.');
@@ -41,7 +41,7 @@ io.on('connection', function(socket){
 });
 
 // Sockets Matching Namespace
-io.of('/match').on('connection', function (socket) {
+io.sockets.of('/match').on('connection', function (socket) {
   socket.on('matching', function (data) {
     matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
@@ -51,7 +51,7 @@ io.of('/match').on('connection', function (socket) {
 });
 
 // Sockets Chatting Namespace
-io.of('/chat').on('connection', function (socket) {
+io.sockets.of('/chat').on('connection', function (socket) {
   socket.on('loadChat', function (chatRoomId) {
     socket.join(chatRoomId);
     socket.on('message', function (message) {
