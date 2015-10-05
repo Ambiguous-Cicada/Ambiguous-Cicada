@@ -83,6 +83,7 @@ Kickstarts the matching mechanism for the user.
 
 #### matchController.remove(*user*)
 *Incomplete feature*
+
 Removes user from matching process before user is matched.
 
 **user** *object*, a [user object](#user-object)
@@ -213,6 +214,7 @@ server/chat
 
 ### Message Object
 **message** *object*
+
 A message object contains the following properties:
 - **userName** *string* name of the user posting it
 - **text** *string* the string contents of the message
@@ -247,11 +249,14 @@ Creates a new chat with the given list of users
 Adds a message to the chatroom document on the database
 
 **chatroomId** *string*, ObjectId of the chatroom where the message is to be added
+
 **message** *object*, a [message object](#message-object)
 
 #### chatController.getMessages(*chatroomId*)
 *Incomplete feature*
+
 Gets the messages of a particular chatroom
+
 **chatroomId** *string*, ObjectId of the chatroom where the messages are stored
 
 **returns** *promise*
