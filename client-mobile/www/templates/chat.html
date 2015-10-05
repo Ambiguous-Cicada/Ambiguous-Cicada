@@ -1,8 +1,12 @@
+<!-- <ion-nav-bar ng-click="leaveChat()"> -->
   <ion-view view-title="Kwiki" ng-controller="ChatCtrl">
     <ion-nav-buttons side="primary">
       <button class="button button-energized" ng-click="leaveChat()">
         Leave
       </button>
+ <!--      <button class="button" ng-click="logOut()">
+        Log Out
+      </button> -->
     </ion-nav-buttons>
     <ion-content>
       <div class="row row-bottom" ng-init="loadChat()">
@@ -18,7 +22,14 @@
             </label>
             <button class="button button-block button-calm" action="submit">Send</button>
           </form>
+          <!-- <form> -->
+            <!-- <input ng-click='logOut()' type='submit' value="Log Out"> -->
+          <!-- </form> -->
+          <!-- <form>
+            <input ng-click='leaveChat()' type='submit' value="Leave Chat">
+          </form> -->
         </div>
       </div>
     </ion-content>
   </ion-view>
+<!-- </ion-nav-bar> -->
