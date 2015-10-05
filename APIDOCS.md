@@ -283,6 +283,7 @@ Majority of the important Ionic files are located in a folder called www.
 ```
 www/js
 ```
+This directory contains all of the client-side Javascript.
 ### App
 ```
 www/js/app.js
