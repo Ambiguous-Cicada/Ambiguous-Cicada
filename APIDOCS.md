@@ -19,6 +19,11 @@
   - [API Keys](#api-keys)
 - [Client Mobile](#client-mobile)
   - [js](#js)
+    - [app.js](#app.js) 
+    - [auth.js](#app.js)
+    - [chat.js](#chat.js)
+    - [match.js](#match.js)
+    - [socket.js](#socket.js)
   - [templates](#templates)
   - [css](#css)
 
@@ -309,9 +314,10 @@ Clears `ChatCtrl.messages` and sends the user back to the matching view. Calls `
 Loads the chat state for users. When one user leaves the chat instance, `ChatFactory.loadChat` is called with `null` and `true` to empty the other user's `ChatCtrl.messages` and switching the user's state to match.
 
 #### ChatCtrl.sendMessage
-Sends a message to the server and pushes it to user's `ChatCtrl.messages` to rendering. Sets the client's UI to an empty string.
+Sends a message to the server and pushes it to user's `ChatCtrl.messages` for rendering. Sets the client's UI to an empty string.
 
 #### ChatCtrl.logOut
+Clears the user's `ChatCtrl.messages` and logs them out. User is able to enter new chats after logging back in.
 
 ### match.js
 Consists of matching functions.
