@@ -288,12 +288,13 @@ Consists of the main Ionic client.
 ### auth.js
 Consists of authorisation functions.
 
-### chat.js
+### Chat
+```
+www/js/chat.js
+```
 Consists of chat functions.
 #### ChatFactory.loadChat(*callback*)
-Does two things:
-1. Triggers a `loadChat` event.
-2. Creates 'messsage' and 'leaveChat' event listeners.
+Triggers a `loadChat` event and create `message` and `leaveChat` event listeners.
 
 #### ChatFactory.leaveChat
 Triggers `leaveChat` event.
