@@ -1,4 +1,4 @@
-var apiKey = require("./config").api_keys.geocoding;
+var apiKey = require("./config.js").api_keys.geocoding;
 var https = require("https");
 
 var coordMatcher = function(roomSize, maxDist) {
