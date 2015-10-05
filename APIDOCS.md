@@ -286,11 +286,28 @@ Majority of the important Ionic files are located in a folder called www.
 www/js
 ```
 #### app.js
-[app.js] consists of the main Ionic client.
+Consists of the main Ionic client.
 #### auth.js
+Consists of authorisation functions.
+
 #### chat.js
+Consists of chat functions.
+#####
+ChatFactory
+######
+socket
+######
+loadChat(*callback*)
+######
+leaveChat
+######
+postMessage
+#####
+ChatCtrl
 #### match.js
+Consists of matching functions.
 #### socket.js
+Consists of socket functions.
  
 ### templates
 ```
