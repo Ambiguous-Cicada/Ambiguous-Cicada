@@ -274,53 +274,44 @@ Environmental variables, as well as API keys and database URIs, are referenced i
 ## Client-Mobile
 Majority of the important Ionic files are located in a folder called www.
 
-### js
+## js
 ```
 www/js
 ```
-#### app.js
+### app.js
 Consists of the main Ionic client.
-#### auth.js
+### auth.js
 Consists of authorisation functions.
 
-#### chat.js
+### chat.js
 Consists of chat functions.
-#####
+####
 ChatFactory.loadChat(*callback*)
-#####
+####
 ChatFactory.leaveChat
-#####
+####
 ChatFactory.postMessage(*message*, *callback*)
-#####
+####
 ChatCtrl.leaveChat(*logout*)
-#####
+####
 ChatCtrl.loadChat
-#####
+####
 ChatCtrl.sendMessage
-#####
+####
 ChatCtrl.logOut
-######
-socket
-######
-loadChat(*callback*)
-######
-leaveChat
-######
-postMessage
-#####
-ChatCtrl
-#### match.js
+
+### match.js
 Consists of matching functions.
-#### socket.js
+### socket.js
 Consists of socket functions.
  
-### templates
+## templates
 ```
 www/templates
 ```
 - HTML files
 
-### css
+## css
 ```
 www/css
 ```
