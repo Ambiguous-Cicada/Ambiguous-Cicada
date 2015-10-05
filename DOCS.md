@@ -299,11 +299,15 @@ Submits a POST request to `signup` and passes an object with `username` and `pas
 #### AuthFactory.checkUser
 Submits a POST request to `login` and passes an object with `username` and `password`. Creates a socket connection.
 #### AuthFactory.logOut
-Submits a POSt request to `logout` and passwo
-#### AuthFactory.isAuth
+Submits a POST request to `logout` and passwo
+#### AuthFactory.isAuth (deprecated)
+Verifies that that userID is stored in local storage.
 #### AuthCtrl.addUser
+Collects username and password from $scope, then uses `AuthFactory.addUser` to add a new user to the DB if one does not exist.
 #### AuthCtrl.checkUser
+Collects username and password from $scope, then uses `AuthFactory.checkuser` to verify that user has an account.
 #### AuthCtrl.logOut
+Calls `AuthFactory.logout()`.
 
 ### Chat (Client)
 ```
