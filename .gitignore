@@ -1,4 +1,3 @@
-.env
 Dockerfile
 docker-compose.yml
 
@@ -32,9 +31,8 @@ coverage
 build/
 dist/
 
-# API Keys
-server/config.js
-server/env/api-keys.js
+# DB URIs and API Keys
+.env
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
