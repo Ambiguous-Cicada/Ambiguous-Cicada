@@ -38,23 +38,16 @@ io.sockets.on('connection', function(socket){
   });
 });
 
-io.of('/chat').on('connection', function (socket) {
-  socket.on('loadChat', function (chatRoomId) {
-    console.log("connection to /chat");
-    socket.join(chatRoomId);
-    socket.on('message', function (message) {
-      socket.to(chatRoomId).broadcast.emit('message', message);
-      chatCtrl.addMessage(chatRoomId, message);
+// Sockets Matching Namespace
+io.of('/match').on('connection', function (socket) {
+  socket.on('matching', function (data) {
+    matchCtrl.add(data, function (chatRoomId) {
+      socket.emit('matched', chatRoomId);
     });
-  });
-  socket.on('leaveChat', function (chatRoomId) {
-    socket.to(chatRoomId).broadcast.emit('leaveChat');
-    var room = io.nsps['/chat'].adapter.rooms[chatRoomId];
-    for( var sock in room ) {
-      io.sockets.connected[sock].leave(chatRoomId);
-    }
+    // .catch(function (err) { SEND ERROR BACK TO CLIENT });
   });
 });
+
 // Sockets Chatting Namespace
 io.of('/chat').on('connection', function (socket) {
   socket.on('loadChat', function (chatRoomId) {
