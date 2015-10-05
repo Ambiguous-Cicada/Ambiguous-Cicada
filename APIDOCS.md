@@ -2,20 +2,22 @@
 
 ## Table of Contents
 
-1. [Server](#server)
-  1. [Server.js](#serverjs)
-  1. [Database](#database)
-  1. [Authentication](#authentication)
-  1. [Utilities](#utils)
-  1. [Matching](#matching)
-    1. [Match Controller](#matchcontroller)
-    1. [Match Model](#matchmodel)
-    1. [Matcher](#matcher)
-    1. [Coordinate Matcher](#coordinate-matcher)
-  1. [Chat](#chat)
-  1. [Config](#config)
-  1. [API Keys](#api-keys)
-1. [Client](#client)
+- [Server](#server)
+  - [Server.js](#serverjs)
+  - [Database](#database)
+  - [Authentication](#authentication)
+  - [Utilities](#utils)
+  - [Matching](#matching)
+    - [MatchController](#matchcontroller)
+    - [MatchModel](#matchmodel)
+    - [Matcher](#matcher)
+    - [Coordinate Matcher](#coordinate-matcher)
+  - [Chat](#chat)
+    - [ChatModel](#chatmodel)
+    - [ChatController](#chatcontroller)
+  - [Config](#config)
+  - [API Keys](#api-keys)
+- [Client](#client)
 
 ## Server.js
 ```
@@ -80,9 +82,8 @@ Kickstarts the matching mechanism for the user.
   - *chatroomId* *string*, identifies the chatroom that the user was matched into
 
 #### matchController.remove(*user*)
+*Incomplete feature*
 Removes user from matching process before user is matched.
-
-- Yet to be completely implemented.
 
 **user** *object*, a [user object](#user-object)
 
@@ -209,12 +210,51 @@ Finds out if the two users are a match given their distance apart
 ```
 server/chat
 ```
+
+### Message Object
+**message** *object*
+A message object contains the following properties:
+- **userName** *string* name of the user posting it
+- **text** *string* the string contents of the message
+
 ### ChatModel
 ```
 server/chat/chatModel.js
 ```
 This module specifies the MongoDB schemas for the chatting system.
 The chat model is comprised of Chatroom and Message, where exists a one-to-many relationship as MongoDB ObjectId references. Each chatroom will have a `messages` array containing `{ObjectId: ObjectId}` references to their respective messages.
+
+### ChatController
+```
+server/chat/chatController.js
+```
+The single interface for the chat system
+
+**depends on:**
+  - ChatModel.Chatroom
+  - ChatModel.Message
+
+#### chatController.createChat(*users*)
+Creates a new chat with the given list of users
+
+1. Creates a list of user objects suitable for the ChatModel.Chatroom MongoDB model
+1. Invoke ChatModel.Chatroom.create() method to create a chatroom as a MongoDB document
+1. Invoke the join() method on each user with the newly created chatroom's ID
+
+**users** *array*, a list of user objects that are to be joined in the chat
+
+#### chatController.addMessage(*chatroomId*, *message*)
+Adds a message to the chatroom document on the database
+
+**chatroomId** *string*, ObjectId of the chatroom where the message is to be added
+**message** *object*, a [message object](#message-object)
+
+#### chatController.getMessages(*chatroomId*)
+*Incomplete feature*
+Gets the messages of a particular chatroom
+**chatroomId** *string*, ObjectId of the chatroom where the messages are stored
+
+**returns** *promise*
 
 ## Config
 ## API Keys
