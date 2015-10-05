@@ -1,4 +1,4 @@
-var ChatRoom = require('./chatModel.js').ChatRoom;
+var Chatroom = require('./chatModel.js').Chatroom;
 var Message = require('./chatModel.js').Message;
 
 var chatController = {};
@@ -11,7 +11,7 @@ chatController.createChat = function(users) {
     };
   });
 
-  ChatRoom.create({
+  Chatroom.create({
     users: usersDbObj,
     messages: []
   }, function(err, chatroom) {
@@ -24,22 +24,22 @@ chatController.createChat = function(users) {
   });
 };
 
-chatController.addMessage = function (chatRoomId, message) {
+chatController.addMessage = function (chatroomId, message) {
   Message.create(message).then(function(msg) {
-    ChatRoom.findOne({_id: chatRoomId}, function (err, chatroom) {
+    Chatroom.findOne({_id: chatroomId}, function (err, chatroom) {
       if (err) {
         console.error(err);
       }
-      var oldMessages = chatroom.messages;
-      oldMessages.push(msg._id);
-      ChatRoom.findOneAndUpdate({_id: chatRoomId}, {messages: oldMessages}).exec();
+      var messages = chatroom.messages;
+      messages.push(msg._id);
+      Chatroom.findOneAndUpdate({_id: chatroomId}, {messages: messages}).exec();
     });
   });
 };
 
-chatController.getMessages = function (chatRoomId) {
-  return ChatRoom
-    .findOne({_id: chatRoomId})
+chatController.getMessages = function (chatroomId) {
+  return Chatroom
+    .findOne({_id: chatroomId})
     .populate("messages")
     .exec();
 };

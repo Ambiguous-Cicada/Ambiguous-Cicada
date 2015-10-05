@@ -1,18 +1,19 @@
-<ion-view view-title="Signup">
+<ion-view view-title="Kwiki">
   <ion-content>
+    <div id="authbox-container" class="authbox">
+      <!-- <h4>Log In</h4> -->
+      <!-- <form> -->
+      <div class="inputs">
+        <input ng-model='username' type='text' placeholder='username' class='username'>
+        <input ng-model='password' type='password' placeholder='password' class='password'>
+        <!-- <input ng-click='checkUser(username, password)' type='submit'> -->
+      </div>
 
-    <div>
-    <h4>Sign Up</h4>
-
-    <form>
-      <input ng-model='username' type='text' placeholder='username'>
-      <input ng-model='password' type='password' placeholder='password'>
-      <input ng-click='addUser(username, password)' type='submit'>
-    </form>
-
+      <div class="authbox-button-container">
+        <input type="submit" class="button button-energized auth-button" action="submit" ng-click="addUser(username, password)" value="I'm ready for a kwiki">
+      <!-- </form> -->
+      </div>
+      <a class="auth-link-to-signup" href="#/login">Already signed up? Log in!</a>
     </div>
-
-    <a href="/#/login">Log In</a>
-
   </ion-content>
 </ion-view>

@@ -1,1 +1,80 @@
 /* Empty. Add your own CSS if you like */
+
+.button-energized,
+.button-calm {
+  font-weight: bold;
+}
+.inputs {
+  margin-top: 50%;
+}
+
+/* Auth Views */
+.username,
+.password,
+.login {
+  margin: 0 auto;
+}
+#authbox-container {
+  height: 100vh;
+  text-align: center;
+}
+.authbox-button-container {
+  text-align: center;
+}
+.username, 
+.password,
+.authbox-button,
+.auth-link-to-signup {
+  margin: 0 auto;
+}
+
+
+/* Match View */
+#matchbox-container {
+  height: 100vh;
+}
+.matchbox-button-container {
+  text-align: center;
+}
+.matchbox-location,
+.matchbox-button {
+  margin: 0 auto;
+}
+
+
+/* Load View */
+.spinner svg {
+  width: 10em;
+  height: 10em;
+}
+.loading {
+  font-family: sans-serif;
+  font-size: 1.5em;
+  margin: 100px auto;
+}
+#load-container {
+  margin-top: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+
+/* Chat View */
+.chatbox {
+    position:absolute;
+    bottom: 0px;
+}
+.message-input {
+    margin-top: 10px;
+}
+.chatbox-container {
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.8);
+    position:relative;
+    height: 450px;
+    /*border: 1px solid rgba(0,0,255, 0.2);*/
+    padding: 10px;
+    line-height: 29px;
+    overflow: hidden;
+}

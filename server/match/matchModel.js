@@ -1,12 +1,12 @@
 var chatController = require('../chat/chatController');
 
-var Lobby = function(matcher) {
+var MatchModel = function(matcher) {
   this._matcher = matcher;
   this._size = 0;
   this.users = [];
 };
 
-Lobby.prototype.join = function(user) {
+MatchModel.prototype.join = function(user) {
   return Promise.all([
       this._add(user),
       this._matcher.preMatch(user)
@@ -16,7 +16,7 @@ Lobby.prototype.join = function(user) {
     }.bind(this));
 };
 
-Lobby.prototype.leave = function(user) {
+MatchModel.prototype.leave = function(user) {
   return new Promise(function(resolve, reject) {
     for (var i = 0; i < this.users.length; i++) {
       if (this.users[i] === user){
@@ -28,7 +28,7 @@ Lobby.prototype.leave = function(user) {
   }.bind(this));
 };
 
-Lobby.prototype._add = function(user) {
+MatchModel.prototype._add = function(user) {
   return new Promise(function(resolve, reject) {
     if(this._isDuplicate(user)){
       reject(new Error('User is already in the lobby'));
@@ -39,7 +39,7 @@ Lobby.prototype._add = function(user) {
   }.bind(this));
 };
 
-Lobby.prototype._isDuplicate = function(user) {
+MatchModel.prototype._isDuplicate = function(user) {
   for (var i = 0; i < this.users.length; i++) {
     if (this.users[i].id === user.id) {
       return true;
@@ -48,7 +48,7 @@ Lobby.prototype._isDuplicate = function(user) {
   return false;
 };
 
-Lobby.prototype._match = function() {
+MatchModel.prototype._match = function() {
   if(this._size >= this._matcher.roomSize){
     this._matcher.match(this.users)
       .then(function (users) {
@@ -60,4 +60,4 @@ Lobby.prototype._match = function() {
   }
 };
 
-module.exports = Lobby;
+module.exports = MatchModel;

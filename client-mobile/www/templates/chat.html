@@ -1,23 +1,35 @@
-<ion-view view-title="Chat">
-  <ion-content>
-
-    <div ng-init="loadChat()">
-
-      <div>
-        <div ng-repeat="message in messages track by $index">{{ message.text }}</div>
+<!-- <ion-nav-bar ng-click="leaveChat()"> -->
+  <ion-view view-title="Kwiki" ng-controller="ChatCtrl">
+    <ion-nav-buttons side="primary">
+      <button class="button button-energized" ng-click="leaveChat()">
+        Leave
+      </button>
+ <!--      <button class="button" ng-click="logOut()">
+        Log Out
+      </button> -->
+    </ion-nav-buttons>
+    <ion-content>
+      <div class="row row-bottom" ng-init="loadChat()">
+        <div class="col">
+          <div class="chatbox-container">
+            <ul class="chatbox">
+              <li ng-repeat="message in messages track by $index">{{ message.text }}</li>
+            </ul>
+          </div>
+          <form ng-submit="sendMessage()">
+            <label class="item item-input message-input">
+              <input type="text" ng-model="message.text" placeholder="Send a message ..."/>
+            </label>
+            <button class="button button-block button-calm" action="submit">Send</button>
+          </form>
+          <!-- <form> -->
+            <!-- <input ng-click='logOut()' type='submit' value="Log Out"> -->
+          <!-- </form> -->
+          <!-- <form>
+            <input ng-click='leaveChat()' type='submit' value="Leave Chat">
+          </form> -->
+        </div>
       </div>
-      <form ng-submit="sendMessage()">
-        <input ng-model="message.text" type="message" placeholder="Type a message">
-        <input type="submit" value="Submit" id="Submit">
-      </form>
-      <form>
-        <input ng-click='logOut()' type='submit' value="Log Out">
-      </form>
-      <form>
-        <input ng-click='leaveChat()' type='submit' value="Leave Chat">
-      </form>
-
-    </div>
-    
-  </ion-content>
-</ion-view>
+    </ion-content>
+  </ion-view>
+<!-- </ion-nav-bar> -->
