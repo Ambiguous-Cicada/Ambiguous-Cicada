@@ -55,6 +55,7 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+```
 
 ### Known bugs and issues
 This project contains known bugs and issues, which can all be accessed [here](https://github.com/Ambiguous-Cicada/Ambiguous-Cicada/issues). Feel free to add to them.
@@ -62,9 +63,9 @@ This project contains known bugs and issues, which can all be accessed [here](ht
 ### Potential new features
 - Geolocation using device GPS
 - Location based restaurant/bar suggestions
-- Post images, location, yelp, foursquare.
+- Post emoji, images, video, location, etc
 - Allow multiple chats per client
-- Allow more than two users per chat
+- Group chats with more than two users
 
 ## Contributing
 
