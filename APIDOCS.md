@@ -332,14 +332,20 @@ www/js/match.js
 ```
 Consists of matching functions.
 #### MatchFactory.connectSocket
-Connects the user to the `match` namespace on the server.
+Establishes a socket to connect the user to the `match` namespace on the server.
 
 #### MatchFactory.postMatch
 Triggers a `matching` event and creates a `matched` event listener that receives a chatRoomId from the server and switches the user to the `chat` state.
 
 #### MatchCtrl.connect
+Establishes the connection for the socket created in `MatchFactory.connectSocket`
+
 #### MatchCtrl.submit
+Triggers a `matching` event that prevents the user from entering multiple chats. Switches the user to a `load` state.
+
 #### MatchCtrl.logOut
+Logs the user out. User establishes a new chat on login.
+
 ### socket.js
 ```
 www/js/socket.js
