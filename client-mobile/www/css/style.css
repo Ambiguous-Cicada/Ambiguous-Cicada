@@ -1,5 +1,17 @@
 /* Empty. Add your own CSS if you like */
 
+.user {
+  color: #00BBEE;
+  font-size: 1.1em;
+}
+
+.message {
+  font-size: 1.5em;
+  color: #000;
+}
+.message-item {
+  margin: 10px 0;
+}
 .button-energized,
 .button-calm {
   font-weight: bold;
