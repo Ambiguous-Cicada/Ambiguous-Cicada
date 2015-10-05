@@ -12,16 +12,16 @@
     - [MatchModel](#matchmodel)
     - [Matcher](#matcher)
     - [Coordinate Matcher](#coordinate-matcher)
-  - [Chat Server](#chat-server)
+  - [Chat (Server)](#chat-server)
     - [ChatModel](#chatmodel)
     - [ChatController](#chatcontroller)
   - [Config](#config)
   - [API Keys](#api-keys)
-- [Client Mobile](#client-mobile)
+- [Client (Mobile)](#client-mobile)
   - [js](#js)
     - [App](#app) 
     - [Auth](auth)
-    - [Chat Client](#chat-client)
+    - [Chat (Client)](#chat-client)
     - [Match](#match)
     - [Socket](#socket)
   - [templates](#templates)
@@ -215,7 +215,7 @@ Finds out if the two users are a match given their distance apart
 
 **returns:** *boolean*, whether there is a match or not
 
-## Chat
+## Chat (Server)
 ```
 server/chat
 ```
@@ -288,7 +288,7 @@ Consists of the main Ionic client.
 ### auth.js
 Consists of authorisation functions.
 
-### Chat
+### Chat (Client)
 ```
 www/js/chat.js
 ```
