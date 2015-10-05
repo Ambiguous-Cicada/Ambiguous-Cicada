@@ -8,7 +8,7 @@ angular.module('kwiki', [
 .factory('SocketFactory', ['$location', function ($location) {
   var socketFact = {};
 
-  socketFact.host = $location.host() + ":8000";
+  socketFact.host = $location.host();
 
   socketFact.connect = function (nameSpace) {
     return io.connect(this.host + "/" + nameSpace);
