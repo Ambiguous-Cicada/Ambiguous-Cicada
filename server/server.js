@@ -40,7 +40,7 @@ io.sockets.on('connection', function(socket){
 
 // Sockets Matching Namespace
 io.of('/match').on('connection', function (socket) {
-  console.log("connection to /match");
+  console.log(socket.id + "connected to /match");
   socket.on('matching', function (data) {
     matchCtrl.add(data, function (chatRoomId) {
       socket.emit('matched', chatRoomId);
@@ -51,9 +51,9 @@ io.of('/match').on('connection', function (socket) {
 
 // Sockets Chatting Namespace
 io.of('/chat').on('connection', function (socket) {
-  socket.on('loadChat', function (chatRoomId) {
-    console.log("connection to /chat");
-    socket.join(chatRoomId);
+  console.log(socket.id + "connected to /chat");
+  socket.on('loadChat', function (chatroomId) {
+    socket.join(chatroomId);
     socket.on('message', function (message) {
       socket.to(chatRoomId).broadcast.emit('message', message);
       chatCtrl.addMessage(chatRoomId, message);
