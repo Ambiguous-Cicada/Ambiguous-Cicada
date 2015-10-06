@@ -311,7 +311,7 @@ Environmental variables, as well as API keys and database URIs, are referenced i
 
 
 ## Client-Mobile
-Majority of the important Ionic files are located in a folder called www.
+Majority of the important Ionic files are located in a folder called www. Use `ionic serve --lab` in terminal to emulate iOS and Android devices.
 
 ## js
 ```
