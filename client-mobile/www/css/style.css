@@ -4,13 +4,15 @@
   color: #00BBEE;
   font-size: 1.1em;
 }
-
 .message {
   font-size: 1.5em;
   color: #000;
 }
 .message-item {
   margin: 10px 0;
+}
+.load-text {
+  font-size: 1.5em;
 }
 .button-energized,
 .button-calm {
