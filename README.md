@@ -25,7 +25,7 @@ Refer to our [Documentation](DOCS.md) for internal details of our app.
 
 ### Config
 The config file located at `env/config.js` contains environment variables that can be set to your requirements and `process.env.NODE_ENV` will be used to determine which set of variables will be used.
-Find more information in the [API Documentation](APIDOCS.md).
+Find more information in the [Documentation](DOCS.md).
 
 ### Server
 The server is in NodeJS and is configured to start with `node server/server.js` or simply `npm start` from the root directory.
