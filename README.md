@@ -4,13 +4,13 @@
 
 Kwiki is a mobile chat app that brings closeby users together.
 
-Refer to our [API Documentation](APIDOCS.md) for internal details of our app.
+Refer to our [Documentation](DOCS.md) for internal details of our app.
 
 ## Original Kwiki Team
 
   - __Product Owner__: Daniel O'Leary
   - __Scrum Master__: JT Knox
-  - __Development Team Members__: Niraj Vora, Michael Junio, Daniel O'Leary, JT Knox
+  - __Development Team__: Niraj Vora, Michael Junio, Daniel O'Leary, JT Knox
 
 ## Table of Contents
 
